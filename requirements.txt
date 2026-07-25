@@ -1,0 +1,20 @@
+# Pusula AI — bağımlılıklar (25 Tem 2026'da kurulup doğrulandı)
+# Kurulum:  python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+
+agno==2.8.2               # Agent framework — Team (leader agent), Memory, Knowledge, Guardrails
+openai==2.48.0            # OpenAI SDK (GitHub Models dahil OpenAI-uyumlu endpoint'ler için)
+fastapi==0.140.0
+uvicorn==0.51.0
+pydantic==2.13.4
+
+# Redis: oturum kalıcılığı (agno.db.redis.RedisDb) + semantic/API cache
+redis==7.4.1
+# Redis vektör arama (agno.vectordb.redis.RedisVectorDb) — RediSearch gerektirir → redis/redis-stack imajı
+redisvl==0.23.0
+
+# agno.db.sqlite.SqliteDb için (Redis yokken kalıcı fallback)
+SQLAlchemy==2.0.51
+
+# NOT — kasıtlı olarak KURULMAYANLAR:
+#   torch / sentence-transformers  -> /home %91 dolu, embedding API'den veya mock hashing ile
+#   lancedb, pgvector              -> Redis vector kullanıyoruz (case Redis istiyor)

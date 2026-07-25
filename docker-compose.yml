@@ -1,0 +1,26 @@
+# Redis Stack — Pusula AI'da üç iş yapar:
+#   1) Oturum kalıcılığı   (agno.db.redis.RedisDb)
+#   2) Vektör arama / RAG  (agno.vectordb.redis.RedisVectorDb — RediSearch gerektirir)
+#   3) Semantic + API cache (app/cache.py)
+#
+# Düz `redis` imajında RediSearch YOK -> vektör arama çalışmaz. Bu yüzden redis-stack.
+# Çalıştırma:  docker compose up -d      Kapatma:  docker compose down
+# Redis çalışmıyorsa uygulama otomatik in-memory fallback'e düşer (kasıtlı).
+
+services:
+  redis:
+    image: redis/redis-stack:latest
+    container_name: pusula-redis
+    ports:
+      - "6379:6379"     # Redis protokolü
+      - "8001:8001"     # RedisInsight web arayüzü — videoda cache'i göstermek için kullanışlı
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  redis-data:
