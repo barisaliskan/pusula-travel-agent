@@ -476,6 +476,37 @@ def _():
     assert not r.ok, "error ok=False yapmalı"
 
 
+@test("dayanıklılık: sağlayıcı hata metni kullanıcıya yanıt olarak gitmez")
+def _():
+    """3 Ağu 2026 regresyonu.
+
+    Agno, sağlayıcı hatasında exception fırlatmaz; hata metnini `content` olarak
+    döndürür. GitHub Models emeklilik brownout'unda düz metin dönünce, sayısı az
+    taslaklarda (kültür/mutfak/SSS) bu metin kullanıcıya yanıt olarak gitti —
+    parmak izi listesi 'service unavailable' arıyordu, mesaj ise
+    'temporarily unavailable' diyordu.
+    """
+    from app.team import _gecerli_uretim
+
+    taslak = ("Roma mutfağı: Cacio e pepe pecorino ve karabiberle yapılır. "
+              "Carbonara guanciale içerir. Supplì kızartma bir sokak lezzetidir.")
+    hatalar = [
+        "GitHub Models is temporarily unavailable as part of a scheduled retirement brownout.",
+        "Error in agent run: 429 Too many requests",
+        "This model has been deprecated and will be retired soon.",
+        # Bilinmeyen hata metni: parmak izi listesi asla tam olamaz, yapısal
+        # denetim (Türkçe harf yokluğu + uzunluk) bunu da yakalamalı.
+        "Something went wrong on our end. Please contact support.",
+    ]
+    for h in hatalar:
+        assert not _gecerli_uretim(taslak, h), f"sağlayıcı hata metni geçti: {h[:60]}"
+
+    gercek = ("Roma mutfağında Cacio e pepe öne çıkar; pecorino peyniri ve karabiberle, "
+              "krema kullanılmadan yapılır. Carbonara ise guanciale ve yumurta sarısıyla "
+              "hazırlanır. Sokak lezzeti arıyorsanız supplì deneyebilirsiniz.")
+    assert _gecerli_uretim(taslak, gercek), "gerçek Türkçe yanıt elenmemeli"
+
+
 # ─────────────────────────────────────────────────────────────────────
 def main() -> int:
     from app.cache import cache as _c

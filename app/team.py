@@ -373,6 +373,13 @@ _LLM_HATA_IZLERI = (
     "too many requests", "rate limit", "quota", "error in agent run", "terms of service",
     "unauthorized", "forbidden", "invalid api key", "authentication", "bad request",
     "internal server error", "service unavailable", "model not found", "context length",
+    # 3 Ağu 2026: GitHub Models emekliye ayrılma sürecine girdi ve "brownout" penceresinde
+    # HTTP hatası değil, düz metin döndürüyor:
+    #   "GitHub Models is temporarily unavailable as part of a scheduled retirement brownout."
+    # Eski liste yalnızca "service unavailable" arıyordu, bu metin "temporarily unavailable"
+    # dediği için elendi ve sayısı az taslaklarda kullanıcıya yanıt olarak gitti.
+    "unavailable", "brownout", "retirement", "deprecated", "sunset",
+    "try again later", "temporarily disabled",
 )
 
 # Devre kesici: üst üste başarısızlıkta LLM'i geçici kapatıp şablona düşeriz.
@@ -409,6 +416,16 @@ def _gecerli_uretim(taslak: str, uretilen: Optional[str]) -> bool:
     # (kesilmiş yanıt, konu dışı üretim). Tek sayının korunması yeterli sayılır.
     sayilar = set(re.findall(r"\d[\d.,]{2,}", taslak))
     if len(sayilar) >= 3 and not any(s in uretilen for s in sayilar):
+        return False
+    # Yapısal denetim: parmak izi listesi hiçbir zaman tam olamaz — sağlayıcı yarın
+    # başka bir hata metni döndürebilir. Model burada olgu paketini YENİDEN YAZIYOR,
+    # yani çıktı taslakla kabaca aynı uzunlukta olmalı. Dolu bir taslağa karşılık
+    # bir avuç karakter dönmesi, bilinmeyen bir hata metninin göstergesidir.
+    if len(taslak) >= 400 and len(uretilen) < min(400, 0.25 * len(taslak)):
+        return False
+    # Çıktı Türkçe olmak zorunda. Kısa + hiç Türkçe'ye özgü harf yoksa, sağlayıcının
+    # İngilizce bir sistem mesajı döndürdüğü anlamına gelir.
+    if len(uretilen) < 400 and not any(h in kucuk for h in "ıçğöşü"):
         return False
     return True
 

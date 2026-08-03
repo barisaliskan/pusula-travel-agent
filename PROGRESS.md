@@ -6,7 +6,7 @@
 **Son güncelleme:** 30 Temmuz 2026
 **Teslim:** 30 Temmuz 2026 — Sunum (PDF) + Video
 **Durum:** 🟢 **Sistem uçtan uca çalışıyor ve teslim paketi hazır.**
-40/40 birim testi + **32/32 uçtan uca senaryo**, hem mock hem **gerçek GitHub Models** modunda.
+41/41 birim testi + **32/32 uçtan uca senaryo**, hem mock hem **gerçek GitHub Models** modunda.
 Kalan tek iş: **slaytları PDF'e çevirmek ve videoyu kaydetmek** (`SUNUM-METNI.md` hazır).
 
 **30 Tem — ikinci tur:** sistem gerçek bir kullanıcıya verildi ve **11 açık** çıktı
@@ -25,7 +25,7 @@ saymaması, küçük harfli yer adları). Hepsi kapatıldı; S27–S32 eklendi. 
 ```bash
 cd /home/baris/Desktop/projects/pusula-travel-agent
 docker compose up -d                                    # Redis
-.venv/bin/python tests/test_agent.py                    # 40/40 bekleniyor
+.venv/bin/python tests/test_agent.py                    # 41/41 bekleniyor
 .venv/bin/python tests/test_scenarios.py                # 32/32 bekleniyor
 .venv/bin/python -m uvicorn app.main:app --port 8000    # http://localhost:8000
 ```

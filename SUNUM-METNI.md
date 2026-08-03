@@ -20,7 +20,7 @@
 ```bash
 cd /home/baris/Desktop/projects/pusula-travel-agent
 docker compose up -d                                  # Redis
-.venv/bin/python tests/test_agent.py                  # 40/40 bekleniyor
+.venv/bin/python tests/test_agent.py                  # 41/41 bekleniyor
 .venv/bin/python tests/test_scenarios.py              # 32/32 bekleniyor
 pkill -f "[u]vicorn app.main"      # ayrı komut olarak çalıştırın
 .venv/bin/python -m uvicorn app.main:app --port 8000
