@@ -654,7 +654,13 @@ Bu case'te en çok üzerinde durduğum üç şey şu.
 Beni dinlediğiniz için çok teşekkür ederim.
 
 Demo şu an canlı olarak çalıştırılabilir durumda. Altını çizmek isterim, **LLM anahtarı
-olmadan da, Redis olmadan da çalışıyor.** Sorularınızı memnuniyetle yanıtlarım.
+olmadan da, Redis olmadan da çalışıyor.**
+
+Onun dışında projenin tamamını GitHub'a açtım. Kaynak kod, dokümantasyon ve senaryo
+testleri **github.com/barisaliskan/pusula-travel-agent** adresinde duruyor. İsteyen
+klonlayıp kendi makinesinde çalıştırabilir. Bu şekilde bahsedebilirim.
+
+Sorularınızı memnuniyetle yanıtlarım. Çok teşekkür ederim.
 
 ---
 
