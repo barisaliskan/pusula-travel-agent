@@ -55,6 +55,8 @@ Kullanıcı ─► FastAPI ─► Guardrail (giriş)
 
 Ayrıntılı tasarım kararları, kademeli veri stratejisi, Redis anahtar şeması ve
 KVKK katmanı için: **[`PLAN.md`](PLAN.md)**.
+Aynı mimarinin n8n görsel karşılığı (ekran görüntüleri + düğüm açıklamaları):
+**[`n8n/README.md`](n8n/README.md)**.
 
 ---
 
@@ -125,7 +127,7 @@ app/            FastAPI uygulaması, ajanlar, planlayıcı, guardrail, KVKK
 knowledge/      küratörlü bilgi tabanı (destinasyon, vize, POI, mutfak, kültür, SSS)
 web/            sıfır bağımlılıklı demo arayüzü (CDN yok)
 slides/         sunum slaytları (tarayıcıdan PDF'e basılır)
-n8n/            görsel iş akışları — ana akış + veri hattı
+n8n/            görsel iş akışları — ana akış + veri hattı (ekran görüntüleriyle)
 tests/          birim testleri + senaryo regresyon seti
 docs/           kurulu Agno sürümünde doğrulanmış API notları
 PLAN.md         mimari ve tasarım kararları
