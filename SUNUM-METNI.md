@@ -3,14 +3,15 @@
 > **Bu metin okunmak için yazıldı.** Cümleler kısa, konuşma diline yakın.
 > Kalın yerler vurgu içindir. `>` ile başlayan satırlar **yönergedir, okunmaz.**
 >
-> **Süre:** Metnin tamamı okunduğunda **~22 dakika** (demo dahil). Slayt numaraları
+> **Süre:** Metnin tamamı okunduğunda **~23,5 dakika** (demo dahil). Slayt numaraları
 > `slides/index.html` ile birebir eşleşir. Slaytlar bir pencerede tam ekran, demo diğer
 > pencerede `localhost:8000`. İkisini önceden açıp Alt+Tab ile geçin.
 >
 > **16–17 dakikaya indirmek isterseniz** şunları atlayın (metinde `⟨kesilebilir⟩` işaretli):
 > Slayt 9'daki kota/devre kesici anlatımı · Slayt 10'daki "Pazar günleri araç trafiğine
 > kapalı" detayı · Slayt 13'ün tamamı · Slayt 15'teki `"YENİR".lower()` bonusu ·
-> Slayt 18'deki `ItineraryDay` hikâyesi · Demo 4.
+> Slayt 18'deki `ItineraryDay` hikâyesi · Demo 4 · Slayt 22–23'ün n8n anlatımı
+> (slaytları gösterip "iki akışı n8n'de de modelledim, detayı repoda" demeniz yeterli).
 
 ---
 
@@ -649,7 +650,49 @@ Bu case'te en çok üzerinde durduğum üç şey şu.
 
 ---
 
-## Slayt 22 · Kapanış `(21:40 – 22:00)`
+## Slayt 22 · n8n ana akışı `(21:40 – 22:25)` ⟨kesilebilir⟩
+
+Kapatmadan önce n8n tarafına da kısaca değinmek istiyorum.
+
+Case, n8n gibi platformlardan ilham alınabileceğini söylüyor. Ben de Python tarafında
+yazdığım akışı n8n'de görsel olarak modelledim. Gördüğünüz akış, birebir uygulamadaki
+akışın aynısı.
+
+Soldan başlayalım. Webhook ile kullanıcı mesajı geliyor. Sonrasında rate limit ve giriş
+guardrail'i çalışıyor. Engellenirse hazır ret yanıtı dönüyor, hiç LLM çağrısı yapılmıyor.
+
+Sonrasında semantic cache'e bakılıyor. HIT varsa yaklaşık üç milisaniyede dönüyoruz.
+
+Ortada yol seçimi var. Sınıflandırıcı kural tabanlı, yani sıfır LLM çağrısı. Hızlı yol
+tek uzmanı çağırıyor, yavaş yol Agno Team'e gidiyor.
+
+Sağ tarafta da iki denetim var. Plan doğrulayıcı ve çıkış guardrail'i. Burada dikkat
+edilecek şey şu: **semantic cache yazımı guardrail'den sonra duruyor.** Yani doğrulanmamış
+bir yanıt cache'e girip sonraki kullanıcılara servis edilemiyor. Bu şekilde bahsedebilirim.
+
+---
+
+## Slayt 23 · n8n veri hattı `(22:25 – 23:10)` ⟨kesilebilir⟩
+
+İkinci akış gecelik veri hattı. Gece saat üçte tetikleniyor.
+
+Üç kaynaktan veri çekiliyor. T0 editoryal içerik, T1 resmî kaynaklar, T3 açık veri.
+Her birinin kendi kuralı var. Mesela T3'te lisans ve atıf zorunlu.
+
+Sonrasında normalize ediliyor ve Wikidata QID ile varlık eşleştirmesi yapılıyor.
+
+Burada da önemli bir düğüm var, değişiklik tespiti. Değişmeyen kaynağı yeniden embed
+etmiyoruz. Embedding maliyeti bu şekilde kontrol altında kalıyor.
+
+Onun dışında olay tabanlı invalidation var. Vize gibi bir veride TTL'in dolmasını beklemek
+yetmiyor. Mevzuat değişince bayat cache anında düşürülüyor.
+
+En sonda da tazelik SLA raporu çıkıyor. Yani "güncel veri kullanıyoruz" bir iddia değil,
+ölçülen bir metrik. Bu şekilde bahsedebilirim.
+
+---
+
+## Slayt 24 · Kapanış `(23:10 – 23:30)`
 
 Beni dinlediğiniz için çok teşekkür ederim.
 

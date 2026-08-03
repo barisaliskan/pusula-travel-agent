@@ -32,7 +32,7 @@ docker compose up -d                                    # Redis
 
 1. **Slaytları PDF yap:** `localhost:8000/slides` → Ctrl+P → *Hedef: PDF olarak kaydet* →
    **Yatay (landscape)** · Kenar boşlukları **Yok** · **Arka plan grafikleri AÇIK**
-   (kritik: kapatılırsa renkler ve kademe rozetleri kaybolur) → **22 sayfa** çıkmalı.
+   (kritik: kapatılırsa renkler ve kademe rozetleri kaybolur) → **24 sayfa** çıkmalı.
 2. **Provayı bir kez yap:** `SUNUM-METNI.md` içindeki demo sırasını baştan sona dene
    (7 demo adımı, ~4 dk). Demo öncesi sağ panel → *Verilerim → Verilerimi sil*.
 3. **Videoyu kaydet.** Hedef 15–18 dk. Ekran + ses.
@@ -61,7 +61,8 @@ docker compose up -d                                    # Redis
       sözleşmesini doğrular + cache, kişiselleştirme ve KVKK kanıtları.
 - [x] `n8n/pusula-ana-akis.json` (19 node) + `n8n/pusula-veri-hatti.json` (11 node) —
       bağlantı bütünlüğü doğrulandı.
-- [x] `slides/index.html` — **22 slayt**, offline tek dosya, Ctrl+P → A4 yatay PDF.
+- [x] `slides/index.html` — **24 slayt**, offline tek dosya
+      (son iki slayt n8n akışlarının ekran görüntüsü, PNG'ler HTML'e gömülü), Ctrl+P → A4 yatay PDF.
 - [x] `SUNUM-METNI.md` — dakika dakika konuşma metni + 7 adımlı demo senaryosu +
       olası soruların cevapları.
 - [x] `docs/agno-api-dogrulama.md` — 30 Tem doğrulamaları eklendi (`RedisDb.db_url`,
@@ -174,7 +175,7 @@ eleme bir formülle, gösterim başka bir formülle yapılıyordu.
 
 | Çıktı | Dosya | Durum |
 |---|---|---|
-| **Sunum (asıl teslim)** | `slides/index.html` → PDF | ✅ **22 slayt** · **PDF'e çevrilecek** |
+| **Sunum (asıl teslim)** | `slides/index.html` → PDF | ✅ **24 slayt** · **PDF'e çevrilecek** |
 | Video konuşma metni | `SUNUM-METNI.md` | ✅ bitti · **kayıt yapılacak** |
 | Çalışan demo | `app/` + `web/` | ✅ uçtan uca çalışıyor |
 | Tasarım dokümanı | `PLAN.md` | ✅ mimari + 7 çıktı (slaytlar bunu genişletiyor) |
