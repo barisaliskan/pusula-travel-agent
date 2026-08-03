@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "aciklama": "Küratörlü POI (gezilecek yer) seti (T0). `itinerary_architect` günlük planı bu havuzdan kurar; süre ve maliyet alanları plan doğrulayıcısının tempo/bütçe kontrollerini besler.",
+    "guven_kademesi": "T0",
+    "alan_sozlugu": {
+      "duration_min": "Ortalama ziyaret süresi (dakika)",
+      "cost_try": "Kişi başı giriş/katılım ücreti tahmini (TRY); 0 = ücretsiz",
+      "best_time": "Günün önerilen dilimi",
+      "district": "Semt — aynı semtteki duraklar aynı güne kümelenir, ulaşım süresi düşer",
+      "indoor": "Kapalı mekân mı — kötü hava planı için kullanılır",
+      "accessible": "Tekerlekli sandalye ile makul erişim"
+    },
+    "son_guncelleme": "2026-07-27"
+  },
+  "pois": {
+    "roma": [
+      {"key": "roma_kolezyum", "name": "Kolezyum ve Roma Forumu", "district": "Antik Merkez", "category": "tarih", "duration_min": 180, "cost_try": 900, "best_time": "sabah", "indoor": false, "accessible": true, "tags": ["antik", "ikonik"], "note": "Zaman damgalı bilet zorunlu; sabah ilk seansta hem serin hem sakin."},
+      {"key": "roma_vatikan", "name": "Vatikan Müzeleri ve Sistine Şapeli", "district": "Vatikan", "category": "müze", "duration_min": 210, "cost_try": 1100, "best_time": "sabah", "indoor": true, "accessible": true, "tags": ["sanat", "dini", "ikonik"], "note": "Omuz ve diz kapalı kıyafet zorunlu. Çarşamba sabahı papalık genel görüşmesi nedeniyle çevre kalabalıktır."},
+      {"key": "roma_pantheon", "name": "Pantheon", "district": "Tarihi Merkez", "category": "tarih", "duration_min": 45, "cost_try": 250, "best_time": "ikindi", "indoor": true, "accessible": true, "tags": ["antik", "mimari"]},
+      {"key": "roma_trevi", "name": "Trevi Çeşmesi", "district": "Tarihi Merkez", "category": "meydan", "duration_min": 30, "cost_try": 0, "best_time": "gece", "indoor": false, "accessible": true, "tags": ["ikonik", "ücretsiz"], "note": "Gündüz çok kalabalık; gece 22:00 sonrası belirgin şekilde sakinleşir."},
+      {"key": "roma_trastevere", "name": "Trastevere Sokakları", "district": "Trastevere", "category": "semt", "duration_min": 150, "cost_try": 0, "best_time": "aksam", "indoor": false, "accessible": false, "tags": ["yerel", "yemek", "ücretsiz"], "note": "Akşam yemeği ve sonrası yürüyüş için en canlı semt."},
+      {"key": "roma_borghese", "name": "Galleria Borghese", "district": "Villa Borghese", "category": "müze", "duration_min": 120, "cost_try": 700, "best_time": "ogle", "indoor": true, "accessible": true, "tags": ["sanat", "sakin"], "note": "Girişler 2 saatlik kontenjanla; rezervasyon şart. Kalabalıktan kaçmak isteyene ideal."},
+      {"key": "roma_appia", "name": "Via Appia Antica Bisiklet Turu", "district": "Güney", "category": "doğa", "duration_min": 180, "cost_try": 400, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["aktif", "sakin", "doğa"], "note": "Pazar günleri araç trafiğine kapalı."}
+    ],
+    "barselona": [
+      {"key": "bcn_sagrada", "name": "Sagrada Família", "district": "Eixample", "category": "mimari", "duration_min": 120, "cost_try": 1000, "best_time": "sabah", "indoor": true, "accessible": true, "tags": ["gaudi", "ikonik"], "note": "Vitray ışığı için sabah doğu cephesi, ikindi batı cephesi tercih edilir."},
+      {"key": "bcn_guell", "name": "Park Güell", "district": "Gràcia", "category": "park", "duration_min": 120, "cost_try": 450, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["gaudi", "manzara"], "note": "Anıtsal bölge biletli; yokuş dik, üst girişten başlamak yorgunluğu azaltır."},
+      {"key": "bcn_gotik", "name": "Gotik Mahalle", "district": "Ciutat Vella", "category": "semt", "duration_min": 150, "cost_try": 0, "best_time": "ikindi", "indoor": false, "accessible": true, "tags": ["tarih", "ücretsiz", "yürüyüş"]},
+      {"key": "bcn_boqueria", "name": "La Boqueria Pazarı", "district": "El Raval", "category": "pazar", "duration_min": 75, "cost_try": 300, "best_time": "sabah", "indoor": true, "accessible": true, "tags": ["yemek", "yerel"], "note": "Pazar günleri kapalı. Ana koridordan içeri girildikçe fiyatlar düşer."},
+      {"key": "bcn_barceloneta", "name": "Barceloneta Plajı", "district": "Barceloneta", "category": "plaj", "duration_min": 180, "cost_try": 0, "best_time": "ogle", "indoor": false, "accessible": true, "tags": ["plaj", "ücretsiz"], "note": "Erişilebilir plaj noktalarında amfibi sandalye hizmeti mevcuttur."},
+      {"key": "bcn_montjuic", "name": "Montjuïc Tepesi ve Teleferik", "district": "Montjuïc", "category": "manzara", "duration_min": 150, "cost_try": 500, "best_time": "aksam", "indoor": false, "accessible": true, "tags": ["manzara", "gün batımı"]},
+      {"key": "bcn_picasso", "name": "Picasso Müzesi", "district": "El Born", "category": "müze", "duration_min": 90, "cost_try": 550, "best_time": "ikindi", "indoor": true, "accessible": true, "tags": ["sanat"], "note": "Perşembe akşamları ve ayın ilk pazarı ücretsiz saatler uygulanır."}
+    ],
+    "paris": [
+      {"key": "paris_louvre", "name": "Louvre Müzesi", "district": "1. Bölge", "category": "müze", "duration_min": 210, "cost_try": 800, "best_time": "sabah", "indoor": true, "accessible": true, "tags": ["sanat", "ikonik"], "note": "Salı kapalı. Tüm müzeyi gezmeye çalışmak yerine 2-3 bölüm seçmek daha verimli."},
+      {"key": "paris_eiffel", "name": "Eyfel Kulesi", "district": "7. Bölge", "category": "manzara", "duration_min": 120, "cost_try": 950, "best_time": "aksam", "indoor": false, "accessible": true, "tags": ["ikonik", "manzara"], "note": "Her saat başı 5 dakikalık ışık gösterisi; Trocadéro tarafı en iyi fotoğraf açısı."},
+      {"key": "paris_orsay", "name": "Orsay Müzesi", "district": "7. Bölge", "category": "müze", "duration_min": 150, "cost_try": 600, "best_time": "sabah", "indoor": true, "accessible": true, "tags": ["sanat", "empresyonizm"], "note": "Pazartesi kapalı."},
+      {"key": "paris_montmartre", "name": "Montmartre ve Sacré-Cœur", "district": "18. Bölge", "category": "semt", "duration_min": 180, "cost_try": 0, "best_time": "ikindi", "indoor": false, "accessible": false, "tags": ["manzara", "ücretsiz"], "note": "Tepeye çıkış dik; füniküler metro bileti ile kullanılabilir."},
+      {"key": "paris_marais", "name": "Le Marais Yürüyüşü", "district": "3-4. Bölge", "category": "semt", "duration_min": 150, "cost_try": 0, "best_time": "ikindi", "indoor": false, "accessible": true, "tags": ["alışveriş", "yemek", "ücretsiz"], "note": "Pazar günü açık olan az sayıdaki alışveriş bölgesinden biri."},
+      {"key": "paris_seine", "name": "Seine Nehri Tekne Turu", "district": "Merkez", "category": "tur", "duration_min": 75, "cost_try": 500, "best_time": "aksam", "indoor": false, "accessible": true, "tags": ["manzara", "dinlendirici"]},
+      {"key": "paris_versay", "name": "Versay Sarayı", "district": "Versailles", "category": "tarih", "duration_min": 300, "cost_try": 900, "best_time": "sabah", "indoor": true, "accessible": true, "tags": ["tarih", "gün boyu"], "note": "Şehir dışı, RER C ile ~1 saat. Tam gün ayırmak gerekir; pazartesi kapalı."}
+    ],
+    "prag": [
+      {"key": "prag_kale", "name": "Prag Kalesi ve Aziz Vitus Katedrali", "district": "Hradčany", "category": "tarih", "duration_min": 180, "cost_try": 500, "best_time": "sabah", "indoor": true, "accessible": true, "tags": ["ikonik", "tarih"]},
+      {"key": "prag_karl", "name": "Karl Köprüsü", "district": "Malá Strana", "category": "köprü", "duration_min": 45, "cost_try": 0, "best_time": "sabah", "indoor": false, "accessible": true, "tags": ["ikonik", "ücretsiz"], "note": "Gün doğumunda neredeyse boş; 10:00 sonrası yoğun kalabalık."},
+      {"key": "prag_eskisehir", "name": "Eski Şehir Meydanı ve Astronomik Saat", "district": "Staré Město", "category": "meydan", "duration_min": 90, "cost_try": 0, "best_time": "ikindi", "indoor": false, "accessible": true, "tags": ["ikonik", "ücretsiz"], "note": "Saat gösterisi her saat başı, yaklaşık 45 saniye sürer."},
+      {"key": "prag_yahudi", "name": "Yahudi Mahallesi (Josefov)", "district": "Josefov", "category": "müze", "duration_min": 150, "cost_try": 700, "best_time": "sabah", "indoor": true, "accessible": true, "tags": ["tarih", "müze"], "note": "Cumartesi ve Yahudi bayramlarında kapalı."},
+      {"key": "prag_petrin", "name": "Petřín Tepesi ve Gözlem Kulesi", "district": "Malá Strana", "category": "manzara", "duration_min": 120, "cost_try": 300, "best_time": "aksam", "indoor": false, "accessible": true, "tags": ["manzara", "park"], "note": "Füniküler toplu taşıma bileti ile geçerli."},
+      {"key": "prag_birahane", "name": "Geleneksel Birahane Deneyimi", "district": "Vinohrady", "category": "yeme-içme", "duration_min": 120, "cost_try": 600, "best_time": "aksam", "indoor": true, "accessible": true, "tags": ["yerel", "gece"]}
+    ],
+    "tokyo": [
+      {"key": "tokyo_sensoji", "name": "Sensō-ji Tapınağı ve Asakusa", "district": "Asakusa", "category": "tapınak", "duration_min": 120, "cost_try": 0, "best_time": "sabah", "indoor": false, "accessible": true, "tags": ["ikonik", "ücretsiz", "gelenek"], "note": "07:00-08:00 arası neredeyse boş; Nakamise çarşısı 10:00'da açılır."},
+      {"key": "tokyo_shibuya", "name": "Shibuya Kavşağı ve Çevresi", "district": "Shibuya", "category": "semt", "duration_min": 120, "cost_try": 0, "best_time": "gece", "indoor": false, "accessible": true, "tags": ["ikonik", "ücretsiz", "modern"]},
+      {"key": "tokyo_meiji", "name": "Meiji Jingū ve Yoyogi Parkı", "district": "Shibuya", "category": "tapınak", "duration_min": 120, "cost_try": 0, "best_time": "sabah", "indoor": false, "accessible": true, "tags": ["doğa", "ücretsiz", "sakin"]},
+      {"key": "tokyo_tsukiji", "name": "Tsukiji Dış Pazarı", "district": "Chūō", "category": "pazar", "duration_min": 120, "cost_try": 800, "best_time": "sabah", "indoor": false, "accessible": true, "tags": ["yemek", "yerel"], "note": "Öğleden sonra tezgâhlar kapanır; sabah 08:00-10:00 en canlı saat."},
+      {"key": "tokyo_teamlab", "name": "Dijital Sanat Müzesi", "district": "Koto", "category": "müze", "duration_min": 150, "cost_try": 1000, "best_time": "ikindi", "indoor": true, "accessible": true, "tags": ["modern", "aile"], "note": "Tarihli bilet zorunlu; genellikle haftalar öncesinden dolar."},
+      {"key": "tokyo_shinjuku", "name": "Shinjuku Gyoen Bahçesi", "district": "Shinjuku", "category": "park", "duration_min": 120, "cost_try": 150, "best_time": "ogle", "indoor": false, "accessible": true, "tags": ["doğa", "sakin"], "note": "Pazartesi kapalı; kiraz çiçeği sezonunda çok kalabalık."},
+      {"key": "tokyo_nikko", "name": "Nikkō Günübirlik Turu", "district": "Şehir dışı", "category": "doğa", "duration_min": 480, "cost_try": 1600, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["doğa", "gün boyu", "tarih"], "note": "Trenle ~2 saat. Tam gün ayrılmalı."}
+    ],
+    "bangkok": [
+      {"key": "bkk_grandpalace", "name": "Büyük Saray ve Wat Phra Kaew", "district": "Rattanakosin", "category": "tapınak", "duration_min": 150, "cost_try": 550, "best_time": "sabah", "indoor": false, "accessible": true, "tags": ["ikonik", "dini"], "note": "Omuz ve diz kapalı kıyafet ZORUNLU; girişte kontrol edilir. Serinlik için 08:30 açılışı hedeflenmeli."},
+      {"key": "bkk_watpho", "name": "Wat Pho (Yatan Buda)", "district": "Rattanakosin", "category": "tapınak", "duration_min": 90, "cost_try": 200, "best_time": "sabah", "indoor": true, "accessible": true, "tags": ["dini", "masaj"], "note": "Tayland masajının kaynağı sayılan okul burada; seans alınabilir."},
+      {"key": "bkk_chatuchak", "name": "Chatuchak Hafta Sonu Pazarı", "district": "Chatuchak", "category": "pazar", "duration_min": 210, "cost_try": 400, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["alışveriş", "yerel"], "note": "Yalnızca cumartesi-pazar. 15.000'den fazla tezgâh; harita almadan girmeyin."},
+      {"key": "bkk_chinatown", "name": "Yaowarat (Çin Mahallesi) Sokak Lezzetleri", "district": "Samphanthawong", "category": "yeme-içme", "duration_min": 150, "cost_try": 350, "best_time": "aksam", "indoor": false, "accessible": false, "tags": ["yemek", "gece", "yerel"], "note": "Tezgâhlar 18:00'den sonra kurulur."},
+      {"key": "bkk_chaophraya", "name": "Chao Phraya Nehri Vapuru", "district": "Nehir hattı", "category": "ulaşım", "duration_min": 60, "cost_try": 60, "best_time": "ikindi", "indoor": false, "accessible": false, "tags": ["manzara", "ekonomik"], "note": "Turistik tekne yerine yerel hat vapuru hem ucuz hem hızlı."},
+      {"key": "bkk_ayutthaya", "name": "Ayutthaya Günübirlik Turu", "district": "Şehir dışı", "category": "tarih", "duration_min": 480, "cost_try": 1200, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["tarih", "gün boyu", "UNESCO"]}
+    ],
+    "tiflis": [
+      {"key": "tbs_eskisehir", "name": "Eski Tiflis (Abanotubani) Yürüyüşü", "district": "Eski Şehir", "category": "semt", "duration_min": 150, "cost_try": 0, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["tarih", "ücretsiz"]},
+      {"key": "tbs_hamam", "name": "Kükürtlü Hamam", "district": "Abanotubani", "category": "deneyim", "duration_min": 90, "cost_try": 700, "best_time": "aksam", "indoor": true, "accessible": true, "tags": ["dinlendirici", "yerel"], "note": "Özel oda saatlik kiralanır; grup için kişi başı maliyet düşer."},
+      {"key": "tbs_narikala", "name": "Narikala Kalesi ve Teleferik", "district": "Eski Şehir", "category": "manzara", "duration_min": 120, "cost_try": 120, "best_time": "aksam", "indoor": false, "accessible": true, "tags": ["manzara", "ekonomik"], "note": "Teleferik metro kartı ile ödenir; nakit geçmez."},
+      {"key": "tbs_kurusuriver", "name": "Kuru Köprü Bit Pazarı", "district": "Merkez", "category": "pazar", "duration_min": 90, "cost_try": 0, "best_time": "ogle", "indoor": false, "accessible": true, "tags": ["yerel", "ücretsiz", "antika"]},
+      {"key": "tbs_mtskheta", "name": "Mtskheta Günübirlik Gezisi", "district": "Şehir dışı", "category": "tarih", "duration_min": 300, "cost_try": 600, "best_time": "sabah", "indoor": false, "accessible": true, "tags": ["UNESCO", "dini"], "note": "Tiflis'e 20 km; yarım gün yeterli."},
+      {"key": "tbs_sarap", "name": "Kakheti Şarap Rotası", "district": "Şehir dışı", "category": "gastronomi", "duration_min": 480, "cost_try": 1400, "best_time": "sabah", "indoor": false, "accessible": true, "tags": ["şarap", "gün boyu"], "note": "Qvevri (toprak küp) yöntemi UNESCO listesinde."}
+    ],
+    "saraybosna": [
+      {"key": "sjj_bascarsija", "name": "Başçarşı ve Sebilj", "district": "Stari Grad", "category": "semt", "duration_min": 150, "cost_try": 0, "best_time": "sabah", "indoor": false, "accessible": true, "tags": ["tarih", "ücretsiz", "osmanlı"]},
+      {"key": "sjj_gazihusrev", "name": "Gazi Hüsrev Bey Camii", "district": "Stari Grad", "category": "dini", "duration_min": 45, "cost_try": 100, "best_time": "sabah", "indoor": true, "accessible": true, "tags": ["osmanlı", "dini"], "note": "Namaz vakitlerinde ziyaret kapalı; kadınlar için başörtüsü girişte temin edilir."},
+      {"key": "sjj_tunel", "name": "Savaş Tüneli Müzesi", "district": "Butmir", "category": "müze", "duration_min": 90, "cost_try": 250, "best_time": "ikindi", "indoor": true, "accessible": true, "tags": ["tarih", "yakın tarih"], "note": "Duygusal olarak ağır bir ziyaret; çocuklu ailelere ön bilgi verilmeli."},
+      {"key": "sjj_latinkopru", "name": "Latin Köprüsü", "district": "Merkez", "category": "tarih", "duration_min": 30, "cost_try": 0, "best_time": "ikindi", "indoor": false, "accessible": true, "tags": ["tarih", "ücretsiz"]},
+      {"key": "sjj_trebevic", "name": "Trebević Teleferiği", "district": "Trebević", "category": "manzara", "duration_min": 150, "cost_try": 350, "best_time": "aksam", "indoor": false, "accessible": true, "tags": ["manzara", "doğa"], "note": "Terk edilmiş 1984 olimpiyat bobsled pisti üst istasyona yürüme mesafesinde."},
+      {"key": "sjj_vrelo", "name": "Vrelo Bosne Parkı", "district": "Ilidža", "category": "doğa", "duration_min": 180, "cost_try": 200, "best_time": "ogle", "indoor": false, "accessible": true, "tags": ["doğa", "aile"], "note": "Girişten kaynağa fayton ile gidilebilir; çocuklu aileler için elverişli."}
+    ],
+    "baku": [
+      {"key": "gyd_icerisehir", "name": "İçerişehir ve Kız Kulesi", "district": "İçerişehir", "category": "tarih", "duration_min": 180, "cost_try": 300, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["UNESCO", "tarih"]},
+      {"key": "gyd_alevkuleleri", "name": "Alev Kuleleri Manzarası", "district": "Merkez", "category": "manzara", "duration_min": 60, "cost_try": 0, "best_time": "gece", "indoor": false, "accessible": true, "tags": ["modern", "ücretsiz"], "note": "Işık gösterisi hava karardıktan sonra; en iyi izleme noktası Şehitler Hıyabanı."},
+      {"key": "gyd_heydar", "name": "Haydar Aliyev Merkezi", "district": "Merkez", "category": "mimari", "duration_min": 120, "cost_try": 400, "best_time": "ikindi", "indoor": true, "accessible": true, "tags": ["modern", "mimari"]},
+      {"key": "gyd_bulvar", "name": "Bakü Bulvarı (Hazar Kıyısı)", "district": "Sahil", "category": "park", "duration_min": 120, "cost_try": 0, "best_time": "aksam", "indoor": false, "accessible": true, "tags": ["yürüyüş", "ücretsiz", "sahil"]},
+      {"key": "gyd_gobustan", "name": "Gobustan Kaya Resimleri", "district": "Şehir dışı", "category": "tarih", "duration_min": 300, "cost_try": 700, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["UNESCO", "arkeoloji"], "note": "Çamur volkanları ile birlikte yarım gün planlanır."},
+      {"key": "gyd_ateshgah", "name": "Ateşgah Tapınağı ve Yanardağ", "district": "Suraxanı", "category": "tarih", "duration_min": 180, "cost_try": 350, "best_time": "ikindi", "indoor": false, "accessible": true, "tags": ["tarih", "ilginç"]}
+    ],
+    "dubai": [
+      {"key": "dxb_burjkhalifa", "name": "Burj Khalifa Seyir Katı", "district": "Downtown", "category": "manzara", "duration_min": 120, "cost_try": 1800, "best_time": "aksam", "indoor": true, "accessible": true, "tags": ["ikonik", "manzara"], "note": "Gün batımı seansları en pahalı ve en erken dolan slot."},
+      {"key": "dxb_colsafari", "name": "Çöl Safarisi ve Akşam Yemeği", "district": "Şehir dışı", "category": "macera", "duration_min": 360, "cost_try": 2200, "best_time": "ikindi", "indoor": false, "accessible": false, "tags": ["macera", "aile"], "note": "Kum tepesi sürüşü mide hassasiyeti olanlar için uygun değil; talep edilirse yumuşak sürüş seçeneği var."},
+      {"key": "dxb_eskisehir", "name": "Al Fahidi Tarihi Mahallesi ve Abra", "district": "Bur Dubai", "category": "tarih", "duration_min": 150, "cost_try": 100, "best_time": "sabah", "duration_note": "Abra (nehir taksisi) 1 AED", "indoor": false, "accessible": true, "tags": ["tarih", "ekonomik"]},
+      {"key": "dxb_altin_sok", "name": "Altın ve Baharat Çarşısı", "district": "Deira", "category": "pazar", "duration_min": 120, "cost_try": 0, "best_time": "aksam", "indoor": false, "accessible": true, "tags": ["alışveriş", "ücretsiz"]},
+      {"key": "dxb_marina", "name": "Dubai Marina ve JBR Sahili", "district": "Marina", "category": "semt", "duration_min": 180, "cost_try": 0, "best_time": "aksam", "indoor": false, "accessible": true, "tags": ["plaj", "yürüyüş", "ücretsiz"]},
+      {"key": "dxb_akvaryum", "name": "Dubai Akvaryumu (Dubai Mall)", "district": "Downtown", "category": "aile", "duration_min": 120, "cost_try": 900, "best_time": "ogle", "indoor": true, "accessible": true, "tags": ["aile", "kapalı"], "note": "Öğle sıcağında kapalı alan alternatifi olarak plana yerleştirilir."}
+    ],
+    "marakes": [
+      {"key": "rak_jemaa", "name": "Jemaa el-Fna Meydanı", "district": "Medina", "category": "meydan", "duration_min": 150, "cost_try": 200, "best_time": "aksam", "indoor": false, "accessible": true, "tags": ["ikonik", "yemek", "canlı"], "note": "Gündüz sakin, akşam tamamen değişir. Fotoğraf çekiminde ücret talep edilebilir."},
+      {"key": "rak_souk", "name": "Medina Soukları", "district": "Medina", "category": "pazar", "duration_min": 180, "cost_try": 0, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["alışveriş", "labirent"], "note": "Pazarlık normdur; ilk fiyatın yaklaşık üçte biri makul başlangıç sayılır."},
+      {"key": "rak_bahia", "name": "Bahia Sarayı", "district": "Medina", "category": "tarih", "duration_min": 90, "cost_try": 250, "best_time": "sabah", "indoor": true, "accessible": true, "tags": ["mimari", "tarih"]},
+      {"key": "rak_majorelle", "name": "Majorelle Bahçesi", "district": "Gueliz", "category": "bahçe", "duration_min": 90, "cost_try": 450, "best_time": "sabah", "indoor": false, "accessible": true, "tags": ["bahçe", "fotoğraf"], "note": "Açılışta gidilmezse kuyruk uzun olur."},
+      {"key": "rak_hamam", "name": "Geleneksel Fas Hamamı", "district": "Medina", "category": "deneyim", "duration_min": 120, "cost_try": 800, "best_time": "ikindi", "indoor": true, "accessible": true, "tags": ["dinlendirici"]},
+      {"key": "rak_atlas", "name": "Atlas Dağları / Ourika Vadisi", "district": "Şehir dışı", "category": "doğa", "duration_min": 480, "cost_try": 1100, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["doğa", "gün boyu"], "note": "Şehrin sıcağından kaçmak için ideal; 1500 m rakımda hava belirgin serin."}
+    ],
+    "kapadokya": [
+      {"key": "cap_balon", "name": "Sıcak Hava Balonu Turu", "district": "Göreme", "category": "macera", "duration_min": 180, "cost_try": 6500, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["ikonik", "gün doğumu"], "note": "Kalkış 04:30-05:30 civarı. Rüzgâr nedeniyle iptal olabilir; planın ilk gününe koymak telafi şansı verir."},
+      {"key": "cap_goreme", "name": "Göreme Açık Hava Müzesi", "district": "Göreme", "category": "tarih", "duration_min": 120, "cost_try": 700, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["UNESCO", "fresk"]},
+      {"key": "cap_derinkuyu", "name": "Derinkuyu Yeraltı Şehri", "district": "Derinkuyu", "category": "tarih", "duration_min": 90, "cost_try": 500, "best_time": "ogle", "indoor": true, "accessible": false, "tags": ["yeraltı", "serin"], "note": "Dar ve alçak geçitler var; klostrofobi ve diz sorunu olanlar için uygun değil."},
+      {"key": "cap_ihlara", "name": "Ihlara Vadisi Yürüyüşü", "district": "Aksaray", "category": "doğa", "duration_min": 240, "cost_try": 400, "best_time": "sabah", "indoor": false, "accessible": false, "tags": ["doğa", "aktif"], "note": "Vadiye iniş ~380 basamak."},
+      {"key": "cap_kizilvadi", "name": "Kızılçukur Vadisi Gün Batımı", "district": "Ortahisar", "category": "manzara", "duration_min": 120, "cost_try": 150, "best_time": "aksam", "indoor": false, "accessible": true, "tags": ["manzara", "gün batımı"]},
+      {"key": "cap_avanos", "name": "Avanos Çömlek Atölyesi", "district": "Avanos", "category": "deneyim", "duration_min": 120, "cost_try": 400, "best_time": "ikindi", "indoor": true, "accessible": true, "tags": ["el sanatı", "aile"]}
+    ]
+  }
+}

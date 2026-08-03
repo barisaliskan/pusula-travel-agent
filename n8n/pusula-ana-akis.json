@@ -1,0 +1,561 @@
+{
+  "name": "Pusula AI — Seyahat Asistanı Ana Akışı",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "pusula/chat",
+        "httpMethod": "POST",
+        "responseMode": "responseNode"
+      },
+      "id": "kullanici-mesaji-(webhook)",
+      "name": "Kullanıcı Mesajı (Webhook)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -940,
+        300
+      ],
+      "notes": "Giriş katmanı: oturum, kullanıcı kimliği, dil.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "operation": "incr",
+        "key": "rl:{{$json.user_id}}:{{$now.toSeconds()}}"
+      },
+      "id": "rate-limit-(redis)",
+      "name": "Rate Limit (Redis)",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -740,
+        300
+      ],
+      "notes": "30 istek / 60 sn. Aşılırsa kibar ret.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// etik · prompt-injection · kapsam · PII maskeleme · yüksek risk · m.6 sinyali\n// Engellenirse LLM'e HİÇ gidilmez."
+      },
+      "id": "guardrail-—-giriş",
+      "name": "Guardrail — Giriş",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -540,
+        300
+      ],
+      "notes": "3 katman: Agno guardrail + TR kalıpları + PII maskeleme (KVKK m.9).",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.blocked}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "engellendi-mi?",
+      "name": "Engellendi mi?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "answer",
+              "value": "={{$json.reply}}"
+            }
+          ]
+        }
+      },
+      "id": "hazir-ret-yaniti",
+      "name": "Hazır Ret Yanıtı",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        120
+      ],
+      "notes": "0 LLM çağrısı, 0 veri sızıntısı.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "key": "prof:{{hash(user_id)}}"
+      },
+      "id": "riza-&-profil-(redis)",
+      "name": "Rıza & Profil (Redis)",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        460
+      ],
+      "notes": "Kişiselleştirme rızası yoksa profil OKUNMAZ ve YAZILMAZ.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// kova = dil | profil parmak izi | niyet | destinasyon\n// benzerlik >= 0.92 -> HIT"
+      },
+      "id": "semantic-cache-arama",
+      "name": "Semantic Cache Arama",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        60,
+        460
+      ],
+      "notes": "HIT = 0 LLM çağrısı, ~3 ms.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.cache_hit}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "cache-hit?",
+      "name": "Cache HIT?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        260,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "answer",
+              "value": "={{$json.payload.answer}}"
+            }
+          ]
+        }
+      },
+      "id": "cache-yaniti",
+      "name": "Cache Yanıtı",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// kural tabanlı, 0 LLM çağrısı\n// tek alan -> hızlı yol · plan/çok alan -> yavaş yol"
+      },
+      "id": "karmaşiklik-siniflandirici",
+      "name": "Karmaşıklık Sınıflandırıcı",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        460,
+        620
+      ],
+      "notes": "PLAN'da ucuz model öngörülmüştü; ölçümde kurallar daha hızlı ve kararlı çıktı.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            {
+              "value2": "fast"
+            },
+            {
+              "value2": "slow"
+            }
+          ]
+        }
+      },
+      "id": "yol-seçimi",
+      "name": "Yol Seçimi",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        660,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://pusula/api/agent/{{$json.agent}}",
+        "method": "POST"
+      },
+      "id": "hizli-yol-—-tek-uzman",
+      "name": "HIZLI YOL — Tek Uzman",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        880,
+        480
+      ],
+      "notes": "1 LLM çağrısı: uzman araçları çalıştırır, model yalnızca dile çevirir.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "url": "http://pusula/api/team/coordinate",
+        "method": "POST"
+      },
+      "id": "yavaş-yol-—-agno-team-(coordinate)",
+      "name": "YAVAŞ YOL — Agno Team (coordinate)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        880,
+        760
+      ],
+      "notes": "Lider ajan böler → uzmanlara delege eder → tek sese sentezler (3-6 çağrı).",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// get_weather · get_timezone_diff (zoneinfo) · get_fx\n// search_flights/hotels/restaurants (T2, simüle)\n// get_pois · get_culture_notes · get_visa_requirements (T1)\n// build_itinerary · validate_itinerary"
+      },
+      "id": "araç-katmani-(19-adapter)",
+      "name": "Araç Katmanı (19 adapter)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        620
+      ],
+      "notes": "Her araç cache-aside + TTL + single-flight'tan geçer.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// bütçe · tempo · mesafe · kapalı gün · erişilebilirlik · UNKNOWN_POI\n// error varsa plan sunulmaz -> deterministik plana düşülür"
+      },
+      "id": "plan-doğrulayici",
+      "name": "Plan Doğrulayıcı",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        760
+      ],
+      "notes": "Halüsinasyona karşı son kapı: uydurma POI burada yakalanır.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// groundedness (sayısal iddia bağlamda var mı?)\n// PII maskeleme · yüksek-risk feragat enjeksiyonu"
+      },
+      "id": "guardrail-—-çikiş",
+      "name": "Guardrail — Çıkış",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        620
+      ],
+      "notes": "Yanıttaki her sayı olgu paketinde karşılığı olmalı.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "sc:{kova}",
+        "ttl": 3600
+      },
+      "id": "semantic-cache-yazimi",
+      "name": "Semantic Cache Yazımı",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        760
+      ],
+      "notes": "Yalnızca groundedness geçen yanıtlar cache'lenir.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// hash'li kimlik + işlem + zaman; kişisel içerik YOK"
+      },
+      "id": "kvkk-denetim-i̇zi",
+      "name": "KVKK Denetim İzi",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        480
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "yanit-+-trace",
+      "name": "Yanıt + Trace",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        620
+      ],
+      "notes": "answer · trace (yol, ajanlar, araçlar, gecikme) · kaynaklar · feragat",
+      "notesInFlow": true
+    }
+  ],
+  "connections": {
+    "Kullanıcı Mesajı (Webhook)": {
+      "main": [
+        [
+          {
+            "node": "Rate Limit (Redis)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rate Limit (Redis)": {
+      "main": [
+        [
+          {
+            "node": "Guardrail — Giriş",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardrail — Giriş": {
+      "main": [
+        [
+          {
+            "node": "Engellendi mi?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Engellendi mi?": {
+      "main": [
+        [
+          {
+            "node": "Hazır Ret Yanıtı",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Rıza & Profil (Redis)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hazır Ret Yanıtı": {
+      "main": [
+        [
+          {
+            "node": "Yanıt + Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rıza & Profil (Redis)": {
+      "main": [
+        [
+          {
+            "node": "Semantic Cache Arama",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Semantic Cache Arama": {
+      "main": [
+        [
+          {
+            "node": "Cache HIT?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cache HIT?": {
+      "main": [
+        [
+          {
+            "node": "Cache Yanıtı",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Karmaşıklık Sınıflandırıcı",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cache Yanıtı": {
+      "main": [
+        [
+          {
+            "node": "Yanıt + Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Karmaşıklık Sınıflandırıcı": {
+      "main": [
+        [
+          {
+            "node": "Yol Seçimi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Yol Seçimi": {
+      "main": [
+        [
+          {
+            "node": "HIZLI YOL — Tek Uzman",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "YAVAŞ YOL — Agno Team (coordinate)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HIZLI YOL — Tek Uzman": {
+      "main": [
+        [
+          {
+            "node": "Araç Katmanı (19 adapter)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "YAVAŞ YOL — Agno Team (coordinate)": {
+      "main": [
+        [
+          {
+            "node": "Araç Katmanı (19 adapter)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Araç Katmanı (19 adapter)": {
+      "main": [
+        [
+          {
+            "node": "Plan Doğrulayıcı",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Plan Doğrulayıcı": {
+      "main": [
+        [
+          {
+            "node": "Guardrail — Çıkış",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardrail — Çıkış": {
+      "main": [
+        [
+          {
+            "node": "Semantic Cache Yazımı",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "KVKK Denetim İzi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Semantic Cache Yazımı": {
+      "main": [
+        [
+          {
+            "node": "Yanıt + Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KVKK Denetim İzi": {
+      "main": [
+        [
+          {
+            "node": "Yanıt + Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "pusula-ai"
+    }
+  ],
+  "meta": {
+    "aciklama": "Case Çıktı 1'in görsel karşılığı. Kod app/team.py'de; bu akış aynı hattın n8n gösterimidir."
+  }
+}

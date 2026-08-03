@@ -1,0 +1,299 @@
+{
+  "name": "Pusula AI — Gecelik Veri Hattı (ETL)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 3
+            }
+          ]
+        }
+      },
+      "id": "gecelik-tetik-(03:00)",
+      "name": "Gecelik Tetik (03:00)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.mfa.gov.tr/... (vize/seyahat uyarıları)"
+      },
+      "id": "t1-—-resmî-kaynaklar",
+      "name": "T1 — Resmî Kaynaklar",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        120
+      ],
+      "notes": "Vize matrisi. Değişiklik varsa visa:* ve sc:* olay-tabanlı temizlenir.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "url": "Wikidata / Wikivoyage / GeoNames / IANA tzdata"
+      },
+      "id": "t3-—-açik-veri",
+      "name": "T3 — Açık Veri",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        300
+      ],
+      "notes": "Lisans ve atıf zorunlu (Wikivoyage CC BY-SA).",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "url": "İç CMS: POI, kültür, mutfak, SSS"
+      },
+      "id": "t0-—-editoryal-i̇çerik",
+      "name": "T0 — Editoryal İçerik",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        480
+      ],
+      "notes": "İnsan onaylı; yüksek riskli dokümanlarda ikinci onay Hukuk/Uyum'dan.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Wikidata QID = kanonik destinasyon anahtarı\n// aynı şehir farklı kaynaklarda tek kimliğe bağlanır"
+      },
+      "id": "normalize-+-varlik-eşleştirme",
+      "name": "Normalize + Varlık Eşleştirme",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.changed}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "değişiklik-tespiti-(diff)",
+      "name": "Değişiklik Tespiti (diff)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// text-embedding-3-small · emb:{hash} 7 gün cache"
+      },
+      "id": "chunk-+-embed",
+      "name": "Chunk + Embed",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        180,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "pusula_knowledge"
+      },
+      "id": "redisvectordb'ye-yaz",
+      "name": "RedisVectorDb'ye Yaz",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        420,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "visa:* , sc:* , dest:*"
+      },
+      "id": "olay-tabanli-invalidation",
+      "name": "Olay-Tabanlı Invalidation",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        420,
+        420
+      ],
+      "notes": "Mevzuat değişince bayat cache anında düşer.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// kaynak başına son güncelleme, gecikme, hata oranı"
+      },
+      "id": "tazelik-sla-raporu",
+      "name": "Tazelik SLA Raporu",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        660,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "değişiklik-yok-—-atla",
+      "name": "Değişiklik yok — atla",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        180,
+        420
+      ]
+    }
+  ],
+  "connections": {
+    "Gecelik Tetik (03:00)": {
+      "main": [
+        [
+          {
+            "node": "T1 — Resmî Kaynaklar",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "T3 — Açık Veri",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "T0 — Editoryal İçerik",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "T1 — Resmî Kaynaklar": {
+      "main": [
+        [
+          {
+            "node": "Normalize + Varlık Eşleştirme",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "T3 — Açık Veri": {
+      "main": [
+        [
+          {
+            "node": "Normalize + Varlık Eşleştirme",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "T0 — Editoryal İçerik": {
+      "main": [
+        [
+          {
+            "node": "Normalize + Varlık Eşleştirme",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize + Varlık Eşleştirme": {
+      "main": [
+        [
+          {
+            "node": "Değişiklik Tespiti (diff)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Değişiklik Tespiti (diff)": {
+      "main": [
+        [
+          {
+            "node": "Chunk + Embed",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Değişiklik yok — atla",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chunk + Embed": {
+      "main": [
+        [
+          {
+            "node": "RedisVectorDb'ye Yaz",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RedisVectorDb'ye Yaz": {
+      "main": [
+        [
+          {
+            "node": "Olay-Tabanlı Invalidation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Olay-Tabanlı Invalidation": {
+      "main": [
+        [
+          {
+            "node": "Tazelik SLA Raporu",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "pusula-ai"
+    }
+  ],
+  "meta": {
+    "aciklama": "Çıktı 4'ün görsel karşılığı: 5 kademeli kaynak hiyerarşisinin alım hattı."
+  }
+}

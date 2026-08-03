@@ -1,0 +1,225 @@
+{
+  "_meta": {
+    "aciklama": "Yöresel mutfak bilgi tabanı (T0). Yalnızca **yemek ve mutfak kültürü** verisi tutulur; restoran adı/fiyatı burada YOKTUR — onlar canlı envanterdir (T2) ve `search_restaurants` aracının mock adapter'ından gelir. Bu ayrım bilinçlidir: küratörlü katmanda uydurulmuş işletme kaydı bulunmaz (CLAUDE.md kural 3).",
+    "guven_kademesi": "T0",
+    "diyet_etiketleri": ["vegan", "vejetaryen", "helal", "glutensiz", "deniz_urunu", "domuz_iceriyor", "alkol_iceriyor"],
+    "diyet_notu": "`culinary_guide` ajanı diyet kısıtını SERT FİLTRE olarak uygular: uyumsuz yemek listeye hiç girmez, 'dikkatli olun' notuyla geçiştirilmez.",
+    "son_guncelleme": "2026-07-27"
+  },
+  "cuisines": {
+    "roma": {
+      "ozet": "Roma mutfağı sadeliğe dayanır: az malzeme, güçlü teknik. Dört klasik makarna sosu (cacio e pepe, carbonara, amatriciana, gricia) şehrin imzasıdır.",
+      "yemek_saatleri": "Öğle 13:00-15:00, akşam 20:00-22:30. 19:00'dan önce açık restoran çoğunlukla turistiktir.",
+      "ipuclari": [
+        "Bar'da ayakta içilen kahve, masaya oturunca 2-3 katına çıkar.",
+        "Cappuccino yerel alışkanlıkta sabah içeceğidir; yemek sonrası espresso tercih edilir.",
+        "Menüde 'coperto' (kuver) ücreti yasaldır ve normaldir."
+      ],
+      "dishes": [
+        {"name": "Cacio e pepe", "aciklama": "Pecorino peyniri ve karabiberle yapılan, kremasız makarna.", "diet": ["vejetaryen"], "fiyat_bandi": "orta"},
+        {"name": "Carbonara", "aciklama": "Yumurta sarısı, pecorino, guanciale ve karabiber. Krema kullanılmaz.", "diet": ["domuz_iceriyor"], "fiyat_bandi": "orta"},
+        {"name": "Supplì", "aciklama": "İçi mozzarellalı kızarmış pirinç köftesi; klasik sokak atıştırmalığı.", "diet": ["vejetaryen"], "fiyat_bandi": "ekonomik"},
+        {"name": "Carciofi alla giudia", "aciklama": "Roma Yahudi mutfağından, çıtır kızarmış enginar.", "diet": ["vegan", "vejetaryen", "glutensiz"], "fiyat_bandi": "orta"},
+        {"name": "Pizza al taglio", "aciklama": "Tepside pişip gramla satılan dilim pizza; vegan seçenekleri yaygındır.", "diet": ["vejetaryen"], "fiyat_bandi": "ekonomik"},
+        {"name": "Maritozzo", "aciklama": "Kremayla doldurulmuş tatlı çörek; kahvaltı tatlısı.", "diet": ["vejetaryen"], "fiyat_bandi": "ekonomik"}
+      ],
+      "vegan_notu": "Roma'nın Yahudi mutfağı ve sebze ağırlıklı contorni geleneği sayesinde vegan seçenek bulmak kolaydır; enginar, puntarelle ve fasulye yemekleri güvenli tercihlerdir."
+    },
+    "barselona": {
+      "ozet": "Katalan mutfağı deniz ve dağ ürünlerini aynı tabakta buluşturur ('mar i muntanya'). Tapas kültürü paylaşarak yemeyi merkeze alır.",
+      "yemek_saatleri": "Öğle 14:00-16:00, akşam 21:00-23:00. Erken akşam yemeği yerel alışkanlık değildir.",
+      "ipuclari": [
+        "Paella yerel alışkanlıkta öğle yemeğidir; akşam menüsünde öne çıkan yerler genellikle turistiktir.",
+        "'Menú del día' öğlen sunulan sabit fiyatlı üç kap menüdür, en ekonomik seçenektir.",
+        "Sangria turistik; yerel tercih 'vermut' veya 'cava'dır."
+      ],
+      "dishes": [
+        {"name": "Pa amb tomàquet", "aciklama": "Domates sürülmüş, zeytinyağlı ekmek; her sofranın başlangıcı.", "diet": ["vegan", "vejetaryen"], "fiyat_bandi": "ekonomik"},
+        {"name": "Escalivada", "aciklama": "Közlenmiş patlıcan, biber ve soğan; zeytinyağıyla servis edilir.", "diet": ["vegan", "vejetaryen", "glutensiz"], "fiyat_bandi": "ekonomik"},
+        {"name": "Fideuà", "aciklama": "Pirinç yerine ince erişteyle yapılan deniz ürünlü paella.", "diet": ["deniz_urunu"], "fiyat_bandi": "orta"},
+        {"name": "Patatas bravas", "aciklama": "Acılı sosla servis edilen kızarmış patates; sos bazen yumurtalı olabilir, sorulmalı.", "diet": ["vejetaryen"], "fiyat_bandi": "ekonomik"},
+        {"name": "Crema catalana", "aciklama": "Tarçın ve limon kabuklu, üstü karamelize krema tatlısı.", "diet": ["vejetaryen", "glutensiz"], "fiyat_bandi": "ekonomik"},
+        {"name": "Calçots", "aciklama": "Közde pişirilen taze soğan; yalnızca kış-ilkbahar sezonunda bulunur.", "diet": ["vegan", "vejetaryen", "glutensiz"], "fiyat_bandi": "orta", "sezon": [1, 2, 3]}
+      ],
+      "vegan_notu": "Sebze tapas'ları bol; ancak birçok sos ve stok et suyu içerebilir. 'sense carn ni peix' (etsiz ve balıksız) ifadesi işe yarar."
+    },
+    "paris": {
+      "ozet": "Klasik Fransız mutfağı teknik ve sos merkezlidir; boulangerie ve fromagerie kültürü günlük hayatın parçasıdır.",
+      "yemek_saatleri": "Öğle 12:00-14:00, akşam 19:30-22:00. Mutfaklar arada kapanır.",
+      "ipuclari": [
+        "Fırında 'baguette tradition' etiketi el yapımı ve katkısız olduğunu gösterir.",
+        "'Formule' öğle menüleri à la carte'a göre belirgin ucuzdur.",
+        "Su isterken 'une carafe d'eau' demek ücretsiz musluk suyu getirir."
+      ],
+      "dishes": [
+        {"name": "Croissant", "aciklama": "Tereyağlı milföy hamur işi; 'au beurre' etiketi saf tereyağı demektir.", "diet": ["vejetaryen"], "fiyat_bandi": "ekonomik"},
+        {"name": "Soupe à l'oignon", "aciklama": "Karamelize soğan çorbası; genellikle dana suyu ile yapılır.", "diet": [], "fiyat_bandi": "orta"},
+        {"name": "Ratatouille", "aciklama": "Provence usulü sebze güveci.", "diet": ["vegan", "vejetaryen", "glutensiz"], "fiyat_bandi": "orta"},
+        {"name": "Steak frites", "aciklama": "Biftek ve patates kızartması; bistro klasiği.", "diet": [], "fiyat_bandi": "orta"},
+        {"name": "Falafel (Le Marais)", "aciklama": "Marais'nin Yahudi mahallesinde köklü bir sokak lezzeti geleneği vardır.", "diet": ["vegan", "vejetaryen"], "fiyat_bandi": "ekonomik"},
+        {"name": "Tarte Tatin", "aciklama": "Ters çevrilmiş karamelize elmalı tart.", "diet": ["vejetaryen"], "fiyat_bandi": "ekonomik"}
+      ],
+      "vegan_notu": "Klasik bistrolarda vegan seçenek sınırlıdır; Marais ve 11. bölgede vegan mutfak yoğunlaşır. Tereyağı ve krema varsayılan malzemedir, açıkça belirtmek gerekir."
+    },
+    "prag": {
+      "ozet": "Çek mutfağı doyurucu, et ve soslu yemekler üzerine kuruludur; bira mutfağın ayrılmaz parçasıdır.",
+      "yemek_saatleri": "Öğle 11:30-14:00, akşam 18:00-21:30. Avrupa'nın erken yemek yiyen şehirlerinden.",
+      "ipuclari": [
+        "Masaya sorulmadan gelen çerezler ücretlidir; istemiyorsanız geri verin.",
+        "Bira çoğu yerde sudan ucuzdur ve 'tank bira' taze servis anlamına gelir.",
+        "Turistik merkezde 'Trdelník' yerel bir Prag tatlısı olarak pazarlanır; aslında bölgesel/ithal bir üründür."
+      ],
+      "dishes": [
+        {"name": "Svíčková", "aciklama": "Kremalı sebze soslu dana rosto, knedlík ile servis edilir.", "diet": [], "fiyat_bandi": "orta"},
+        {"name": "Guláš", "aciklama": "Koyu soslu et yahnisi; knedlík (buğulama ekmek dilimi) ile yenir.", "diet": [], "fiyat_bandi": "orta"},
+        {"name": "Smažený sýr", "aciklama": "Panelenmiş kızarmış peynir; en yaygın vejetaryen ana yemek.", "diet": ["vejetaryen"], "fiyat_bandi": "ekonomik"},
+        {"name": "Bramborák", "aciklama": "Sarımsaklı patates mücveri.", "diet": ["vejetaryen"], "fiyat_bandi": "ekonomik"},
+        {"name": "Nakládaný hermelín", "aciklama": "Baharatlı yağda marine edilmiş yumuşak peynir; bira mezesi.", "diet": ["vejetaryen"], "fiyat_bandi": "ekonomik"}
+      ],
+      "vegan_notu": "Geleneksel Çek mutfağı vegan için zorlayıcıdır. Vinohrady ve Žižkov semtlerinde modern vegan mutfak gelişmiştir; geleneksel menüde çoğunlukla yalnızca garnitürler uygundur."
+    },
+    "tokyo": {
+      "ozet": "Japon mutfağı mevsimsellik ve malzemenin saflığı üzerine kurulu; her tür yemeğin kendi uzmanlaşmış lokantası vardır.",
+      "yemek_saatleri": "Öğle 11:30-14:00, akşam 18:00-22:00. Öğle menüleri aynı mutfağın akşam fiyatının yarısına yakındır.",
+      "ipuclari": [
+        "Bahşiş verilmez; bazı yerlerde rahatsızlık yaratır.",
+        "Birçok küçük lokantada girişte bilet makinesi bulunur, sipariş orada verilir.",
+        "Yemek yerken yürümek pek çok semtte hoş karşılanmaz."
+      ],
+      "dishes": [
+        {"name": "Sushi / Sashimi", "aciklama": "Çiğ balık ve sirkeli pirinç; öğle setleri belirgin ekonomiktir.", "diet": ["deniz_urunu"], "fiyat_bandi": "orta"},
+        {"name": "Ramen", "aciklama": "Et veya deniz ürünü suyunda erişte; tonkotsu domuz kemiği suyudur.", "diet": ["domuz_iceriyor"], "fiyat_bandi": "ekonomik"},
+        {"name": "Shōjin ryōri", "aciklama": "Budist tapınak mutfağı — tamamen bitkisel, hayvansal ürün içermez.", "diet": ["vegan", "vejetaryen"], "fiyat_bandi": "konforlu"},
+        {"name": "Okonomiyaki", "aciklama": "Lahanalı tuzlu krep; standart tarifte katsuobushi (balık) ve sos hayvansal içerir.", "diet": [], "fiyat_bandi": "ekonomik"},
+        {"name": "Zaru soba", "aciklama": "Soğuk karabuğday erişte; sos genellikle dashi (balık) içerir, vegan istenirse belirtilmeli.", "diet": ["deniz_urunu"], "fiyat_bandi": "ekonomik"},
+        {"name": "Onigiri", "aciklama": "Pirinç topu; marketlerde bile ucuz ve doyurucu ara öğün.", "diet": ["vejetaryen"], "fiyat_bandi": "ekonomik"}
+      ],
+      "vegan_notu": "DİKKAT: Sebzeli görünen yemeklerin çoğu dashi (balık suyu) içerir. Shōjin ryōri lokantaları ve tapınak restoranları güvenli tercihtir. Helal arayanlar için Asakusa ve Shinjuku'da sertifikalı işletmeler bulunur."
+    },
+    "bangkok": {
+      "ozet": "Tayland mutfağı tatlı-ekşi-tuzlu-acı dengesi üzerine kurulu; sokak tezgâhı ile restoran arasındaki kalite farkı çoğu zaman yoktur.",
+      "yemek_saatleri": "Sokak tezgâhları sabahtan gece yarısına kadar dönüşümlü açıktır; sabit öğün saati kültürü zayıftır.",
+      "ipuclari": [
+        "'Mai phet' = acı olmasın, 'phet nit noi' = az acı.",
+        "Kalabalık tezgâh iyi işaret: hem taze hem yerel onaylı.",
+        "Musluk suyu içilmez; şişe su her yerde çok ucuzdur."
+      ],
+      "dishes": [
+        {"name": "Pad Thai", "aciklama": "Tamarindli erişte; standart tarifte balık sosu ve karides bulunur.", "diet": ["deniz_urunu"], "fiyat_bandi": "ekonomik"},
+        {"name": "Som tam", "aciklama": "Yeşil papaya salatası; genelde balık sosu ve kurutulmuş karides içerir.", "diet": ["deniz_urunu"], "fiyat_bandi": "ekonomik"},
+        {"name": "Tom yum", "aciklama": "Limon otu ve galangal aromalı ekşi-acı çorba.", "diet": ["deniz_urunu"], "fiyat_bandi": "ekonomik"},
+        {"name": "Massaman curry", "aciklama": "Hindistan cevizi sütlü, baharatlı yumuşak köri; Müslüman mutfak etkisi taşır.", "diet": [], "fiyat_bandi": "orta"},
+        {"name": "Jay (เจ) mutfağı", "aciklama": "Tayland'ın kendi vegan geleneği; sarı-kırmızı 'เจ' tabelası tamamen bitkisel demektir.", "diet": ["vegan", "vejetaryen"], "fiyat_bandi": "ekonomik"},
+        {"name": "Mango sticky rice", "aciklama": "Hindistan cevizi sütlü yapışkan pirinç ve mango.", "diet": ["vegan", "vejetaryen", "glutensiz"], "fiyat_bandi": "ekonomik"}
+      ],
+      "vegan_notu": "Balık sosu neredeyse her yerde varsayılan malzemedir. 'Jay' tabelalı tezgâhlar ve Çin mahallesindeki vejetaryen lokantalar güvenlidir. Helal arayanlar için Müslüman mahallelerinde sertifikalı seçenek çoktur."
+    },
+    "tiflis": {
+      "ozet": "Gürcü mutfağı ceviz, nar ekşisi ve taze otlarla tanımlanır; sofra kültürü (supra) merkezi öneme sahiptir.",
+      "yemek_saatleri": "Esnek; akşam yemeği 19:00 sonrası uzun sürer.",
+      "ipuclari": [
+        "Khinkali elle sapından tutularak yenir, sapı yenmez.",
+        "Ortodoks oruç dönemlerinde her menüde hazır bitkisel ('samarkhvo') bölüm bulunur — vegan için büyük avantaj.",
+        "Ev yapımı şarap 'qvevri' toprak küplerde üretilir; UNESCO listesindedir."
+      ],
+      "dishes": [
+        {"name": "Khachapuri (Adjaruli)", "aciklama": "Kayık şeklinde, içi peynirli ve yumurtalı ekmek.", "diet": ["vejetaryen"], "fiyat_bandi": "ekonomik"},
+        {"name": "Khinkali", "aciklama": "Etli veya mantarlı, suyu içinde kalan büyük mantı.", "diet": [], "fiyat_bandi": "ekonomik"},
+        {"name": "Pkhali", "aciklama": "Cevizli sebze ezmesi (ıspanak, pancar, fasulye); tamamen bitkisel.", "diet": ["vegan", "vejetaryen", "glutensiz"], "fiyat_bandi": "ekonomik"},
+        {"name": "Lobio", "aciklama": "Baharatlı fasulye yemeği, mısır ekmeği ile.", "diet": ["vegan", "vejetaryen", "glutensiz"], "fiyat_bandi": "ekonomik"},
+        {"name": "Badrijani nigvzit", "aciklama": "Cevizli patlıcan ruloları, nar taneli.", "diet": ["vegan", "vejetaryen", "glutensiz"], "fiyat_bandi": "ekonomik"},
+        {"name": "Churchkhela", "aciklama": "Üzüm şırasına batırılmış ceviz dizisi; geleneksel tatlı.", "diet": ["vegan", "vejetaryen"], "fiyat_bandi": "ekonomik"}
+      ],
+      "vegan_notu": "Gürcistan vegan için Kafkasya'nın en kolay destinasyonudur: oruç geleneği sayesinde bitkisel menü her lokantada standarttır."
+    },
+    "saraybosna": {
+      "ozet": "Bosna mutfağı Osmanlı mirasının doğrudan devamıdır; Türkiye'den gelen ziyaretçiye tanıdık gelir.",
+      "yemek_saatleri": "Öğle 12:00-15:00, akşam 18:00-22:00.",
+      "ipuclari": [
+        "Bosna kahvesi Türk kahvesine çok yakındır, 'fildžan' fincanda rahat lokumla servis edilir.",
+        "Ćevabdžinica'lar genellikle yalnızca ćevapi servis eder, menü tek kalemdir.",
+        "Şehir merkezindeki işletmelerin çoğu helal sertifikalıdır."
+      ],
+      "dishes": [
+        {"name": "Ćevapi", "aciklama": "Somun ekmek (somun) içinde ızgara köfte, soğanla.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Burek", "aciklama": "Kıymalı yufka böreği. Peynirli olanına 'sirnica', ıspanaklı olana 'zeljanica' denir.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Zeljanica", "aciklama": "Ispanaklı yufka böreği.", "diet": ["vejetaryen", "helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Begova čorba", "aciklama": "Tavuk ve bamyalı 'bey çorbası'.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Japrak", "aciklama": "Yaprak sarma; etli veya zeytinyağlı yapılır.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Tufahija", "aciklama": "Cevizle doldurulmuş şerbetli elma tatlısı.", "diet": ["vejetaryen", "helal"], "fiyat_bandi": "ekonomik"}
+      ],
+      "vegan_notu": "Vegan seçenek geleneksel menüde sınırlıdır; zeytinyağlı sarma, salata ve bazı börekler uygundur. Helal uyumluluğu ise şehir merkezinde neredeyse geneldir."
+    },
+    "baku": {
+      "ozet": "Azerbaycan mutfağı safran, nar ve taze ot kullanımıyla öne çıkar; pilav kültürü çok gelişmiştir.",
+      "yemek_saatleri": "Öğle 13:00-15:00, akşam 19:00-22:30.",
+      "ipuclari": [
+        "Çay armudi bardakta, reçelle servis edilir; sofranın vazgeçilmezidir.",
+        "Menüdeki porsiyonlar büyüktür, paylaşmak yaygındır.",
+        "İşletmelerin büyük kısmı helal uyumludur."
+      ],
+      "dishes": [
+        {"name": "Plov", "aciklama": "Safranlı pilav; onlarca çeşidi vardır, kazmağı (dip kabuğu) makbuldür.", "diet": ["helal"], "fiyat_bandi": "orta"},
+        {"name": "Dolma", "aciklama": "Yaprak veya sebze dolması; zeytinyağlı versiyonu bitkiseldir.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Düşbərə", "aciklama": "Çok küçük boyutlu etli mantı çorbası.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Kükü", "aciklama": "Yoğun taze ot ve yumurtayla yapılan omlet benzeri yemek.", "diet": ["vejetaryen", "helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Qutab", "aciklama": "İnce hamurda otlu, kabaklı veya etli gözleme.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Şəkərbura", "aciklama": "Cevizli, kakuleli bayram tatlısı.", "diet": ["vejetaryen", "helal"], "fiyat_bandi": "ekonomik"}
+      ],
+      "vegan_notu": "Otlu qutab, zeytinyağlı dolma ve sebze yemekleri uygundur; tereyağı kullanımı yaygın olduğu için sorulmalıdır."
+    },
+    "dubai": {
+      "ozet": "Yerel Emirati mutfağı görece az sayıda işletmede sunulur; şehrin gerçek mutfak zenginliği göçmen toplulukların (Güney Asya, Levanten, İran) mutfaklarındadır.",
+      "yemek_saatleri": "Akşam yemeği geç, 21:00 sonrası; Ramazan ayında gündüz servis sınırlıdır.",
+      "ipuclari": [
+        "Neredeyse tüm işletmeler helaldir; alkol yalnızca lisanslı otel/restoranlarda sunulur.",
+        "Deira ve Karama semtleri, marina bölgesine kıyasla çok daha ekonomiktir.",
+        "Ramazan'da gündüz halka açık alanda yeme-içme konusunda yerel kurallara dikkat edilmelidir."
+      ],
+      "dishes": [
+        {"name": "Machboos", "aciklama": "Baharatlı, limon kurusu aromalı Emirati pilavı.", "diet": ["helal"], "fiyat_bandi": "orta"},
+        {"name": "Luqaimat", "aciklama": "Hurma pekmezli lokma tatlısı.", "diet": ["vejetaryen", "helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Shawarma", "aciklama": "Levanten döner dürüm; en yaygın ekonomik öğün.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Mezze tabağı", "aciklama": "Humus, mütebbel, tabule; büyük ölçüde bitkiseldir.", "diet": ["vegan", "vejetaryen", "helal"], "fiyat_bandi": "orta"},
+        {"name": "Karak çay", "aciklama": "Kakuleli, sütlü koyu çay; günlük ritüel içeceği.", "diet": ["vejetaryen", "helal"], "fiyat_bandi": "ekonomik"}
+      ],
+      "vegan_notu": "Güney Asya ve Levanten mutfakları sayesinde vegan seçenek çok geniştir; Hint vejetaryen lokantaları en güvenli adrestir."
+    },
+    "marakes": {
+      "ozet": "Fas mutfağı tatlı-tuzlu birleşimi, uzun pişirme ve baharat karışımı (ras el hanout) ile tanımlanır.",
+      "yemek_saatleri": "Öğle 12:00-15:00, akşam 19:30-22:30. Cuma öğle yemeği couscous günüdür.",
+      "ipuclari": [
+        "Nane çayı ikramı ticaretin parçasıdır; kabul etmek satın alma zorunluluğu doğurmaz.",
+        "Musluk suyu içilmez.",
+        "Meydandaki tezgâhlarda fiyat önceden sorulmalı, sipariş edilmeyen ikramlar hesaba eklenebilir."
+      ],
+      "dishes": [
+        {"name": "Tajine", "aciklama": "Konik kapaklı toprak kapta uzun süre pişen yemek; sebzeli, tavuklu veya kuzulu.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Couscous", "aciklama": "Buğulanmış irmik üzerine sebze ve et; geleneksel olarak cuma yemeği.", "diet": ["helal"], "fiyat_bandi": "orta"},
+        {"name": "Harira", "aciklama": "Mercimek ve nohutlu çorba; Ramazan'da iftar açılışında yenir.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Zaalouk", "aciklama": "Közlenmiş patlıcan ve domates ezmesi.", "diet": ["vegan", "vejetaryen", "glutensiz", "helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Msemen", "aciklama": "Katmer benzeri kahvaltılık hamur işi, bal veya reçelle.", "diet": ["vejetaryen", "helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Nane çayı", "aciklama": "Bol şekerli yeşil çay ve taze nane; misafirperverliğin simgesi.", "diet": ["vegan", "vejetaryen", "helal"], "fiyat_bandi": "ekonomik"}
+      ],
+      "vegan_notu": "Sebze tajine ve mezeler uygundur; ancak et suyu kullanımı yaygın olduğu için 'sans viande et sans bouillon' diye belirtmek gerekir."
+    },
+    "kapadokya": {
+      "ozet": "İç Anadolu mutfağının testi kebabı ve hamur işleri öne çıkar; bölgede bağcılık ve yerli üzüm çeşitleri güçlüdür.",
+      "yemek_saatleri": "Öğle 12:00-15:00, akşam 19:00-22:00.",
+      "ipuclari": [
+        "Testi kebabı çoğu yerde önceden sipariş ister; rezervasyonda belirtilmeli.",
+        "Bölgede Emir ve Kalecik Karası gibi yerli üzümlerden şarap üretilir.",
+        "Manzaralı teras restoranlarda gün batımı saati için rezervasyon şarttır."
+      ],
+      "dishes": [
+        {"name": "Testi kebabı", "aciklama": "Ağzı kapatılmış toprak testide pişirilip masada kırılan et yemeği.", "diet": ["helal"], "fiyat_bandi": "orta"},
+        {"name": "Mantı", "aciklama": "Yoğurtlu küçük mantı; bölgesel varyasyonları vardır.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Nevşehir tava", "aciklama": "Sebze ve et bir arada, fırında pişen tepsi yemeği.", "diet": ["helal"], "fiyat_bandi": "orta"},
+        {"name": "Sac kavurma", "aciklama": "Sac üzerinde sebzeli et kavurma.", "diet": ["helal"], "fiyat_bandi": "orta"},
+        {"name": "Kuru fasulye + pilav", "aciklama": "Bölgenin en yaygın günlük öğünü; etsiz yapılabilir.", "diet": ["helal"], "fiyat_bandi": "ekonomik"},
+        {"name": "Pekmezli çörek", "aciklama": "Üzüm pekmeziyle yapılan yerel hamur işi.", "diet": ["vejetaryen", "helal"], "fiyat_bandi": "ekonomik"}
+      ],
+      "vegan_notu": "Zeytinyağlılar, kuru fasulye (etsiz istenirse) ve mezeler uygundur; tereyağı kullanımı yaygın olduğundan belirtmek gerekir."
+    }
+  }
+}

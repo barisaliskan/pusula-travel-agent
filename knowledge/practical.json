@@ -1,0 +1,130 @@
+{
+  "_meta": {
+    "aciklama": "Pratik seyahat bilgileri: priz, voltaj, acil numara, su, bağlantı, para. `practical_desk` ajanının veri kaynağı.",
+    "guven_kademesi": "T1/T3 karışık — acil numaralar ve elektrik standartları resmî/kamusal kaynaklıdır (T1), gündelik ipuçları küratörlüdür (T0).",
+    "saat_farki_notu": "Saat farkı burada SABİT olarak tutulmaz. `get_timezone_diff` aracı IANA tzdata (`zoneinfo`) üzerinden anlık hesaplar — yaz saati uygulaması sabit tabloyu yanlışlar (PLAN.md §2.4).",
+    "son_guncelleme": "2026-07-27"
+  },
+  "practical": {
+    "roma": {
+      "timezone": "Europe/Rome",
+      "currency": {"code": "EUR", "symbol": "€", "nakit_kullanimi": "Kart neredeyse her yerde geçer; küçük esnaf için az miktar nakit yeterli."},
+      "elektrik": {"voltaj": "230V", "frekans": "50Hz", "priz_tipi": ["C", "F", "L"], "adaptor_gerekli_mi_tr": false, "not": "Türkiye ile aynı yuvarlak uç; L tipi eski binalarda görülebilir, evrensel adaptör güvenli olur."},
+      "acil_numaralar": {"genel": "112", "not": "112 tüm AB'de ortak acil numaradır."},
+      "musluk_suyu": "İçilebilir. Sokak çeşmeleri (nasone) şehir şebekesine bağlıdır ve ücretsizdir.",
+      "internet": "AB roaming Türkiye'yi kapsamaz; yerel eSIM veya turist SIM ekonomiktir.",
+      "ulasim_karti": "Toplu taşımada tek biletle 100 dakika aktarma hakkı vardır.",
+      "eczane": "Yeşil haç tabelası; nöbetçi eczane listesi kapıya asılır."
+    },
+    "barselona": {
+      "timezone": "Europe/Madrid",
+      "currency": {"code": "EUR", "symbol": "€", "nakit_kullanimi": "Kart yaygın; küçük tapas barlarında minimum tutar uygulanabilir."},
+      "elektrik": {"voltaj": "230V", "frekans": "50Hz", "priz_tipi": ["C", "F"], "adaptor_gerekli_mi_tr": false},
+      "acil_numaralar": {"genel": "112"},
+      "musluk_suyu": "İçilebilir ancak tadı serttir; birçok yerel şişe su tercih eder.",
+      "internet": "eSIM yaygın; havalimanında turist SIM satılır.",
+      "ulasim_karti": "10 biniş hakkı veren çoklu biletler tek bilete göre belirgin ucuzdur.",
+      "eczane": "Yeşil haç; 24 saat açık şubeler merkezde mevcuttur."
+    },
+    "paris": {
+      "timezone": "Europe/Paris",
+      "currency": {"code": "EUR", "symbol": "€", "nakit_kullanimi": "Kart hâkim; bazı fırın ve pazar tezgâhları nakit ister."},
+      "elektrik": {"voltaj": "230V", "frekans": "50Hz", "priz_tipi": ["C", "E"], "adaptor_gerekli_mi_tr": false, "not": "E tipinde topraklama pimi prizin içindedir; Türk fişi genellikle uyar."},
+      "acil_numaralar": {"genel": "112", "polis": "17", "ambulans": "15", "itfaiye": "18"},
+      "musluk_suyu": "İçilebilir; Wallace çeşmeleri ücretsiz içme suyu sağlar.",
+      "internet": "eSIM veya yerel operatör turist paketi.",
+      "ulasim_karti": "Günlük/haftalık ulaşım geçişleri tek bilete göre avantajlıdır; kâğıt bilet kademeli olarak kaldırılmaktadır.",
+      "eczane": "Yeşil haç; 'pharmacie de garde' nöbetçi eczane demektir."
+    },
+    "prag": {
+      "timezone": "Europe/Prague",
+      "currency": {"code": "CZK", "symbol": "Kč", "nakit_kullanimi": "Avro kabul edilse de kur kötüdür; koruna ile ödemek her zaman avantajlı."},
+      "elektrik": {"voltaj": "230V", "frekans": "50Hz", "priz_tipi": ["C", "E"], "adaptor_gerekli_mi_tr": false},
+      "acil_numaralar": {"genel": "112", "polis": "158", "ambulans": "155", "itfaiye": "150"},
+      "musluk_suyu": "İçilebilir ve kalitelidir.",
+      "internet": "Yerel SIM ucuzdur; kafe ve toplu taşımada Wi-Fi yaygın.",
+      "ulasim_karti": "Süreli bilet (30/90 dakika, 24/72 saat) sistemi; bilet mutlaka damgalanmalıdır.",
+      "eczane": "'Lékárna' tabelası."
+    },
+    "tokyo": {
+      "timezone": "Asia/Tokyo",
+      "currency": {"code": "JPY", "symbol": "¥", "nakit_kullanimi": "Beklenenin aksine NAKİT önemlidir; küçük lokanta ve tapınaklarda kart geçmeyebilir."},
+      "elektrik": {"voltaj": "100V", "frekans": "Doğu Japonya 50Hz / Batı Japonya 60Hz", "priz_tipi": ["A", "B"], "adaptor_gerekli_mi_tr": true, "not": "DİKKAT: Hem fiş tipi hem voltaj Türkiye'den farklıdır. Çoğu telefon/laptop şarj cihazı 100-240V destekler ama saç kurutma makinesi gibi cihazlar çalışmaz veya bozulur."},
+      "acil_numaralar": {"polis": "110", "ambulans_itfaiye": "119", "not": "Japonya'da 112 kullanılmaz."},
+      "musluk_suyu": "İçilebilir ve yüksek kalitelidir.",
+      "internet": "Turist eSIM veya cep Wi-Fi kiralama yaygın ve ucuzdur.",
+      "ulasim_karti": "Temassız IC kart (Suica/Pasmo) metro, otobüs ve marketlerde geçer; en pratik çözümdür.",
+      "eczane": "'薬局' tabelası; reçetesiz ilaç seçenekleri sınırlıdır."
+    },
+    "bangkok": {
+      "timezone": "Asia/Bangkok",
+      "currency": {"code": "THB", "symbol": "฿", "nakit_kullanimi": "Sokak tezgâhları ve taksi nakit ister; ATM çekim ücreti işlem başına yüksektir, tek seferde fazla çekmek mantıklı."},
+      "elektrik": {"voltaj": "230V", "frekans": "50Hz", "priz_tipi": ["A", "B", "C"], "adaptor_gerekli_mi_tr": false, "not": "Prizler çoğunlukla hibrit; Türk fişi genellikle takılır."},
+      "acil_numaralar": {"polis": "191", "ambulans": "1669", "turist_polisi": "1155", "not": "Turist polisi İngilizce hizmet verir."},
+      "musluk_suyu": "İÇİLMEZ. Şişe su çok ucuzdur; buz genellikle güvenli üretimdir ama şüphede sorulmalı.",
+      "internet": "Havalimanında turist SIM çok ucuz ve hızlıdır.",
+      "ulasim_karti": "BTS Skytrain ve MRT ayrı sistemlerdir; Rabbit kartı BTS için kullanılır.",
+      "eczane": "Yaygın ve ucuz; birçok ilaç reçetesiz satılır."
+    },
+    "tiflis": {
+      "timezone": "Asia/Tbilisi",
+      "currency": {"code": "GEL", "symbol": "₾", "nakit_kullanimi": "Kart merkezde yaygın; pazar ve marşrutkalarda nakit gerekir."},
+      "elektrik": {"voltaj": "220V", "frekans": "50Hz", "priz_tipi": ["C", "F"], "adaptor_gerekli_mi_tr": false},
+      "acil_numaralar": {"genel": "112"},
+      "musluk_suyu": "Tiflis şebeke suyu içilebilir kabul edilir; hassas mideler için şişe su önerilir.",
+      "internet": "Yerel SIM çok ucuz; şehirde Wi-Fi yaygın.",
+      "ulasim_karti": "Metro, otobüs ve teleferik tek kartla kullanılır; teleferik NAKİT kabul etmez.",
+      "eczane": "'აფთიაქი' tabelası; 24 saat açık şubeler var."
+    },
+    "saraybosna": {
+      "timezone": "Europe/Sarajevo",
+      "currency": {"code": "BAM", "symbol": "KM", "nakit_kullanimi": "Nakit ağırlıklı; Başçarşı esnafında kart geçmeyebilir."},
+      "elektrik": {"voltaj": "230V", "frekans": "50Hz", "priz_tipi": ["C", "F"], "adaptor_gerekli_mi_tr": false},
+      "acil_numaralar": {"genel": "112", "polis": "122", "ambulans": "124", "itfaiye": "123"},
+      "musluk_suyu": "İçilebilir; şehir kaynak suyuyla beslenir.",
+      "internet": "Yerel SIM ucuz; Türk operatörlerinin roaming paketleri de kullanılabilir.",
+      "ulasim_karti": "Tramvay bileti büfeden alınır ve araçta damgalanır.",
+      "eczane": "'Apoteka' tabelası."
+    },
+    "baku": {
+      "timezone": "Asia/Baku",
+      "currency": {"code": "AZN", "symbol": "₼", "nakit_kullanimi": "Kart merkezde yaygın; çarşı ve küçük esnafta nakit."},
+      "elektrik": {"voltaj": "220V", "frekans": "50Hz", "priz_tipi": ["C", "F"], "adaptor_gerekli_mi_tr": false},
+      "acil_numaralar": {"genel": "112", "polis": "102", "ambulans": "103", "itfaiye": "101"},
+      "musluk_suyu": "Şişe su önerilir.",
+      "internet": "Yerel SIM alımında pasaport gerekir.",
+      "ulasim_karti": "BakıKART metro ve otobüste kullanılır; nakit binilmez.",
+      "eczane": "'Aptek' tabelası."
+    },
+    "dubai": {
+      "timezone": "Asia/Dubai",
+      "currency": {"code": "AED", "symbol": "د.إ", "nakit_kullanimi": "Kart her yerde geçer; taksi ve souk için az nakit yeterli."},
+      "elektrik": {"voltaj": "230V", "frekans": "50Hz", "priz_tipi": ["G"], "adaptor_gerekli_mi_tr": true, "not": "DİKKAT: İngiliz tipi üç yassı uçlu priz. Türk fişi UYMAZ, adaptör zorunludur."},
+      "acil_numaralar": {"polis": "999", "ambulans": "998", "itfaiye": "997", "not": "Ülkede 112 de yönlendirir ancak yukarıdaki numaralar esastır."},
+      "musluk_suyu": "Teknik olarak arıtılmıştır ancak yerel alışkanlık şişe sudur.",
+      "internet": "eSIM ve turist SIM yaygın. WhatsApp/FaceTime gibi bazı sesli görüşme servisleri kısıtlı olabilir.",
+      "ulasim_karti": "Nol kartı metro, tramvay, otobüs ve su taksisinde geçer.",
+      "eczane": "24 saat açık zincir eczaneler yaygındır."
+    },
+    "marakes": {
+      "timezone": "Africa/Casablanca",
+      "currency": {"code": "MAD", "symbol": "د.م.", "nakit_kullanimi": "Nakit ağırlıklı. Dirham kapalı para birimidir; ülke dışında bozdurmak zordur, çıkışta elde bırakmayın."},
+      "elektrik": {"voltaj": "220V", "frekans": "50Hz", "priz_tipi": ["C", "E"], "adaptor_gerekli_mi_tr": false},
+      "acil_numaralar": {"polis_sehir": "19", "jandarma_kirsal": "177", "ambulans": "15", "itfaiye": "15"},
+      "musluk_suyu": "İÇİLMEZ. Şişe su kullanın; buz ve yıkanmış çiğ sebzeye de dikkat.",
+      "internet": "Havalimanında ucuz turist SIM; medina içinde kapsama zayıflayabilir.",
+      "ulasim_karti": "Şehir içi ulaşım için petit taxi kullanılır; taksimetre ısrarla istenmelidir.",
+      "eczane": "'Pharmacie' tabelası; nöbetçi listesi kapıda."
+    },
+    "kapadokya": {
+      "timezone": "Europe/Istanbul",
+      "currency": {"code": "TRY", "symbol": "₺", "nakit_kullanimi": "Kart yaygın; köy pazarlarında nakit pratik."},
+      "elektrik": {"voltaj": "230V", "frekans": "50Hz", "priz_tipi": ["C", "F"], "adaptor_gerekli_mi_tr": false},
+      "acil_numaralar": {"genel": "112", "jandarma": "156", "orman_yangini": "177"},
+      "musluk_suyu": "Şişe su önerilir.",
+      "internet": "Yerel operatör kapsaması iyi; vadilerde zayıflayabilir.",
+      "ulasim_karti": "Yerleşimler arası dolmuş ve tur servisleri; araç kiralamak en esnek çözüm.",
+      "eczane": "Nöbetçi eczane bilgisi 'e-Nabız' ve belediye üzerinden."
+    }
+  }
+}

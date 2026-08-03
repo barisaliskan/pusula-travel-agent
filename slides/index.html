@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pusula AI — Seyahat Asistanı · AI Designer Case Study</title>
+<style>
+/* Tek dosya, çevrimdışı. Ekranda sunum, Ctrl+P ile A4 yatay PDF.
+   Renkler baskıda da korunsun diye print-color-adjust: exact. */
+:root{
+  --ink:#0f1b2d; --ink2:#43566f; --ink3:#7a8ba1; --line:#dde5ee;
+  --bg:#ffffff; --soft:#f4f7fb; --accent:#1668c4; --accent2:#0d4c96;
+  --ok:#1a7f4b; --warn:#a86a08; --danger:#b3261e; --purple:#6b3fa0;
+  --t0:#1a7f4b; --t1:#1668c4; --t2:#a86a08; --t3:#6b3fa0; --t4:#b3261e;
+}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{margin:0;padding:0;background:#59657a;
+  font:15px/1.55 "Segoe UI",-apple-system,Roboto,Helvetica,Arial,sans-serif;color:var(--ink)}
+.deck{padding:26px 0}
+.slide{
+  width:1123px;height:794px;margin:0 auto 26px;background:var(--bg);
+  padding:44px 56px;position:relative;overflow:hidden;
+  box-shadow:0 8px 34px rgba(0,0,0,.34);border-radius:6px;
+  display:flex;flex-direction:column;
+}
+h1{font-size:44px;line-height:1.12;margin:0 0 12px;letter-spacing:-.6px}
+h2{font-size:29px;margin:0 0 4px;letter-spacing:-.3px}
+h3{font-size:17px;margin:16px 0 7px;color:var(--accent2)}
+.sub{color:var(--ink2);font-size:15.5px;margin:0 0 16px}
+.eyebrow{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:1.4px;
+  text-transform:uppercase;margin:0 0 6px}
+p{margin:0 0 9px}
+ul{margin:6px 0 10px;padding-left:19px}
+li{margin:5px 0}
+b,strong{font-weight:650}
+.small{font-size:13px}
+.dim{color:var(--ink2)}
+.faint{color:var(--ink3)}
+code{background:var(--soft);border:1px solid var(--line);border-radius:4px;
+  padding:1px 5px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em}
+.slide::after{content:attr(data-no);position:absolute;right:26px;bottom:16px;
+  font-size:11px;color:var(--ink3)}
+.slide::before{content:"Pusula AI · AI Designer Case Study · Barış Alışkan";
+  position:absolute;left:56px;bottom:16px;font-size:11px;color:var(--ink3)}
+.body{flex:1;min-height:0}
+
+/* Kapak */
+.cover{background:linear-gradient(140deg,#0b2544 0%,#123f70 55%,#1668c4 100%);color:#fff}
+.cover h1{font-size:60px;color:#fff}
+.cover .sub,.cover p{color:#c9dcf3}
+.cover::before,.cover::after{color:#7fa8d8}
+.cover .meta{margin-top:auto;display:flex;gap:34px;font-size:13.5px;color:#b7d0ec}
+.cover .meta b{color:#fff;display:block;font-size:15px}
+.compass{position:absolute;right:-40px;top:-40px;font-size:340px;opacity:.09}
+
+/* Izgaralar */
+.grid{display:grid;gap:13px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.box{border:1px solid var(--line);border-radius:9px;padding:12px 14px;background:var(--bg)}
+.box.soft{background:var(--soft)}
+.box h4{margin:0 0 5px;font-size:14px;color:var(--accent2)}
+.box p{font-size:13px;margin:0 0 5px}
+.box.accent{border-left:4px solid var(--accent)}
+.box.ok{border-left:4px solid var(--ok)}
+.box.warn{border-left:4px solid var(--warn)}
+.box.danger{border-left:4px solid var(--danger)}
+
+table{width:100%;border-collapse:collapse;font-size:12.8px;margin:6px 0}
+th{text-align:left;background:var(--soft);color:var(--ink2);font-weight:650;
+  padding:6px 9px;border-bottom:2px solid var(--line);font-size:12px}
+td{padding:5.5px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+.tier{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 6px;
+  border-radius:4px;color:#fff}
+.T0{background:var(--t0)}.T1{background:var(--t1)}.T2{background:var(--t2)}
+.T3{background:var(--t3)}.T4{background:var(--t4)}
+
+.kpi{display:flex;gap:13px;margin:10px 0}
+.kpi div{flex:1;border:1px solid var(--line);border-radius:9px;padding:12px;
+  text-align:center;background:var(--soft)}
+.kpi .n{font-size:31px;font-weight:700;color:var(--accent);line-height:1.1;
+  font-variant-numeric:tabular-nums}
+.kpi .l{font-size:11.5px;color:var(--ink2);margin-top:3px}
+
+.flow{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.3px;
+  line-height:1.42;background:#0f1b2d;color:#d7e6f7;border-radius:9px;
+  padding:15px 17px;white-space:pre;overflow:hidden}
+.flow .hl{color:#7fd1a0}
+.flow .hl2{color:#8ec2ff}
+.flow .hl3{color:#f0c674}
+
+.badge{display:inline-block;font-size:10.5px;padding:1.5px 7px;border-radius:999px;
+  border:1px solid var(--line);background:var(--soft);color:var(--ink2);margin-right:4px}
+.badge.g{border-color:#a8dcc0;background:#e9f7ef;color:var(--ok)}
+.badge.r{border-color:#f0c4c0;background:#fdeceb;color:var(--danger)}
+.badge.y{border-color:#f0dcb0;background:#fdf5e5;color:var(--warn)}
+
+.quote{border-left:4px solid var(--accent);background:var(--soft);padding:11px 15px;
+  border-radius:0 8px 8px 0;font-size:14.5px;margin:11px 0}
+.note{font-size:12px;color:var(--ink2);border-top:1px solid var(--line);
+  padding-top:8px;margin-top:auto}
+
+.agents{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.agent{border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:12px}
+.agent b{display:block;font-size:13px;color:var(--accent2);margin-bottom:2px}
+.agent .tools{color:var(--ink3);font-size:11px;margin-top:3px;font-family:ui-monospace,Menlo,monospace}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.stack{display:flex;flex-direction:column;gap:9px}
+
+.timeline{display:flex;gap:0;margin:14px 0}
+.timeline div{flex:1;border-top:3px solid var(--accent);padding:9px 11px 0;font-size:12px}
+.timeline div:nth-child(even){border-color:var(--accent2)}
+.timeline b{display:block;font-size:13px}
+
+@media print{
+  html,body{background:#fff}
+  .deck{padding:0}
+  .slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;
+    width:297mm;height:209.5mm;padding:13mm 15mm}
+  .noprint{display:none}
+}
+.toolbar{position:fixed;right:14px;bottom:14px;z-index:99;display:flex;gap:7px}
+.toolbar button{background:#0f1b2d;color:#fff;border:1px solid #2c4160;border-radius:7px;padding:7px 12px;cursor:pointer;font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1 ───────────────────────────────────────────────── -->
+<section class="slide cover" data-no="1">
+  <div class="compass">🧭</div>
+  <p class="eyebrow" style="color:#8fc0f0">AI Designer · Case Study #2</p>
+  <h1>Pusula AI<br>Seyahat Asistanı</h1>
+  <p class="sub" style="font-size:19px;max-width:640px">
+    Lider-ajan mimarisi üzerine kurulu, <b style="color:#fff">olgu uydurmayan</b>
+    ve <b style="color:#fff">rıza olmadan veri saklamayan</b> bir seyahat asistanı.
+  </p>
+  <div class="meta">
+    <div><b>Barış Alışkan</b>AI Designer adayı</div>
+    <div><b>30 Temmuz 2026</b>Teslim tarihi</div>
+    <div><b>Çalışan demo</b>10 ajan · 19 araç · 172 belge</div>
+    <div><b>72 otomatik test</b>mock ve gerçek modda yeşil</div>
+  </div>
+</section>
+
+<!-- 2 ───────────────────────────────────────────────── -->
+<section class="slide" data-no="2">
+  <p class="eyebrow">İş problemi</p>
+  <h2>Seyahat planlaması parçalı ve hata maliyeti yüksek</h2>
+  <div class="body">
+    <div class="two" style="margin-top:14px">
+      <div>
+        <h3>Bugün kullanıcı ne yapıyor?</h3>
+        <ul>
+          <li>Destinasyon için <b>bir siteye</b>, uçuş için <b>ikincisine</b>, otel için
+              <b>üçüncüsüne</b> gidiyor</li>
+          <li>Vize için resmî kuruma, "orada ne yenir" için bloglara</li>
+          <li>Hiçbiri onu <b>tanımıyor</b>: vejetaryen olduğunu, kalabalık sevmediğini,
+              bütçesini her seferinde yeniden anlatıyor</li>
+        </ul>
+        <div class="box danger" style="margin-top:12px">
+          <h4>Hata maliyeti asimetrik</h4>
+          <p>Yanlış müze saati = can sıkıcı. <b>Yanlış vize bilgisi = uçağa binememek.</b>
+             Bu yüzden asistanın akıcı konuşması yetmez; <b>kaynağa dayalı</b> konuşması gerekir.</p>
+        </div>
+      </div>
+      <div>
+        <h3>Ürün hedefi</h3>
+        <div class="quote">Tek arayüzde, kullanıcıyı tanıyan, her cümlesinin arkasında
+          bir kaynak olan bir seyahat asistanı.</div>
+        <h3>Başarı metrikleri</h3>
+        <table>
+          <tr><th>Metrik</th><th>Hedef</th></tr>
+          <tr><td>Containment (insana devretmeden çözülen oturum)</td><td>artan trend</td></tr>
+          <tr><td>Groundedness (kaynağa dayanan olgusal ifade)</td><td>%100'e yakın</td></tr>
+          <tr><td>İlk yanıt — cache HIT</td><td>&lt; 300 ms</td></tr>
+          <tr><td>Kişiselleştirme etkisi (öneri kabul oranı)</td><td>profil sonrası artış</td></tr>
+          <tr><td>Rıza dışı veri işleme</td><td><b>0</b></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <p class="note">Değerlendirme kriteri: <b>iş problemini doğru analiz edebilme.</b></p>
+</section>
+
+<!-- 3 ───────────────────────────────────────────────── -->
+<section class="slide" data-no="3">
+  <p class="eyebrow">Tasarımın çekirdeği</p>
+  <h2>Tek bir ilke, bütün mimariyi belirledi</h2>
+  <div class="body">
+    <div class="quote" style="font-size:19px;margin:16px 0 20px">
+      <b>Model asla olgu uydurmaz.</b> Fiyat, saat, mesafe, vize kuralı ve mekân
+      ya küratörlü bilgi tabanından ya araçlardan gelir. <b>LLM yalnızca dile çevirir.</b>
+    </div>
+    <div class="grid g3">
+      <div class="box accent">
+        <h4>1 · Olgu paketi</h4>
+        <p>Her uzman ajan önce araçlarını çalıştırıp bir <b>olgu paketi (JSON)</b> üretir.
+           Modelin gördüğü tek doğru kaynak budur.</p>
+      </div>
+      <div class="box accent">
+        <h4>2 · Dile çevirme</h4>
+        <p>Model olgu paketini akıcı Türkçeye çevirir. "Yeni sayı üretme, mevcutları
+           değiştirme" talimatı <b>promptta değil, mimaride</b> güvence altında.</p>
+      </div>
+      <div class="box accent">
+        <h4>3 · Çıkış denetimi</h4>
+        <p>Groundedness guardrail'i yanıttaki her sayısal iddiayı olgu paketinde arar.
+           Karşılığı yoksa yanıt <b>uyarı ile işaretlenir ve cache'lenmez.</b></p>
+      </div>
+    </div>
+    <h3 style="margin-top:22px">Bu ilkenin doğrudan sonuçları</h3>
+    <div class="grid g2">
+      <div class="box soft"><h4>Kapsam kilidi veri seviyesinde</h4>
+        <p>Vize ajanı yalnızca <span class="tier T1">T1</span> resmî kaynağa erişir.
+        Prompt'a "vize uydurma" yazmıyoruz — <b>uyduracak veriye erişemiyor.</b></p></div>
+      <div class="box soft"><h4>Uydurma işletme kaydı yok</h4>
+        <p>"Hotel Bella Roma, 4.6 puan" cümlesi uydurma bir işletmedir. Sistem
+        <b>yer tipi + semt</b> döner: "Trastevere'de geleneksel trattoria".</p></div>
+      <div class="box soft"><h4>Bilmediğini söyleyebilme</h4>
+        <p>Bilgi tabanında olmayan ülke için tahmin yürütülmez; resmî kanala yönlendirilir.</p></div>
+      <div class="box soft"><h4>Mock mod aynı olguları kullanır</h4>
+        <p>LLM olmadan da sistem çalışır: olgular aynı araçlardan gelir, cümleyi şablon kurar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 ───────────────────────────────────────────────── -->
+<section class="slide" data-no="4">
+  <p class="eyebrow">Çıktı 1 · Yapısal taslak</p>
+  <h2>Mimari: lider ajan + 10 uzman</h2>
+  <div class="body">
+<div class="flow">Kullanıcı
+   │
+   ▼
+<span class="hl2">GİRİŞ KATMANI (FastAPI, stateless)</span>   rate-limit · oturum · rıza durumu
+   │
+   ▼
+<span class="hl3">GUARDRAIL — GİRİŞ</span>   PromptInjection · PII maskeleme (KVKK m.9) · etik · kapsam · m.6 sinyali
+   │                                        └─ engellenirse: 0 LLM çağrısı, hazır ret
+   ▼
+<span class="hl">SEMANTIC CACHE (Redis)</span> ── HIT ─────────────────────────▶ yanıt   <span class="hl">0 LLM çağrısı · 3 ms</span>
+   │ MISS
+   ▼
+<span class="hl2">KARMAŞIKLIK SINIFLANDIRICI</span>  (kural tabanlı, 0 LLM çağrısı, ~1 ms)
+   ├──────────── basit ────────────┐              ┌──────── karmaşık ────────┐
+   ▼                               │              ▼                          │
+<span class="hl2">HIZLI YOL</span>                        │        <span class="hl3">YAVAŞ YOL — Agno Team(coordinate)</span>  │
+tek uzman + araçları               │        lider: böl → delege et → sentezle │
+<span class="hl">1 LLM çağrısı</span>                    │        <span class="hl3">3–6 LLM çağrısı</span>                   │
+   └───────────────┬───────────────┘              └────────────┬─────────────┘
+                   ▼                                           ▼
+   ┌───────────────────── 10 UZMAN AJAN (Agno members) ──────────────────────┐
+   │ destination_scout · itinerary_architect · logistics_agent               │
+   │ culinary_guide · culture_curator · practical_desk                       │
+   │ documents_officer · faq_specialist · preference_keeper                  │
+   │ concierge — karşılama, kapsam ve netleştirme                            │
+   └───────────────────────────────┬─────────────────────────────────────────┘
+                                   ▼
+   ┌───────────── ORTAK KAYNAKLAR ─────────────────────────────────────────┐
+   │ 19 araç adapter'ı │ Knowledge (172 belge, hibrit retrieval)           │
+   │ RedisDb (oturum)  │ MemoryManager (profil) │ Cache (TTL + SWR)        │
+   └───────────────────────────────┬───────────────────────────────────────┘
+                                   ▼
+<span class="hl3">GUARDRAIL — ÇIKIŞ</span>   groundedness · PII maskeleme · yüksek-risk feragat
+                                   ▼
+<span class="hl">KVKK KATMANI</span>   rıza kapısı · veri minimizasyonu · silme hakkı · denetim izi
+                                   ▼
+<span class="hl2">TRACE</span>   yol · ajanlar · araçlar · gecikme · LLM çağrı sayısı · kaynak kademeleri</div>
+  </div>
+  <p class="note">Framework: <b>Agno 2.8.2</b> — <code>Team</code> (lider) +
+    <code>Agent(role=…)</code> (üyeler). Tüm import yolları kurulu sürümde tek tek doğrulandı.</p>
+</section>
+
+<!-- 5 ───────────────────────────────────────────────── -->
+<section class="slide" data-no="5">
+  <p class="eyebrow">Çıktı 1 · Modüller</p>
+  <h2>On uzman, on dar sorumluluk</h2>
+  <div class="body">
+    <div class="agents">
+      <div class="agent"><b>1 · Destinasyon Kâşifi</b>Bütçe + tarih + tercihe göre skorlar
+        <div class="tools">search_destinations · estimate_trip_cost · get_seasonality</div>
+        <span class="tier T0">T0</span></div>
+      <div class="agent"><b>2 · Plan Mimarı</b>Çok günlük rota; <code>output_schema=Itinerary</code>
+        <div class="tools">get_pois · estimate_travel_time · build_itinerary · validate_itinerary</div>
+        <span class="tier T0">T0</span> <span class="tier T3">T3</span>
+        <span class="badge">en güçlü model</span></div>
+      <div class="agent"><b>3 · Lojistik Uzmanı</b>Uçuş, konaklama, transfer
+        <div class="tools">search_flights · search_hotels · get_practical_facts</div>
+        <span class="tier T1">T1</span> <span class="tier T2">T2</span></div>
+      <div class="agent"><b>4 · Gastronomi Rehberi</b>Yöresel lezzet; diyet sert filtresi
+        <div class="tools">search_restaurants · get_local_dishes</div>
+        <span class="tier T0">T0</span> <span class="tier T2">T2</span></div>
+      <div class="agent"><b>5 · Kültür Küratörü</b>Görgü, kıyafet, bahşiş, hassasiyet
+        <div class="tools">get_culture_notes</div>
+        <span class="tier T0">T0</span> <span class="badge y">halüsinasyona en açık alan</span></div>
+      <div class="agent"><b>6 · Pratik Bilgi Masası</b>Hava, saat farkı, döviz, priz
+        <div class="tools">get_weather · get_timezone_diff · get_fx · get_practical_facts</div>
+        <span class="tier T1">T1</span> <span class="tier T3">T3</span></div>
+      <div class="agent"><b>7 · Belge Sorumlusu</b>Vize, pasaport, giriş koşulları
+        <div class="tools">get_visa_requirements · check_passport_validity</div>
+        <span class="tier T1">T1</span> <span class="badge r">yüksek risk · zorunlu feragat</span></div>
+      <div class="agent"><b>8 · SSS Uzmanı</b>13 kategorili bilgi tabanı
+        <div class="tools">search_faq</div>
+        <span class="tier T0">T0</span> <span class="tier T1">T1</span></div>
+      <div class="agent"><b>9 · Tercih Yöneticisi</b>Çıkarım + saklama + açıklama
+        <div class="tools">extract_preferences · save_profile · explain_recommendation</div>
+        <span class="tier T0">T0</span>
+        <span class="badge">output_schema=TravelerProfile</span></div>
+      <div class="agent"><b>10 · Karşılama &amp; Yönlendirme</b>Selamlama, kapsam, netleştirme
+        <div class="tools">greet · identity · clarify · repair · scope_check</div>
+        <span class="badge g">emin değilse cevap üretmez</span></div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="box ok"><h4>Yetkilendirme veri seviyesinde</h4>
+        <p>Her ajanın <code>tiers</code> ve <code>tools</code> alanı erişimini sınırlar.
+        Kültür küratörü uçuş arayamaz; belge sorumlusu restoran öneremez.</p></div>
+      <div class="box ok"><h4>On ajan tek şablondan</h4>
+        <p><code>AgentSpec</code> hem Agno <code>Agent</code> nesnesini hem deterministik
+        handler'ı besler. Onuncu ajan (karşılama) canlı kullanımda görülen bir açığı
+        kapatmak için <b>20 satırla</b> eklendi.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 ───────────────────────────────────────────────── -->
+<section class="slide" data-no="6">
+  <p class="eyebrow">Gecikme stratejisi</p>
+  <h2>İki yollu akış — ve neden üç değil de iki</h2>
+  <div class="body">
+    <p class="sub">Case "düşük gecikme" istiyor. Coordinate mode her istekte lider + üye
+      zinciri çalıştırır. Çözüm: <b>isteğin karmaşıklığına göre yol seçimi.</b></p>
+    <table>
+      <tr><th>Yol</th><th>Ne zaman devreye girer</th><th class="num">LLM çağrısı</th>
+          <th class="num">Ölçülen gecikme</th><th>Nasıl</th></tr>
+      <tr><td><b>Cache HIT</b></td><td>Aynı niyet + aynı profil ile tekrar eden soru</td>
+          <td class="num"><b>0</b></td><td class="num"><b>3 ms</b></td>
+          <td>Semantic cache (Redis)</td></tr>
+      <tr><td><b>Engellendi</b></td><td>Etik / injection / kapsam dışı</td>
+          <td class="num"><b>0</b></td><td class="num"><b>1 ms</b></td>
+          <td>Guardrail hazır yanıtı</td></tr>
+      <tr><td><b>Hızlı yol</b></td><td>Tek alanlı soru ("saat farkı kaç?")</td>
+          <td class="num">1</td><td class="num">1,4 – 4,2 sn</td>
+          <td>Kural tabanlı yönlendirme + tek uzman</td></tr>
+      <tr><td><b>Yavaş yol</b></td><td>Plan / çok alanlı istek</td>
+          <td class="num">3 – 6</td><td class="num">8,1 sn</td>
+          <td>Agno <code>Team(mode="coordinate")</code></td></tr>
+    </table>
+    <div class="two" style="margin-top:14px">
+      <div class="box warn">
+        <h4>Ölçüm bir tasarım kararını değiştirdi</h4>
+        <p>Plan başta hızlı yol için <code>Team(mode="route")</code> öngörüyordu. Ama route
+        modunda <b>lider, yönlendirme kararı için de bir LLM çağrısı harcıyor</b> → 2 çağrı.</p>
+        <p>Sınıflandırmayı kural tabanlı yapınca hızlı yol <b>tek çağrıya</b> indi ve
+        gecikme yarıya düştü. Route ekibi kurulu kalmaya devam ediyor, ölçüm sonucu
+        bilinçli olarak devre dışı.</p>
+      </div>
+      <div class="box">
+        <h4>Gecikmeyi düşüren diğer kalemler</h4>
+        <ul class="small" style="margin:0">
+          <li><b>Semantic cache:</b> kova = dil │ profil │ niyet │ destinasyon</li>
+          <li><b>Single-flight kilidi:</b> aynı anahtarı isteyen N istek tek üretim yapar</li>
+          <li><b>Stale-while-revalidate:</b> TTL dolsa da bayat veri servis edilir</li>
+          <li><b>SSE streaming:</b> ilk token beklenmeden akış başlar</li>
+          <li><b>Prompt caching:</b> sabit sistem promptu + destinasyon brief'i</li>
+          <li><b>Embedding cache:</b> <code>emb:{hash}</code>, 7 gün</li>
+        </ul>
+      </div>
+    </div>
+    <div class="kpi" style="margin-top:6px">
+      <div><div class="n">1.678×</div><div class="l">cache HIT hızlanması<br>(5.035 ms → 3 ms)</div></div>
+      <div><div class="n">0</div><div class="l">engellenen istekte<br>LLM çağrısı</div></div>
+      <div><div class="n">~1 ms</div><div class="l">sınıflandırıcı maliyeti<br>(LLM'siz)</div></div>
+      <div><div class="n">16 ms</div><div class="l">mock modda 32 senaryo<br>ortalaması</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ───────────────────────────────────────────────── -->
+<section class="slide" data-no="7">
+  <p class="eyebrow">Çıktı 4 · Veri kaynağı stratejisi</p>
+  <h2>Beş kademeli güven hiyerarşisi</h2>
+  <div class="body">
+    <table>
+      <tr><th style="width:74px">Kademe</th><th>Kaynaklar</th><th>Kullanım kuralı</th>
+          <th style="width:120px">Tazelik</th></tr>
+      <tr><td><span class="tier T0">T0</span></td>
+          <td><b>Kurum içi küratörlü</b><br><span class="faint small">Editoryal destinasyon,
+            POI, kültür ve mutfak rehberleri; SSS</span></td>
+          <td>En yüksek güven. <b>Kültürel bilgi yalnızca buradan.</b></td>
+          <td>Editoryal döngü<br><span class="faint small">3–12 ay inceleme</span></td></tr>
+      <tr><td><span class="tier T1">T1</span></td>
+          <td><b>Resmî / kamusal</b><br><span class="faint small">T.C. Dışişleri Bakanlığı,
+            konsolosluklar, IATA Timatic, WHO, Sağlık Bakanlığı</span></td>
+          <td><b>Vize / pasaport / sağlık için ZORUNLU.</b> Atıf + geçerlilik tarihi + feragat.</td>
+          <td>24 sa + <b>olay-tabanlı</b></td></tr>
+      <tr><td><span class="tier T2">T2</span></td>
+          <td><b>Lisanslı ticari API</b><br><span class="faint small">Amadeus, Hotelbeds,
+            Google Places, Numbeo</span></td>
+          <td>Canlı envanter ve fiyat. Kısa TTL, fiyat asla kalıcı saklanmaz.</td>
+          <td>15 – 30 dk</td></tr>
+      <tr><td><span class="tier T3">T3</span></td>
+          <td><b>Açık veri</b><br><span class="faint small">OpenStreetMap, Wikidata,
+            Wikivoyage, Open-Meteo, IANA tzdata, ECB</span></td>
+          <td>Lisans + atıf zorunlu (Wikivoyage CC BY-SA). Gecelik batch ETL.</td>
+          <td>1 sa – 7 gün</td></tr>
+      <tr><td><span class="tier T4">T4</span></td>
+          <td><b>LLM parametrik bilgi</b></td>
+          <td><b>Olgu için ASLA.</b> Yalnızca dil, ton, özetleme.</td>
+          <td>—</td></tr>
+    </table>
+    <div class="two" style="margin-top:12px">
+      <div>
+        <h3>Alım hattı</h3>
+        <ul class="small">
+          <li><b>Yavaş veri</b> → gecelik batch ETL: normalize → <b>Wikidata QID ile varlık
+              eşleştirme</b> (kanonik destinasyon anahtarı) → chunk → embed → vektör DB</li>
+          <li><b>Oynak veri</b> → istek anında tool çağrısı + kısa TTL</li>
+          <li>Her kaynak için <b>tazelik SLA'sı</b> ve <b>lisans kaydı</b></li>
+        </ul>
+      </div>
+      <div class="box accent">
+        <h4>Ajan–kaynak yetkilendirmesi</h4>
+        <p>Her uzman yalnızca kendi kademelerini görür. <code>documents_officer</code> için
+        <code>tiers={"T1"}</code> — retrieval katmanı diğer kademeleri <b>fiilen döndürmez.</b></p>
+        <p class="small dim">Kapsam kilidi promptta değil, veri erişiminde.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ───────────────────────────────────────────────── -->
+<section class="slide" data-no="8">
+  <p class="eyebrow">Çıktı 5 · API, cache ve veri yönetimi</p>
+  <h2>Redis tek altyapıda üç iş yapıyor</h2>
+  <div class="body">
+    <div class="grid g3" style="margin-bottom:10px">
+      <div class="box accent"><h4>1 · Oturum</h4><p>Agno <code>RedisDb</code> —
+        konuşma bağlamı, 30 dk sliding TTL</p></div>
+      <div class="box accent"><h4>2 · Vektör arama</h4><p><code>RedisVectorDb</code> +
+        RediSearch — küratörlü içeriğin RAG'i</p></div>
+      <div class="box accent"><h4>3 · Önbellek</h4><p>Semantic cache + API cache +
+        rate-limit + embedding cache</p></div>
+    </div>
+    <div class="two">
+      <div>
+        <h3>Anahtar şeması ve TTL politikası</h3>
+        <table>
+          <tr><th>Anahtar</th><th class="num">TTL</th></tr>
+          <tr><td><code>sc:{dil}:{profil}:{niyet}</code> semantic cache</td><td class="num">1 sa</td></tr>
+          <tr><td><code>dest:{qid}</code> destinasyon brief</td><td class="num">7 gün</td></tr>
+          <tr><td><code>poi:{qid}:{kat}</code></td><td class="num">24 sa</td></tr>
+          <tr><td><code>wx:{qid}:{tarih}</code> hava</td><td class="num">1 sa</td></tr>
+          <tr><td><code>fx:{parite}</code> döviz</td><td class="num">1 sa</td></tr>
+          <tr><td><code>fl:{o}:{d}:{tarih}</code> uçuş</td><td class="num">15 dk</td></tr>
+          <tr><td><code>htl:{qid}:{in}:{out}:{pax}</code></td><td class="num">30 dk</td></tr>
+          <tr><td><code>visa:{from}:{to}</code></td><td class="num">24 sa + olay</td></tr>
+          <tr><td><code>itin:{oturum}:{sürüm}</code> plan</td><td class="num">24 sa</td></tr>
+          <tr><td><code>prof:{hash(user)}</code> profil</td><td class="num"><b>rızaya bağlı</b></td></tr>
+          <tr><td><code>emb:{hash}</code> embedding</td><td class="num">7 gün</td></tr>
+          <tr><td><code>idem:{key}</code> idempotency</td><td class="num">24 sa</td></tr>
+        </table>
+      </div>
+      <div class="stack">
+        <div class="box"><h4>Dayanıklılık zinciri</h4>
+          <p class="small"><b>cache-aside</b> → <b>single-flight kilidi</b> (stampede koruması)
+          → <b>stale-while-revalidate</b> → timeout + exponential backoff + circuit breaker</p>
+          <p class="small">Fallback: <code>Redis → canlı API → bayat cache + "gecikmeli olabilir"
+          uyarısı → resmî kanala yönlendirme</code></p></div>
+        <div class="box warn"><h4>Araç şeması sürümlenir</h4>
+          <p class="small">Anahtara <code>#v2</code> soneki eklenir. Bir aracın dönüş alanları
+          değişince eski şekilli kayıtlar otomatik geçersizleşir.
+          <span class="dim">Bu ders sahada öğrenildi: yeni alan eklendi, Redis'teki eski
+          kayıt çöktü.</span></p></div>
+        <div class="box ok"><h4>KVKK kesişimi</h4>
+          <p class="small">Anahtarlarda <b>ham PII yok</b> — kullanıcı kimliği hash'li.
+          Silme talebinde cache purge zorunlu. Fiyat ve kişisel veri kalıcı saklanmaz.</p></div>
+        <div class="box"><h4>Redis yoksa?</h4>
+          <p class="small">Sistem <code>InMemoryDb</code> + in-memory cache'e düşer ve
+          <b>çalışmaya devam eder.</b> 66 testin tamamı iki yapılandırmada da geçiyor.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 ───────────────────────────────────────────────── -->
+<section class="slide" data-no="9">
+  <p class="eyebrow">Çıktı 6 · OpenAI kullanım mimarisi</p>
+  <h2>Görev bazlı model katmanları</h2>
+  <div class="body">
+    <div class="two">
+      <div>
+        <table>
+          <tr><th>Görev</th><th>Katman</th><th>Neden</th></tr>
+          <tr><td>Karmaşıklık sınıflandırıcı</td><td>—</td>
+              <td><b>LLM kullanılmıyor</b>: kural tabanlı, ~1 ms</td></tr>
+          <tr><td>Lider ajan (delegasyon + sentez)</td><td>orta-güçlü<br><code>gpt-4o</code></td>
+              <td>Çözümleme ve tutarlı sentez</td></tr>
+          <tr><td><code>itinerary_architect</code></td><td><b>en güçlü</b><br><code>gpt-4o</code></td>
+              <td>Akıl yürütme yoğun çok günlük planlama</td></tr>
+          <tr><td>Diğer 8 uzman</td><td>ucuz-orta<br><code>gpt-4o-mini</code></td>
+              <td>Dar kapsam, tool sonucunu dile çevirme</td></tr>
+          <tr><td>Embedding (RAG + cache)</td><td><code>text-embedding-3-small</code></td>
+              <td>Çok dilli retrieval, ekonomik</td></tr>
+          <tr><td>Giriş güvenliği</td><td>Moderation</td><td>Guardrail pre-hook</td></tr>
+        </table>
+        <div class="box accent" style="margin-top:8px">
+          <h4>Kod hiçbir yerde model id'si tutmaz</h4>
+          <p class="small">Tek registry (<code>app/models.py</code>) görev adını model id'sine
+          çevirir. Sağlayıcı veya sürüm değişimi <b>tek dosyada</b> kalır.</p>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="box"><h4>Uygulanan teknikler</h4>
+          <ul class="small" style="margin:0">
+            <li><b>Structured Outputs</b> (<code>output_schema</code>) → plan ve profil
+                parse hatası imkânsız</li>
+            <li><b>Düşük temperature (0.2) + sabit seed</b> → regresyon testi mümkün</li>
+            <li><b>Prompt caching</b> → sabit sistem promptu ve destinasyon brief'i</li>
+            <li><b>Streaming (SSE)</b> → algılanan gecikme düşer</li>
+            <li><b>Fallback zinciri:</b> birincil model → küçük model → <b>şablon</b></li>
+          </ul></div>
+        <div class="box warn"><h4>Demo runtime'ı: GitHub Models</h4>
+          <p class="small">Gerçek OpenAI anahtarı yerine
+          <code>OpenAILike(base_url="https://models.github.ai/inference")</code> kullanıldı.
+          Gerçek OpenAI'ya geçiş: <code>OpenAIChat(id="gpt-4o")</code> — <b>tek satır,
+          başka kod değişmez.</b></p>
+          <p class="small dim">Bu sunumda bunu saklamıyorum: üretim tablosu yukarıdaki
+          katmanları gösterir, demo farklı bir <code>base_url</code> ile aynı kodu çalıştırır.</p></div>
+        <div class="box ok"><h4>Anahtar yoksa — ya da sağlayıcı hata verirse</h4>
+          <p class="small">Sistem sessizce <b>şablon moduna</b> düşer: aynı araçlar, aynı
+          olgular, cümleyi şablon kurar. 72 test her iki modda da yeşil.</p>
+          <p class="small"><b>Kritik ayrıntı:</b> Agno, sağlayıcı hatasında exception
+          fırlatmaz — hata metnini yanıt içeriği olarak döndürür. Doğrulamasaydık kullanıcı
+          <i>"Too many requests… GitHub Terms of Service"</i> cümlesini <b>yanıt sanacaktı.</b>
+          Şimdi her LLM çıktısı hata izlerine karşı denetleniyor ve üst üste 3 hatada
+          <b>devre kesici</b> 120 saniyeliğine şablona geçiyor.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 ──────────────────────────────────────────────── -->
+<section class="slide" data-no="10">
+  <p class="eyebrow">Halüsinasyona karşı son kapı</p>
+  <h2>Yapılandırılmış çıktı yetmez — planın bir hakemi olmalı</h2>
+  <div class="body">
+    <div class="quote"><code>output_schema=Itinerary</code> <b>parse</b> hatasını çözer,
+      <b>olgu</b> hatasını çözmez. Model şemaya uygun ama var olmayan bir müze yazabilir.</div>
+    <div class="two" style="margin-top:12px">
+      <div>
+        <h3>Plan doğrulayıcının denetimleri</h3>
+        <table>
+          <tr><th>Kod</th><th>Ne yakalar</th><th>Şiddet</th></tr>
+          <tr><td><code>UNKNOWN_POI</code></td><td>Küratörlü sette olmayan durak
+              — <b>uydurma</b></td><td><span class="badge r">error</span></td></tr>
+          <tr><td><code>CLOSED_ON_DAY</code></td><td>Salı kapalı müze salı gününe konmuş</td>
+              <td><span class="badge r">error</span></td></tr>
+          <tr><td><code>BUDGET_EXCEEDED</code></td><td>Bütçe üst sınırı aşılmış</td>
+              <td><span class="badge r">error</span></td></tr>
+          <tr><td><code>ACCESSIBILITY_VIOLATION</code></td><td>Erişilebilirlik sert filtresi
+              ihlali</td><td><span class="badge r">error</span></td></tr>
+          <tr><td><code>DUPLICATE_POI</code></td><td>Aynı durak iki kez</td>
+              <td><span class="badge r">error</span></td></tr>
+          <tr><td><code>PACE_OVERLOAD</code></td><td>Güne 10 saat sıkıştırılmış</td>
+              <td><span class="badge y">warning</span></td></tr>
+          <tr><td><code>TRAVEL_HEAVY</code></td><td>Günün %28'inden fazlası yolda</td>
+              <td><span class="badge y">warning</span></td></tr>
+          <tr><td><code>COST_MISMATCH</code></td><td>Plandaki ücret küratörlü veriden sapmış</td>
+              <td><span class="badge y">warning</span></td></tr>
+          <tr><td><code>FULL_DAY_TRIP</code></td><td>Bölünemez tam gün turu — sınır uygulanmaz</td>
+              <td><span class="badge">info</span></td></tr>
+        </table>
+        <p class="small dim"><b>error</b> varsa plan kullanıcıya <b>sunulmaz</b>;
+          deterministik plana düşülür.</p>
+      </div>
+      <div class="stack">
+        <div class="box ok"><h4>Doğrulayıcı kendi kurucusunu da denetliyor</h4>
+          <p class="small">12 destinasyon × 3 tempo × 4 gün uzunluğu × 4 kurgu =
+          <b>576 kombinasyon</b> (4 farklı kurgu dahil), hepsi hatasız plan üretiyor. Bu bir test değil,
+          <b>kurucunun sözleşmesi.</b></p></div>
+        <div class="box"><h4>Kapalı gün denetimi gerçek veriden</h4>
+          <p class="small">POI notlarındaki "Salı kapalı" ifadesi ayrıştırılıyor. Ama
+          <b>"Pazar günleri araç trafiğine kapalı"</b> ziyarete kapalı demek değildir —
+          bu ayrım koda yazıldı.</p></div>
+        <div class="box"><h4>Plan kurucu neyi dikkate alıyor</h4>
+          <ul class="small" style="margin:0">
+            <li>Semte göre kümeleme → ulaşım süresi düşer</li>
+            <li><code>best_time</code> alanına göre gün içi sıralama</li>
+            <li>Tempoya göre <b>dakika bütçesi</b> (POI sayısı değil)</li>
+            <li>Yağmurlu güne kapalı mekân öncelemesi</li>
+            <li>Diyet ve erişilebilirlik sert filtreleri</li>
+          </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 ──────────────────────────────────────────────── -->
+<section class="slide" data-no="11">
+  <p class="eyebrow">Çıktı 7 · Tercih yönetimi ve öneri mekanizması</p>
+  <h2>Üç katmanlı tercih toplama</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="box accent"><h4>1 · Açık</h4>
+        <p class="small">Tercih paneli: bütçe bandı, stil, tempo, iklim, grup, diyet,
+        erişilebilirlik. Kullanıcı her an düzeltebilir.</p></div>
+      <div class="box accent"><h4>2 · Örtük</h4>
+        <p class="small">Davranış sinyalleri: kaydetti (+1,0) · rezerve etti (+1,5) ·
+        reddetti (−1,2) · tıkladı (+0,3). <b>30 günde yarılanır.</b></p></div>
+      <div class="box accent"><h4>3 · Konuşmadan</h4>
+        <p class="small">"Vejetaryenim, kalabalık sevmem" → profil alanlarına çıkarım.
+        Gerçek modda Agno <code>MemoryManager</code> aynı profili besler.</p></div>
+    </div>
+    <div class="two" style="margin-top:14px">
+      <div>
+        <h3>Öneri iki aşamalı — ve bu ayrım kasıtlı</h3>
+        <div class="box danger"><h4>Aşama 1 · Sert filtreler <span class="badge r">asla ihlal edilmez</span></h4>
+          <p class="small">Diyet · erişilebilirlik · bütçe üst sınırı · vize uygunluğu.
+          <b>Bunlar skora eklenen bir terim değildir, eleme kriteridir.</b>
+          Vegan birine "biraz uygun" bir öneri sunmak kabul edilemez.</p></div>
+        <div class="box"><h4>Aşama 2 · Yumuşak yeniden sıralama</h4>
+          <div class="flow" style="font-size:11px;padding:10px 12px;margin:6px 0">score = 0,35·tercih_uyumu
+      + 0,25·bütçe_uyumu
+      + 0,20·sezon_uygunluğu
+      + 0,10·popülerlik
+      + 0,10·yenilik
+      − 0,40·son_reddedilenler</div>
+          <p class="small dim">Elenenler de sebebiyle gösterilir: "Dubai — bütçe üst sınırı
+          aşılıyor". Şeffaflık hem güven verir hem kullanıcıya kısıtını gözden geçirtir.</p></div>
+      </div>
+      <div class="stack">
+        <div class="box warn"><h4>Formülde yakalanan gerçek hata</h4>
+          <p class="small">Yenilik başta <code>(6−kalabalık)/5</code> ile tanımlıydı —
+          yani popülerliğin birebir tersi. Eşit ağırlıkta iki terim <b>sabite dönüşüp
+          formülden düşüyordu</b> (12 destinasyonun 3'ü tam eşit skor alıyordu).</p>
+          <p class="small">Yenilik artık <b>kullanıcı geçmişine</b> bakıyor; kalabalık
+          yalnızca hafif bir eğim. Sonuç: 12 destinasyon → 12 farklı skor.</p></div>
+        <div class="box ok"><h4>Cold start</h4>
+          <p class="small">Sinyal yokken 5 persona arketipinden biriyle başlanır
+          (Bütçe Odaklı · Kültür Avcısı · Gastronomi Meraklısı · Aile · Konfor),
+          2–3 etkileşimde bireysel profile devredilir.</p></div>
+        <div class="box"><h4>Kanıt</h4>
+          <p class="small">Aynı soru, iki farklı profil → <b>farklı destinasyon sıralaması ve
+          farklı plan.</b> Otomatik testte doğrulanıyor.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 ──────────────────────────────────────────────── -->
+<section class="slide" data-no="12">
+  <p class="eyebrow">Çıktı 7 · Şeffaflık</p>
+  <h2>"Neden bu öneri?" — algoritmayı kullanıcıya açmak</h2>
+  <div class="body">
+    <div class="two">
+      <div>
+        <div class="box soft" style="font-size:13px">
+          <h4 style="margin-bottom:8px">Barselona neden önerildi? <span class="faint">(toplam skor 0,94)</span></h4>
+          <table style="font-size:12.5px">
+            <tr><td>Tercih uyumu</td><td class="num">1,00 × 0,35</td><td class="num"><b>0,350</b></td></tr>
+            <tr><td>Bütçe uyumu</td><td class="num">0,86 × 0,25</td><td class="num"><b>0,215</b></td></tr>
+            <tr><td>Sezon uygunluğu</td><td class="num">1,00 × 0,20</td><td class="num"><b>0,200</b></td></tr>
+            <tr><td>Popülerlik</td><td class="num">1,00 × 0,10</td><td class="num"><b>0,100</b></td></tr>
+            <tr><td>Yenilik</td><td class="num">0,75 × 0,10</td><td class="num"><b>0,075</b></td></tr>
+          </table>
+          <p class="small" style="margin-top:8px"><b>Gerekçeler:</b> ilgi alanlarınızla
+          örtüşüyor (kültür, gastronomi) · 9. ay ideal sezon · orta bandında günlük ~5.100 TRY</p>
+          <p class="small dim"><i>Katılmadığınız bir çıkarımı tercih panelinden
+          düzeltebilirsiniz; öneriler anında yeniden hesaplanır.</i></p>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="box accent"><h4>Aynı anda üç kazanım</h4>
+          <ul class="small" style="margin:0">
+            <li><b>UX:</b> kullanıcı öneriyi anlıyor, körü körüne kabul etmiyor</li>
+            <li><b>KVKK:</b> otomatik karar verme şeffaflığı + <b>düzeltme hakkı</b>
+                aynı ekranda kullanılabiliyor</li>
+            <li><b>Ürün:</b> düzeltme = en değerli tercih sinyali</li>
+          </ul></div>
+        <div class="box"><h4>Veri minimizasyonu profilin içinde</h4>
+          <p class="small"><code>TravelerProfile</code> şemasında pasaport numarası, ad-soyad,
+          kimlik gibi alanlar <b>bilinçli olarak yoktur.</b> Agno
+          <code>memory_capture_instructions</code> ile modelin neyi hatırlayacağı
+          promptla değil <b>yapılandırmayla</b> sınırlanır.</p></div>
+        <div class="box ok"><h4>Rıza yoksa ne oluyor?</h4>
+          <p class="small">Tercih yine <b>çıkarılıyor</b> ve o yanıtta sert filtre olarak
+          kullanılıyor — ama <b>saklanmıyor</b>, ve kullanıcıya bu açıkça söyleniyor:</p>
+          <p class="small dim"><i>"Kişiselleştirme rızası yok — profil saklanmadı
+          (veri minimizasyonu)."</i></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 ──────────────────────────────────────────────── -->
+<section class="slide" data-no="13">
+  <p class="eyebrow">Çıktı 3 · SSS bilgi mimarisi</p>
+  <h2>13 kategori, tek taksonomi kuralı</h2>
+  <div class="body">
+    <div class="grid g4" style="font-size:12.5px;margin-bottom:12px">
+      <div class="box soft">Rezervasyon &amp; Ödeme</div>
+      <div class="box soft">Uçuş &amp; Ulaşım</div>
+      <div class="box soft">Konaklama</div>
+      <div class="box soft">Vize &amp; Belgeler <span class="badge r">yüksek risk</span></div>
+      <div class="box soft">Sağlık &amp; Sigorta <span class="badge r">yüksek risk</span></div>
+      <div class="box soft">Bagaj</div>
+      <div class="box soft">Değişiklik, İptal &amp; İade</div>
+      <div class="box soft">Destinasyon &amp; Plan</div>
+      <div class="box soft">Yerel Yaşam</div>
+      <div class="box soft">Erişilebilirlik &amp; Özel Yolcu</div>
+      <div class="box soft">Güvenlik &amp; Acil Durum</div>
+      <div class="box soft">Hesap &amp; Gizlilik (KVKK)</div>
+      <div class="box soft">Sadakat &amp; Kampanya</div>
+      <div class="box accent"><b>36 doküman</b><br><span class="small">hepsi metadata'lı</span></div>
+    </div>
+    <div class="two">
+      <div>
+        <h3>Doküman metadata sözlüğü</h3>
+        <table>
+          <tr><th>Alan</th><th>Amaç</th></tr>
+          <tr><td><code>id</code></td><td>Kalıcı kimlik — içerik değişse de sabit, sürümleme buna bağlı</td></tr>
+          <tr><td><code>kategori &gt; alt_konu &gt; etiketler</code></td><td>Üç kademeli taksonomi</td></tr>
+          <tr><td><code>kapsam</code></td><td>Ülke/bölge geçerliliği</td></tr>
+          <tr><td><code>guven_kademesi</code></td><td>T0–T4 — retrieval filtresi buna bakar</td></tr>
+          <tr><td><code>yuksek_risk</code></td><td>true → zorunlu feragat + T1 kaynak şartı</td></tr>
+          <tr><td><code>gecerlilik_tarihi</code></td><td>Geçtikten sonra yeniden doğrulanmadan sunulmaz</td></tr>
+          <tr><td><code>sahip</code></td><td>İçerikten sorumlu ekip</td></tr>
+        </table>
+        <p class="small"><b>Taksonomi kuralı:</b> her doküman <b>tek</b> ana kategoriye aittir;
+        çapraz ilişki <code>ilgili</code> alanıyla kurulur. Böylece kategori filtresi kesin çalışır.</p>
+      </div>
+      <div class="stack">
+        <div class="box"><h4>İçerik yönetişimi</h4>
+          <p class="small"><b>Kim günceller:</b> kategori sahibi ekip; yüksek riskli
+          dokümanlarda <b>ikinci onay Hukuk/Uyum'dan.</b></p>
+          <p class="small"><b>İnceleme sıklığı:</b> yüksek riskli 3 ay · operasyonel politika
+          6 ay · genel bilgi 12 ay.</p>
+          <p class="small"><b>Sürümleme:</b> her düzenleme yeni sürüm; eski sürüm arşivde,
+          denetim izine bağlı.</p>
+          <p class="small"><b>Geçersizleme:</b> politika değişince ilgili doküman <b>ve</b>
+          <code>sc:*</code> semantic cache kayıtları olay tabanlı temizlenir.</p></div>
+        <div class="box accent"><h4>Retrieval: hibrit</h4>
+          <p class="small">IDF ağırlıklı anahtar kelime + vektör cosine, başlık ağırlığı ve
+          <b>destinasyon farkındalığı</b> ile. "Roma'da ne yenir" sorgusunda Tiflis mutfağı
+          yüzeye çıkamaz; ama destinasyondan bağımsız SSS (bagaj, iade) yine çıkabilir.</p>
+          <p class="small dim">172 belge · tier filtresiyle ajan bazlı kapsam kilidi.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 ──────────────────────────────────────────────── -->
+<section class="slide" data-no="14">
+  <p class="eyebrow">Çıktı 2 · Kullanıcı senaryoları</p>
+  <h2>32 senaryo — brief 10 istiyor, hepsi otomatik testli</h2>
+  <div class="body">
+    <table style="font-size:11.6px">
+      <tr><th style="width:22px">#</th><th>Senaryo</th><th style="width:78px">Yol</th>
+          <th>Devreye giren uzman</th><th style="width:52px">Kademe</th><th>Beklenen davranış</th></tr>
+      <tr><td>1</td><td>Destinasyon önerisi (bütçe+tarih+tercih)</td><td>hızlı</td>
+          <td>destination_scout</td><td><span class="tier T0">T0</span></td>
+          <td>Skorlanmış 3 öneri + elenenler sebebiyle</td></tr>
+      <tr><td>2</td><td><b>4 günlük gezi planı</b></td><td>yavaş</td>
+          <td>itinerary_architect + practical_desk + culinary_guide</td>
+          <td><span class="tier T0">T0</span></td><td>Lider delege eder, plan doğrulayıcıdan geçer</td></tr>
+      <tr><td>3</td><td><b>Plan revizyonu</b> ("2. günü sakinleştir")</td><td>yavaş</td>
+          <td>itinerary_architect</td><td><span class="tier T0">T0</span></td>
+          <td>Oturum bağlamı hatırlanır, sürüm artar</td></tr>
+      <tr><td>4</td><td>Konaklama (bütçe sert filtresi)</td><td>hızlı</td><td>logistics_agent</td>
+          <td><span class="tier T2">T2</span></td><td>Bütçe aşımında açık uyarı</td></tr>
+      <tr><td>5</td><td>Ulaşım / havalimanı transferi</td><td>hızlı</td><td>logistics_agent</td>
+          <td><span class="tier T2">T2</span></td><td>Simüle olduğu açıkça belirtilir</td></tr>
+      <tr><td>6</td><td><b>Yöresel lezzet — vegan sert filtresi</b></td><td>hızlı</td>
+          <td>culinary_guide</td><td><span class="tier T0">T0</span></td>
+          <td>Uygun kayıt yoksa "yok" denir, uydurulmaz</td></tr>
+      <tr><td>7</td><td>Kültür ve görgü kuralları</td><td>hızlı</td><td>culture_curator</td>
+          <td><span class="tier T0">T0</span></td><td>Yalnızca küratörlü içerik</td></tr>
+      <tr><td>8</td><td>Turistik noktalar ve ipuçları</td><td>hızlı</td><td>itinerary_architect</td>
+          <td><span class="tier T0">T0</span></td><td>POI listesi (plan değil)</td></tr>
+      <tr><td>9</td><td>Hava durumu + ne giyilir</td><td>hızlı</td><td>practical_desk</td>
+          <td><span class="tier T3">T3</span></td><td>Yağmurlu günde kapalı mekân uyarısı</td></tr>
+      <tr><td>10</td><td><b>Saat farkı</b> (zoneinfo, API yok)</td><td>hızlı</td><td>practical_desk</td>
+          <td><span class="tier T3">T3</span></td><td>Yaz saati uyarısıyla gerçek hesap</td></tr>
+      <tr><td>11</td><td><b>Vize / pasaport</b></td><td>hızlı</td><td>documents_officer</td>
+          <td><span class="tier T1">T1</span></td><td>Atıf + geçerlilik + zorunlu feragat</td></tr>
+      <tr><td>12</td><td>SSS (bagaj / iptal / sigorta)</td><td>hızlı</td><td>faq_specialist</td>
+          <td><span class="tier T0">T0</span></td><td>Bilgi tabanından birebir</td></tr>
+      <tr><td>13</td><td><b>Tercih öğrenme</b></td><td>hızlı</td><td>preference_keeper</td>
+          <td><span class="tier T0">T0</span></td><td>Rıza yoksa saklanmaz ve söylenir</td></tr>
+      <tr><td>14</td><td><b>"Neden bu öneri?"</b></td><td>hızlı</td><td>preference_keeper</td>
+          <td><span class="tier T0">T0</span></td><td>Skor kırılımı + formül</td></tr>
+      <tr><td>15</td><td><b>KVKK: "verilerimi sil"</b></td><td>hızlı</td><td>kvkk_desk</td>
+          <td>—</td><td>Silme + kalıntı denetimi "temiz"</td></tr>
+      <tr><td>16</td><td>Etik ihlali reddi</td><td><b>engellendi</b></td><td>—</td><td>—</td>
+          <td>0 LLM çağrısı, yasal alternatife yönlendirme</td></tr>
+      <tr><td>17</td><td>Prompt-injection denemesi</td><td><b>engellendi</b></td><td>—</td><td>—</td>
+          <td>Rol sabitliği korunur</td></tr>
+      <tr><td>18</td><td>Kapsam dışı soru</td><td><b>engellendi</b></td><td>—</td><td>—</td>
+          <td>Uydurmadan uzmana devir</td></tr>
+    </table>
+  </div>
+  <p class="note">Bu tablo bir belge değil <b>çalıştırılabilir sözleşme</b>:
+    <code>tests/test_scenarios.py</code> her satırın yolunu, uzmanını, guardrail'ini ve
+    feragatini doğruluyor. <b>32/32 — hem mock hem gerçek LLM modunda.</b></p>
+</section>
+
+<!-- YENİ: konuşma yeterliliği ─────────────────────────────────────── -->
+<section class="slide" data-no="15">
+  <p class="eyebrow">Gerçek kullanıcı testi</p>
+  <h2>Sistemi ben değil, kullanıcı kırdı</h2>
+  <div class="body">
+    <p class="sub">18 senaryonun tamamı geçiyordu. Sonra sistemi <b>gerçek bir kullanıcıya</b>
+      verdik ve altı mesajda dört ayrı kusur çıktı. Hiçbiri test setinde yoktu —
+      çünkü testleri de ben yazmıştım ve hepsi <b>tek atımlık</b> sorulardı.</p>
+    <table style="font-size:12.4px">
+      <tr><th style="width:250px">Kullanıcının yazdığı</th><th>Sistemin yaptığı</th>
+          <th>Kök neden</th></tr>
+      <tr><td><i>"roma yerine <b>daha ucuza</b> gelebilecek nereyi önerirsiniz?"</i></td>
+          <td>1. sırada <b>yine Roma'yı</b> önerdi</td>
+          <td>Alternatif isteğinde mevcut destinasyon elenmiyordu</td></tr>
+      <tr><td><i>"bu 3ünden <b>başka yok mu</b>"</i></td>
+          <td><b>İade politikası</b> SSS'i döndü</td>
+          <td>Takip sorusu anlaşılmıyor; eşleşme yoksa en yakın SSS emin tonda sunuluyordu</td></tr>
+      <tr><td><i>"<b>ne alaka</b> ondan bahsetmedim ki"</i></td>
+          <td><b>Bahşiş</b> SSS'i döndü</td>
+          <td>Kullanıcı düzeltmesi diye bir kavram yoktu</td></tr>
+      <tr><td><i>"merhaba" · "naber"</i></td>
+          <td>Acil durum numaraları SSS'i</td>
+          <td>Selamlama tanınmıyordu</td></tr>
+    </table>
+
+    <div class="two" style="margin-top:14px">
+      <div class="box danger">
+        <h4>Asıl kusur bunların hiçbiri değildi</h4>
+        <p>Asıl kusur şuydu: sistem <b>her mesaja emin bir cevap veriyordu.</b>
+        Anlamadığını fark edemiyor, dolayısıyla söyleyemiyordu.</p>
+        <p style="margin:0"><b>Kaynağa dayalı bir asistan için bu, olgu uydurmaktan daha
+        kötüdür:</b> uydurma bir sayıyı groundedness guardrail'i yakalar, ama <i>doğru
+        kaynaklı yanlış cevabı</i> hiçbir filtre yakalamaz.</p>
+      </div>
+      <div class="stack">
+        <div class="box ok"><h4>Ne eklendi</h4>
+          <ul class="small" style="margin:0">
+            <li><b>Oturum hafızası:</b> destinasyon, gün, ay ve önceki öneriler turlar
+                arasında taşınır — <i>"peki orada ne yenir"</i> artık çalışıyor</li>
+            <li><b>10. ajan — Karşılama &amp; Yönlendirme:</b> selamlama, kimlik, kapsam,
+                netleştirme, <b>özür + yeniden sorma</b></li>
+            <li><b>SSS alaka eşiği (0,30):</b> ölçüldü — alakalı sorular 0,40–1,19 alıyor,
+                çöp girdiler 0,05–0,10'da kalıyor</li>
+            <li><b>Eleme mantığı:</b> "başka" / "X yerine" istekleri önceki önerileri hariç
+                tutuyor</li>
+          </ul></div>
+        <div class="box warn"><h4>Bonus: sessiz bir Türkçe hatası daha</h4>
+          <p class="small">Aynı oturumda <code>ROMA'DA NE YENİR</code> yanlış ajana gitti.
+          Sebep: <code>"YENİR".lower()</code> Python'da <b><code>"yeni̇r"</code></b> üretir
+          (i + birleşen nokta, iki karakter). Büyük harf yazan her kullanıcıda eşleşme
+          sessizce kırılıyordu. Artık tüm normalizasyon <code>app/text.py</code>
+          üzerinden geçiyor.</p></div>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:12px">
+      <b>Çıkarılan ders:</b> kendi yazdığın test setinin kör noktası, senin kendi kör
+      noktandır. On dört senaryo iki oturumdan üretildi ve artık regresyon setinde (S19–S32) — aynı hatalar bir daha sessizce geri gelemez.
+    </div>
+  </div>
+</section>
+
+
+<!-- 15 ──────────────────────────────────────────────── -->
+<section class="slide" data-no="16">
+  <p class="eyebrow">Güvenlik ve etik</p>
+  <h2>Üç savunma hattı, bilinçli olarak üst üste</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="box accent"><h4>1 · Framework katmanı</h4>
+        <p class="small">Agno <code>PromptInjectionGuardrail</code> +
+        <code>PIIDetectionGuardrail(mask_pii=True)</code> + Moderation.
+        Ajan çalışmadan önce devreye girer.</p></div>
+      <div class="box accent"><h4>2 · Türkçe kalıp katmanı</h4>
+        <p class="small">Agno'nun kalıpları İngilizce ağırlıklı. 6 etik + 11 injection +
+        4 kapsam + 13 yüksek risk + 8 hassas veri + 6 PII kalıbı <b>Türkçeye özel</b> yazıldı.</p></div>
+      <div class="box accent"><h4>3 · Çıkış katmanı</h4>
+        <p class="small">Groundedness · PII maskeleme · yüksek-risk feragat enjeksiyonu.
+        Yanıt kullanıcıya gitmeden önce.</p></div>
+    </div>
+    <div class="two" style="margin-top:14px">
+      <div>
+        <h3>Türkçe neden ayrı bir mühendislik işi?</h3>
+        <div class="box warn">
+          <p class="small">Türkçe <b>sondan eklemeli</b>. İngilizce için doğal olan
+          <code>\bvegan\b</code> kalıbı <b>"Veganım"</b> ifadesini kaçırır — yani KVKK m.6
+          uyarısı tam da en çok gerektiği cümlede çalışmaz.</p>
+          <p class="small">Aynı sınıf hatalar sahada üç kez yakalandı:</p>
+          <ul class="small" style="margin:4px 0">
+            <li><b>Ünsüz yumuşaması:</b> "gümrü<b>k</b>" → "gümrü<b>ğ</b>ü" — etik filtresi
+                atlatılıyordu</li>
+            <li><b>Çekim eki:</b> "eylül" → "eylül<b>de</b>" — tarih bugüne düşüyor,
+                yanlış sezon hesaplanıyordu</li>
+            <li><b>Alt dize eşleşmesi:</b> "kur" (döviz) anahtarı "<b>kur</b>allar" içinde
+                eşleşiyor, kültür sorusuna pratik masası ortak oluyordu</li>
+          </ul>
+          <p class="small dim">Hepsi otomatik testle korumaya alındı.</p>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="box danger"><h4>Yüksek risk alanı: vize / pasaport / sağlık</h4>
+          <ul class="small" style="margin:0">
+            <li>Yalnızca <span class="tier T1">T1</span> resmî kaynak</li>
+            <li>Atıf + <b>geçerlilik tarihi</b> zorunlu</li>
+            <li>Feragat metni otomatik enjekte edilir</li>
+            <li><b>Kesin hukuki sonuç bildirilmez</b></li>
+            <li>T.C. dışı vatandaşlık → veri üretilmez, resmî kanala yönlendirilir</li>
+            <li>Bilgi tabanında olmayan ülke → <b>tahmin yürütülmez</b></li>
+          </ul></div>
+        <div class="box"><h4>Groundedness denetimi nasıl çalışıyor</h4>
+          <p class="small">Yanıttaki her <b>sayısal iddia</b> (fiyat, süre, saat, yüzde, sıcaklık)
+          olgu paketinde aranır. Karşılığı yoksa yanıta uyarı eklenir ve
+          <b>cache'e yazılmaz</b> — hatalı yanıt kalıcılaşmaz.</p>
+          <p class="small dim">Model "güzel bir şehirdir" diyebilir (dil);
+          "girişi 900 TL" diyemez (olgu).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 ──────────────────────────────────────────────── -->
+<section class="slide" data-no="17">
+  <p class="eyebrow">KVKK uyumluluğu</p>
+  <h2>Slogan değil, çalışan mekanizma</h2>
+  <div class="body">
+    <table>
+      <tr><th style="width:190px">Yükümlülük</th><th>Mimarideki karşılığı</th>
+          <th style="width:150px">Nasıl kanıtlanıyor</th></tr>
+      <tr><td><b>Açık rıza</b><br><span class="faint small">kademeli, geri alınabilir</span></td>
+          <td>4 kademe: oturum (zorunlu) · kişiselleştirme · <b>özel nitelikli (m.6)</b> ·
+              pazarlama. Varsayılan <b>kapalı.</b> Rıza geri alınınca <b>ilgili veri de silinir.</b></td>
+          <td>Rıza olmadan <code>save_profile</code> yazmıyor — testli</td></tr>
+      <tr><td><b>Özel nitelikli veri</b><br><span class="faint small">m.6</span></td>
+          <td>Diyet tercihi inanç/felsefi görüşü, erişilebilirlik ihtiyacı sağlık durumunu
+              ifşa edebilir. <b>Ayrı açık rıza</b> ister; yoksa profile yazılmaz, yalnızca
+              o yanıtta sert filtre olarak kullanılıp unutulur.</td>
+          <td>Ayrı alan + ayrı rıza bayrağı — testli</td></tr>
+      <tr><td><b>Yurt dışına aktarım</b><br><span class="faint small">m.9</span></td>
+          <td>LLM sağlayıcısı yurt dışı veri işleyicisidir. <b>PII, model çağrısından ÖNCE
+              maskelenir</b> → e-posta, telefon, T.C. kimlik no, IBAN, kart, pasaport no
+              sınır ötesine hiç geçmez.</td>
+          <td>Pre-hook + 6 Türkiye'ye özgü kalıp</td></tr>
+      <tr><td><b>Veri minimizasyonu</b></td>
+          <td>Profil şemasında ad, kimlik, pasaport alanları <b>hiç yok.</b> Agno
+              <code>memory_capture_instructions</code> ile modelin neyi hatırlayacağı sınırlı.</td>
+          <td>Şema seviyesinde — yazılamaz</td></tr>
+      <tr><td><b>Silme hakkı</b></td>
+          <td><code>DELETE /api/kvkk/me</code> → profil + rıza + cache purge +
+              Agno <code>clear_user_memories()</code> + oturum bağlamı.
+              <b>Silme sonrası kalıntı denetimi</b> çalışır.</td>
+          <td>Testte kalıntı denetimi: <b>"temiz"</b></td></tr>
+      <tr><td><b>Erişim ve taşınabilirlik</b></td>
+          <td><code>GET /api/kvkk/me</code> → tüm veri + rıza durumu + veri envanteri
+              tek JSON'da.</td><td>Arayüzde "Verilerim" paneli</td></tr>
+      <tr><td><b>Hesap verebilirlik</b></td>
+          <td>Denetim izi: <b>hash'li kimlik</b> + işlem + zaman. <b>Kişisel içerik yok</b> —
+              böylece silme hakkı ile kayıt tutma yükümlülüğü çakışmaz.</td>
+          <td>Arayüzde canlı denetim izi</td></tr>
+      <tr><td><b>Otomatik karar şeffaflığı</b></td>
+          <td>"Neden bu öneri?" skor kırılımı + düzenlenebilir tercih paneli
+              (<b>düzeltme hakkı</b>).</td><td>Her öneride bir tık uzakta</td></tr>
+    </table>
+  </div>
+  <p class="note">⚠️ Bu çalışma bir case study demosudur; hukuki görüş niteliği taşımaz.
+    Madde numaraları ihtiyatla kullanılmış, iddialar mekanizma düzeyinde formüle edilmiştir.</p>
+</section>
+
+<!-- 17 ──────────────────────────────────────────────── -->
+<section class="slide" data-no="18">
+  <p class="eyebrow">Doğrulama</p>
+  <h2>Ölçtüğümüz şeyler ve çıkan sayılar</h2>
+  <div class="body">
+    <div class="kpi">
+      <div><div class="n">72</div><div class="l">otomatik test<br>40 birim + 32 senaryo</div></div>
+      <div><div class="n">4</div><div class="l">yapılandırmada yeşil<br>mock/gerçek × Redis'li/siz</div></div>
+      <div><div class="n">576</div><div class="l">plan kombinasyonu<br>hatasız üretiliyor</div></div>
+      <div><div class="n">172</div><div class="l">küratörlü belge<br>12 destinasyon · 76 POI</div></div>
+      <div><div class="n">0</div><div class="l">dayanaksız sayısal<br>iddia (32/32 senaryo)</div></div>
+    </div>
+    <div class="two" style="margin-top:12px">
+      <div>
+        <h3>Ölçülen gecikmeler <span class="faint small">(GitHub Models, gerçek çağrılar)</span></h3>
+        <table>
+          <tr><th>Yol</th><th class="num">Gecikme</th><th class="num">LLM</th></tr>
+          <tr><td>Guardrail engeli</td><td class="num">1 ms</td><td class="num">0</td></tr>
+          <tr><td>Semantic cache HIT</td><td class="num">3 ms</td><td class="num">0</td></tr>
+          <tr><td>KVKK silme işlemi</td><td class="num">24 ms</td><td class="num">0</td></tr>
+          <tr><td>Hızlı yol — en iyi</td><td class="num">1.390 ms</td><td class="num">1</td></tr>
+          <tr><td>Hızlı yol — ortalama</td><td class="num">3.500 ms</td><td class="num">1</td></tr>
+          <tr><td>Yavaş yol (plan, 3 ajan)</td><td class="num">8.086 ms</td><td class="num">3</td></tr>
+          <tr><td><b>Mock mod — tüm senaryolar</b></td><td class="num"><b>16 ms</b></td>
+              <td class="num"><b>0</b></td></tr>
+        </table>
+        <p class="small dim">Dürüst not: hedefimiz hızlı yol için &lt;1,5 sn idi.
+        GitHub Models ücretsiz katmanında tek çağrı ~1,4–4,2 sn sürüyor. Gerçek OpenAI
+        uç noktasında bu süre belirgin düşer; <b>mimari çağrı sayısını</b> zaten
+        minimuma indiriyor.</p>
+      </div>
+      <div class="stack">
+        <div class="box ok"><h4>Neyi kanıtladık</h4>
+          <ul class="small" style="margin:0">
+            <li><b>Lider ajan delegasyonu:</b> <code>show_members_responses</code> ile hangi
+                uzmana gittiği görünür</li>
+            <li><b>Kişiselleştirme:</b> aynı soru, iki profil, farklı çıktı</li>
+            <li><b>Cache:</b> 5.035 ms → 3 ms, 0 LLM çağrısı</li>
+            <li><b>KVKK:</b> profil oluştur → görüntüle → sil → <b>kalıntı yok</b></li>
+            <li><b>İki mod:</b> anahtar çekildiğinde sistem çökmüyor, mock'a düşüyor</li>
+          </ul></div>
+        <div class="box warn"><h4>Testlerin yakaladığı gerçek hatalar</h4>
+          <p class="small">Bu proje boyunca <b>10'dan fazla</b> gerçek hata testlerle yakalandı.
+          En öğreticileri:</p>
+          <ul class="small" style="margin:4px 0">
+            <li><code>ItineraryDay.date</code> alan adı <code>date</code> tipini gölgeliyordu →
+                alan <b>hiç tarih tutamıyordu</b></li>
+            <li>Groundedness'te boşluk binlik ayracı sayılıyor, iki ayrı sayı birleşip
+                <b>doğru sayılar "uydurma" işaretleniyordu</b></li>
+            <li>Agno <code>custom_patterns</code> liste değil <b>sözlük</b> ister — yanlış tip
+                tüm guardrail katmanını sessizce devre dışı bırakıyordu</li>
+          </ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 18 ──────────────────────────────────────────────── -->
+<section class="slide" data-no="19">
+  <p class="eyebrow">Dürüstlük slaytı</p>
+  <h2>Neyi yapmadık, neyi simüle ettik</h2>
+  <div class="body">
+    <p class="sub">Bir mimariyi değerlendirmenin en hızlı yolu, sınırlarının nerede
+      çizildiğini görmektir.</p>
+    <table>
+      <tr><th style="width:230px">Kalem</th><th>Durum</th><th>Üretimde ne değişir</th></tr>
+      <tr><td><b>Uçuş / otel fiyatları</b></td>
+          <td><span class="badge y">simüle</span> Küratörlü maliyet bandından
+              <b>hesaplanır</b>, rastgele üretilmez; deterministiktir.</td>
+          <td>Amadeus / Hotelbeds çağrısı — <b>araç imzası aynı kalır</b></td></tr>
+      <tr><td><b>Restoran / otel adları</b></td>
+          <td><span class="badge g">bilinçli olarak yok</span> Uydurma işletme kaydı
+              üretmiyoruz; <b>yer tipi + semt</b> dönüyoruz.</td>
+          <td>Google Places / Foursquare kaydı yuvayı doldurur</td></tr>
+      <tr><td><b>Hava durumu</b></td>
+          <td><span class="badge y">simüle</span> İklim normallerinden sinüzoidal model;
+              gerçekçi ama gerçek değil.</td>
+          <td>Open-Meteo çağrısı</td></tr>
+      <tr><td><b>Döviz kuru</b></td>
+          <td><span class="badge y">simüle</span> Referans kur + günlük deterministik
+              dalgalanma.</td>
+          <td>TCMB / ECB referans kuru</td></tr>
+      <tr><td><b>Saat farkı</b></td>
+          <td><span class="badge g">gerçek</span> <code>zoneinfo</code> + IANA tzdata ile
+              yerel hesap, yaz saati dahil. <b>Dış API yok.</b></td>
+          <td>Değişmez</td></tr>
+      <tr><td><b>Vize bilgisi</b></td>
+          <td><span class="badge g">gerçek yapıda</span> T1 kaynak künyesi, geçerlilik tarihi
+              ve feragat ile 12 ülkelik küratörlü matris.</td>
+          <td>IATA Timatic beslemesi + olay-tabanlı invalidation</td></tr>
+      <tr><td><b>Ödeme / rezervasyon</b></td>
+          <td><span class="badge r">kapsam dışı</span> Case bilgilendirme asistanı istiyor;
+              işlem yapan bir ajan güvenlik açısından ayrı bir tasarım gerektirir.</td>
+          <td>Idempotency anahtarı şeması hazır (<code>idem:{key}</code>)</td></tr>
+      <tr><td><b>Çok dillilik</b></td>
+          <td><span class="badge y">kısmi</span> Mimari dil-agnostik (cache kovası dil içerir),
+              içerik şu an Türkçe.</td>
+          <td>İçerik çevirisi + dil bazlı retrieval</td></tr>
+    </table>
+    <div class="box accent" style="margin-top:10px">
+      <p style="margin:0"><b>Neden bu kadar açık yazıyorum:</b> simüle veriyi gerçekmiş gibi
+      sunmak, tam da bu projenin çözmeye çalıştığı problemin kendisi olurdu.
+      Arayüzde her simüle kayıt <b>rozetle işaretlenir.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- 19 ──────────────────────────────────────────────── -->
+<section class="slide" data-no="20">
+  <p class="eyebrow">Üretime geçiş</p>
+  <h2>Bu demodan gerçek ürüne giden yol</h2>
+  <div class="body">
+    <div class="timeline">
+      <div><b>0–1 ay</b>Gerçek entegrasyonlar</div>
+      <div><b>1–3 ay</b>Ölçek ve kalite</div>
+      <div><b>3–6 ay</b>Genişleme</div>
+    </div>
+    <div class="grid g3">
+      <div class="stack">
+        <div class="box"><h4>Veri</h4><p class="small">Amadeus + Places sözleşmeleri ·
+          IATA Timatic beslemesi · gecelik ETL'in canlıya alınması</p></div>
+        <div class="box"><h4>Model</h4><p class="small">Gerçek OpenAI uç noktası
+          (<b>tek satır</b>) · prompt caching ölçümü · maliyet/istek panosu</p></div>
+        <div class="box"><h4>İçerik</h4><p class="small">12 → 100 destinasyon ·
+          editoryal ekip ve inceleme takvimi · yüksek riskli içerikte Hukuk onayı</p></div>
+      </div>
+      <div class="stack">
+        <div class="box"><h4>Ölçeklenebilirlik</h4><p class="small">Agno
+          <code>AgentOS</code> ile stateless servis · yatay ölçekleme ·
+          Redis Cluster · okuma replikaları</p></div>
+        <div class="box"><h4>Kalite</h4><p class="small">Altın senaryo seti genişletme ·
+          <b>LLM-as-judge groundedness</b> · canlı örnekleme ile insan denetimi ·
+          A/B testi (öneri formülü ağırlıkları)</p></div>
+        <div class="box"><h4>Gözlemlenebilirlik</h4><p class="small">İstek başına maliyet ·
+          p50/p95 gecikme · cache hit oranı · guardrail tetiklenme oranı ·
+          containment trendi</p></div>
+      </div>
+      <div class="stack">
+        <div class="box"><h4>Ürün</h4><p class="small">Rezervasyon akışı (idempotency +
+          insan onayı) · seyahat sırasında canlı destek · grup planlama</p></div>
+        <div class="box"><h4>Uyum</h4><p class="small">DPIA · VERBİS kaydı ·
+          veri işleyici sözleşmeleri · saklama süresi otomasyonu · düzenli sızma testi</p></div>
+        <div class="box"><h4>Erişilebilirlik</h4><p class="small">WCAG uyumu ·
+          ekran okuyucu · sesli etkileşim · düşük bant genişliği modu</p></div>
+      </div>
+    </div>
+    <div class="box ok" style="margin-top:12px">
+      <h4>Mimarinin taşıdığı en önemli özellik</h4>
+      <p style="margin:0">Yukarıdaki maddelerin <b>hiçbiri mimariyi değiştirmiyor.</b>
+      Araç gövdeleri, model id'leri ve veri hacmi değişiyor; lider-ajan topolojisi,
+      kaynak hiyerarşisi, guardrail hattı ve KVKK kapısı aynı kalıyor.
+      <span class="dim">Bu, tasarımın doğru soyutlama seviyesinde durduğunun göstergesi.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 20 ──────────────────────────────────────────────── -->
+<section class="slide" data-no="21">
+  <p class="eyebrow">Özet</p>
+  <h2>Yedi çıktı, tek tutarlı sistem</h2>
+  <div class="body">
+    <table>
+      <tr><th style="width:34px">#</th><th style="width:270px">İstenen çıktı</th>
+          <th>Nerede karşılandı</th><th style="width:120px">Kanıt</th></tr>
+      <tr><td>1</td><td>Genel mimari ve modüller</td>
+          <td>Agno <code>Team</code> lider + 10 uzman + 19 araç + guardrail hattı</td>
+          <td>Slayt 4–5 · çalışan kod</td></tr>
+      <tr><td>2</td><td><b>En az 10</b> kullanıcı senaryosu</td>
+          <td><b>32 senaryo</b>, her biri yol/uzman/kademe/guardrail sözleşmesiyle</td>
+          <td>Slayt 14 · 32/32 test</td></tr>
+      <tr><td>3</td><td>SSS konu başlıkları ve bilgi mimarisi</td>
+          <td>13 kategori · 36 doküman · metadata sözlüğü · içerik yönetişimi</td>
+          <td>Slayt 13 · <code>faq.json</code></td></tr>
+      <tr><td>4</td><td>Veri kaynağı stratejisi</td>
+          <td>5 kademeli güven hiyerarşisi + alım hattı + ajan-kaynak yetkilendirmesi</td>
+          <td>Slayt 7 · n8n ETL akışı</td></tr>
+      <tr><td>5</td><td>API, cache (Redis) ve veri yönetimi</td>
+          <td>Redis üç işte · 13 anahtar şeması · TTL politikası · dayanıklılık zinciri</td>
+          <td>Slayt 8 · çalışan cache</td></tr>
+      <tr><td>6</td><td>OpenAI kullanım mimarisi</td>
+          <td>Görev bazlı model katmanları · structured output · fallback zinciri</td>
+          <td>Slayt 9 · <code>models.py</code></td></tr>
+      <tr><td>7</td><td>Tercih yönetimi ve öneri mekanizması</td>
+          <td>3 katmanlı toplama · sert filtre + skor formülü · "Neden bu öneri?"</td>
+          <td>Slayt 11–12 · canlı panel</td></tr>
+    </table>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="box accent"><h4>Bu case'te en çok üzerinde durduğum üç şey</h4>
+        <ol class="small" style="margin:4px 0;padding-left:18px">
+          <li><b>Olgu uydurmama</b> bir prompt talimatı değil, <b>mimari kısıt</b> olmalı</li>
+          <li><b>KVKK</b> bir uyum slaytı değil, <b>çalışan kapı</b> olmalı</li>
+          <li><b>Gecikme</b> bir hedef değil, <b>ölçülüp tasarımı değiştiren</b> bir girdi olmalı</li>
+        </ol></div>
+      <div class="box soft"><h4>Teslim paketi</h4>
+        <p class="small"><b>Sunum</b> (bu dosya, PDF) · <b>çalışan demo</b>
+        (FastAPI + SSE + web arayüzü) · <b>n8n görsel akışları</b> (2 adet) ·
+        <b>72 otomatik test</b> · <b>tasarım dokümanı</b> (PLAN.md) ·
+        <b>video konuşma metni</b></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 21 ──────────────────────────────────────────────── -->
+<section class="slide cover" data-no="22">
+  <div class="compass">🧭</div>
+  <p class="eyebrow" style="color:#8fc0f0">Teşekkürler</p>
+  <h1 style="font-size:46px">Sorular?</h1>
+  <p class="sub" style="font-size:18px;max-width:660px">
+    Demo canlı olarak çalıştırılabilir: <code style="background:rgba(255,255,255,.14);
+    border-color:rgba(255,255,255,.3);color:#fff">localhost:8000</code> —
+    LLM anahtarı olmadan da, Redis olmadan da.
+  </p>
+  <div class="meta" style="margin-top:auto">
+    <div><b>Barış Alışkan</b>AI Designer adayı</div>
+    <div><b>Pusula AI</b>Seyahat Asistanı Case Study</div>
+    <div><b>30 Temmuz 2026</b></div>
+  </div>
+</section>
+
+</div>
+
+<div class="toolbar noprint">
+  <button onclick="window.print()">PDF olarak kaydet</button>
+  <button onclick="document.body.requestFullscreen&&document.body.requestFullscreen()">Tam ekran</button>
+</div>
+
+<script>
+/* Ok tuşlarıyla slayttan slayta geçiş (sunum sırasında pürüzsüz gezinme). */
+const slaytlar = [...document.querySelectorAll('.slide')];
+let aktif = 0;
+function git(i){
+  aktif = Math.max(0, Math.min(slaytlar.length - 1, i));
+  slaytlar[aktif].scrollIntoView({behavior:'smooth', block:'start'});
+}
+addEventListener('keydown', e => {
+  if (['ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); git(aktif+1); }
+  if (['ArrowLeft','PageUp'].includes(e.key))        { e.preventDefault(); git(aktif-1); }
+  if (e.key === 'Home') git(0);
+  if (e.key === 'End')  git(slaytlar.length-1);
+});
+/* Kaydırınca aktif slaydı takip et (ok tuşu kaldığı yerden devam etsin) */
+addEventListener('scroll', () => {
+  const y = scrollY + innerHeight/2;
+  slaytlar.forEach((s,i) => { if (s.offsetTop <= y && s.offsetTop + s.offsetHeight > y) aktif = i; });
+}, {passive:true});
+</script>
+</body>
+</html>

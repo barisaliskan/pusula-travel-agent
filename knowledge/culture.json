@@ -1,0 +1,230 @@
+{
+  "_meta": {
+    "aciklama": "Kültürel bilgi ve görgü kuralları (T0). `culture_curator` ajanı YALNIZCA bu dosyadan konuşur — halüsinasyona en açık alan burasıdır, bu yüzden T4 (modelin kendi bilgisi) olgu üretmek için kullanılmaz (CLAUDE.md kural 3).",
+    "guven_kademesi": "T0",
+    "son_guncelleme": "2026-07-27",
+    "sahip": "İçerik Editörlüğü",
+    "inceleme_sikligi": "6 ayda bir"
+  },
+  "cultures": {
+    "roma": {
+      "selamlasma": "Tanıdıklar arasında iki yanaktan öpüşme yaygın; ilk tanışmada el sıkışmak yeterlidir.",
+      "kiyafet": "Kiliselere girişte omuz ve diz kapalı olmalı. Vatikan'da bu kural girişte fiilen denetlenir; ince bir şal pratik çözümdür.",
+      "gorgu": [
+        "Restoranda hesap istenmeden getirilmez; 'il conto, per favore' demek gerekir.",
+        "Anıtların üzerine oturmak birçok merkezi noktada para cezasına tabidir.",
+        "Fontanelle denen sokak çeşmelerinin suyu içilebilir; şişe su almaya gerek yoktur."
+      ],
+      "bahsis": "Zorunlu değildir; servis iyiyse yuvarlamak veya %5-10 yeterlidir. Hesapta zaten 'coperto' bulunur.",
+      "pazarlik": "Yapılmaz; sabit fiyat kültürü hâkimdir.",
+      "dini_hassasiyet": "Aktif ibadet sırasında fotoğraf çekmek uygun değildir; flaş birçok yerde yasaktır.",
+      "dil_ipuclari": {"Merhaba": "Buongiorno", "Teşekkürler": "Grazie", "Lütfen": "Per favore", "Affedersiniz": "Scusi"},
+      "guvenlik": "Termini çevresi ve kalabalık toplu taşımada yankesicilik yaygındır; çanta önde taşınmalıdır.",
+      "kacinilmasi_gerekenler": [
+        "Turistik meydanlarda 'bileklik takma' teklifi eden kişilere yaklaşmayın.",
+        "Menüsünde fiyat yazmayan, kapıda müşteri çeken restoranlar."
+      ]
+    },
+    "barselona": {
+      "selamlasma": "İki yanaktan öpüşme yaygın; iş ortamında el sıkışma tercih edilir.",
+      "kiyafet": "Sahil kıyafetiyle şehir merkezinde dolaşmak belediye kurallarınca kısıtlanmıştır ve para cezası uygulanabilir.",
+      "gorgu": [
+        "Katalanca ve İspanyolca ayrı dillerdir; Katalanca tabelaları fark etmek nezaket sayılır.",
+        "Öğle uykusu (siesta) Barselona'da büyük ölçüde geçerli değildir, küçük dükkânlar yine de 14:00-17:00 kapanabilir.",
+        "Yemek saatleri geçtir; 20:00'den önce akşam yemeği arayan turistik yerlere yönlendirilir."
+      ],
+      "bahsis": "Zorunlu değil; %5 civarı yuvarlama yeterlidir.",
+      "pazarlik": "Yapılmaz.",
+      "dini_hassasiyet": "Sagrada Família aktif bir kilisedir; ayin saatlerinde ziyaret kısıtlanır.",
+      "dil_ipuclari": {"Merhaba": "Hola / Bon dia (CAT)", "Teşekkürler": "Gracias / Gràcies (CAT)", "Lütfen": "Por favor", "Hesap": "La cuenta"},
+      "guvenlik": "Las Ramblas ve metroda yankesicilik Avrupa ortalamasının üzerindedir; telefon masaya bırakılmamalıdır.",
+      "kacinilmasi_gerekenler": [
+        "Las Ramblas üzerindeki paella restoranları genellikle pahalı ve düşük kalitelidir.",
+        "Sokakta kâğıt/anket imzalatmak isteyen gruplar dikkat dağıtma yöntemidir."
+      ]
+    },
+    "paris": {
+      "selamlasma": "Dükkâna girerken 'Bonjour' demek zorunlu nezakettir; söylemeden konuşmaya başlamak kabalık sayılır.",
+      "kiyafet": "Şık-sade giyim normdur; kiliselerde omuz kapalı olmalı.",
+      "gorgu": [
+        "Restoranda yüksek sesle konuşmak hoş karşılanmaz.",
+        "Ayrılırken 'Au revoir' demek de aynı ölçüde beklenen bir davranıştır.",
+        "Metroda ayakta kalanlara yer açmak için katlanır koltuklar kalabalıkta kullanılmaz."
+      ],
+      "bahsis": "Servis ücreti fiyata dahildir ('service compris'); memnuniyetse birkaç avro bırakılır.",
+      "pazarlik": "Yapılmaz (bit pazarları hariç).",
+      "dini_hassasiyet": "Notre-Dame ve diğer aktif kiliselerde ayin sırasında sessizlik beklenir.",
+      "dil_ipuclari": {"Merhaba": "Bonjour", "Teşekkürler": "Merci", "Lütfen": "S'il vous plaît", "Affedersiniz": "Pardon"},
+      "guvenlik": "Turistik noktalarda ve RER B hattında yankesicilik; 'imza toplama' ve 'yüzük buldum' oyunlarına itibar edilmemeli.",
+      "kacinilmasi_gerekenler": [
+        "Eyfel çevresinde satılan biletlerin resmî olmayanları geçersiz olabilir.",
+        "Turistik bölgede masaya oturunca kahve fiyatının katlandığını hesaba katın."
+      ]
+    },
+    "prag": {
+      "selamlasma": "Mesafeli ve resmî; el sıkışmak standarttır, ilk tanışmada samimiyet beklenmez.",
+      "kiyafet": "Serbest; kışın gerçekten kalın giyinmek gerekir.",
+      "gorgu": [
+        "Toplu taşımada bilet mutlaka damgalanmalıdır; sivil kontrolörler yüksek ceza keser.",
+        "Restoranda masa paylaşımı normaldir, izin isteyip oturulur.",
+        "Bira kadehi tokuşturulurken göz teması kurulur ve kadeh masaya bir kez konur."
+      ],
+      "bahsis": "%10 civarı yaygın; ödeme sırasında toplam tutar söylenerek verilir.",
+      "pazarlik": "Yapılmaz.",
+      "dini_hassasiyet": "Yahudi mahallesindeki sinagoglarda erkeklerden baş örtüsü (kipa) beklenir, girişte verilir.",
+      "dil_ipuclari": {"Merhaba": "Dobrý den", "Teşekkürler": "Děkuji", "Lütfen": "Prosím", "Hesap": "Účet, prosím"},
+      "guvenlik": "Şehir genel olarak güvenli; asıl risk döviz büfesi dolandırıcılığı ve taksi fahiş ücretidir.",
+      "kacinilmasi_gerekenler": [
+        "Sokak döviz büfelerinde '0% komisyon' tabelası genellikle çok kötü kur anlamına gelir; bankamatik kullanın.",
+        "Sokaktan çevrilen taksiler yerine uygulama üzerinden çağırın."
+      ]
+    },
+    "tokyo": {
+      "selamlasma": "Hafif öne eğilerek selamlama (ojigi) standarttır; el sıkışma beklenmez.",
+      "kiyafet": "Temiz ve sade giyim; tapınak ve geleneksel lokantalarda ayakkabı çıkarmak gerekebilir, çorap durumu önemlidir.",
+      "gorgu": [
+        "Toplu taşımada telefonla konuşulmaz, sessiz mod kullanılır.",
+        "Yemek çubukları pirince dik saplanmaz — cenaze ritüelini çağrıştırır.",
+        "Sıraya girme kültürü katıdır; peron işaretlerine uyulur.",
+        "Çöp kutusu sokakta neredeyse yoktur; çöp gün boyu taşınır."
+      ],
+      "bahsis": "Verilmez. Bazı durumlarda geri çevrilir veya rahatsızlık yaratır.",
+      "pazarlik": "Yapılmaz.",
+      "dini_hassasiyet": "Tapınak girişinde el ve ağız yıkama (temizu) ritüeli vardır; orta kapıdan geçilmez, kenardan yürünür.",
+      "dil_ipuclari": {"Merhaba": "Konnichiwa", "Teşekkürler": "Arigatō gozaimasu", "Affedersiniz": "Sumimasen", "Hesap": "O-kaikei onegaishimasu"},
+      "guvenlik": "Dünyanın en güvenli metropollerinden; asıl zorluk suç değil, yön bulma ve dil bariyeridir.",
+      "kacinilmasi_gerekenler": [
+        "Dövme görünürlüğü bazı onsen (kaplıca) işletmelerinde girişe engeldir.",
+        "Kabalık sayıldığı için yürürken yemek yemekten kaçının."
+      ]
+    },
+    "bangkok": {
+      "selamlasma": "Avuç içleri birleşik 'wai' selamı; yaşça büyüğe önce selam verilir, karşılık beklenmez.",
+      "kiyafet": "Tapınaklarda omuz ve diz kapalı ZORUNLU; sıcak olsa da ince uzun kollu pratik çözümdür.",
+      "gorgu": [
+        "Baş vücudun en kutsal, ayak en aşağı görülen bölümüdür: kimsenin başına dokunulmaz, ayak kimseye veya Buda heykeline doğrultulmaz.",
+        "Kral ve kraliyet ailesi hakkında olumsuz konuşmak yasal suçtur; ciddi yaptırımı vardır.",
+        "Sesini yükseltmek ve öfke göstermek itibar kaybı sayılır ('jai yen' = soğukkanlılık)."
+      ],
+      "bahsis": "Beklenmez; küçük yuvarlamalar memnuniyetle karşılanır.",
+      "pazarlik": "Pazarlarda normaldir, güler yüzle yapılır; sabit fiyatlı mağazalarda yapılmaz.",
+      "dini_hassasiyet": "Buda görselleri kutsaldır; sırtı dönük fotoğraf veya heykel üzerine tırmanmak suçtur. Kadınlar keşişlere doğrudan temas etmez.",
+      "dil_ipuclari": {"Merhaba": "Sawatdee khrap/kha", "Teşekkürler": "Khop khun khrap/kha", "Acı olmasın": "Mai phet"},
+      "guvenlik": "Şiddet suçu düşüktür; asıl risk turist odaklı dolandırıcılıktır.",
+      "kacinilmasi_gerekenler": [
+        "'Büyük Saray bugün kapalı' diyerek başka yere yönlendiren kişiler klasik dolandırıcılıktır — saray her gün açıktır.",
+        "Tuk-tuk ile 'bir günlük tur' teklifleri çoğunlukla mağaza komisyonu turudur.",
+        "Sokakta imzalanan taksimetresiz pazarlıklar yerine taksimetre isteyin."
+      ]
+    },
+    "tiflis": {
+      "selamlasma": "Sıcak ve samimi; misafirperverlik kültürel bir yükümlülük olarak görülür.",
+      "kiyafet": "Serbest; kiliselerde kadınlar için baş örtüsü ve etek, erkekler için uzun pantolon gerekir (girişte temin edilir).",
+      "gorgu": [
+        "Supra (sofra) geleneğinde 'tamada' adlı sofra başkanı kadeh kaldırır; sırayla konuşulur.",
+        "Kadeh kaldırılırken bira ile tokuşturmak uygun görülmez, şarap kullanılır.",
+        "Misafire ikram reddedilirse kırgınlık doğabilir; az miktarda kabul etmek nezakettir."
+      ],
+      "bahsis": "%10 yaygın; bazı yerlerde hesaba servis ücreti eklenir.",
+      "pazarlik": "Bit pazarı ve pazar tezgâhlarında yapılır.",
+      "dini_hassasiyet": "Ortodoks kiliselerinde sırt dönerek çıkmak uygun görülmez; ikonlara dokunmadan önce yerel davranış gözlenmelidir.",
+      "dil_ipuclari": {"Merhaba": "Gamarjoba", "Teşekkürler": "Madloba", "Şerefe": "Gaumarjos"},
+      "guvenlik": "Suç oranı düşüktür; trafik ve yaya geçidi kültürü ise dikkat gerektirir.",
+      "kacinilmasi_gerekenler": [
+        "Tartışmalı bölgeler (Abhazya, Güney Osetya) konusunda siyasi yorum yapmaktan kaçının.",
+        "Taksilerde uygulama kullanmak fiyat sürprizini önler."
+      ]
+    },
+    "saraybosna": {
+      "selamlasma": "Türkiye'ye çok yakın: el sıkışma, 'selam' ve 'merhaba' yaygın kullanılır.",
+      "kiyafet": "Şehirde serbest; camilerde omuz-diz kapalı, kadınlar için baş örtüsü gerekir (girişte verilir).",
+      "gorgu": [
+        "Yakın tarih (1992-1995 kuşatması) hassas bir konudur; kişisel deneyim sorulmadan konuşulmaz.",
+        "Etnik ve dini kimlik üzerinden genelleme yapmaktan kaçınılır.",
+        "Kahve içmek sosyal bir ritüeldir, acele edilmez."
+      ],
+      "bahsis": "%10 civarı yaygındır.",
+      "pazarlik": "Başçarşı'da el sanatlarında sınırlı ölçüde yapılabilir.",
+      "dini_hassasiyet": "Şehirde cami, kilise ve sinagog yan yanadır; her birinde ibadet saatlerine saygı beklenir.",
+      "dil_ipuclari": {"Merhaba": "Zdravo / Selam", "Teşekkürler": "Hvala", "Lütfen": "Molim"},
+      "guvenlik": "Şehir merkezi güvenlidir. Kırsalda işaretlenmiş mayın alanları hâlâ mevcuttur — işaretli yürüyüş parkurlarının dışına ÇIKILMAZ.",
+      "kacinilmasi_gerekenler": [
+        "İşaretli patika dışında kırsal yürüyüş yapmayın (mayın riski).",
+        "Savaş dönemine ilişkin sansasyonel turlar yerine müze ve resmî anma noktalarını tercih edin."
+      ]
+    },
+    "baku": {
+      "selamlasma": "El sıkışma standart; Türkçe ile karşılıklı anlaşılabilirlik yüksektir ama aynı kelimeler farklı anlamlara gelebilir.",
+      "kiyafet": "Şehirde serbest ve modern; camilerde örtünme gerekir.",
+      "gorgu": [
+        "Çay ikramı reddedilmez, en azından bir yudum alınır.",
+        "Yaşça büyüklere hitapta saygı ifadeleri önemlidir.",
+        "Dağlık Karabağ konusu son derece hassastır; siyasi yorumdan kaçınılmalıdır."
+      ],
+      "bahsis": "%10 yaygın; bazı restoranlarda servis ücreti hesaba dahildir.",
+      "pazarlik": "Pazarlarda yapılır, mağazalarda yapılmaz.",
+      "dini_hassasiyet": "Ülke laik yapıdadır; camilerde genel İslami görgü kuralları geçerlidir.",
+      "dil_ipuclari": {"Merhaba": "Salam", "Teşekkürler": "Sağ olun", "Lütfen": "Zəhmət olmasa"},
+      "guvenlik": "Suç oranı düşük, şehir merkezi gece de güvenlidir.",
+      "kacinilmasi_gerekenler": [
+        "Tartışmalı bölgelere seyahat girişimi hukuki sorun doğurabilir.",
+        "Havalimanından sabit fiyat yerine uygulama taksisi tercih edin."
+      ]
+    },
+    "dubai": {
+      "selamlasma": "Karşı cinsle tokalaşmada karşı tarafın inisiyatifi beklenir; el uzatılmazsa göğse el koyup selam verilir.",
+      "kiyafet": "Kamusal alanda omuz ve diz kapalı giyim beklenir. Alışveriş merkezlerinde kıyafet uyarısı tabelaları vardır; plaj kıyafeti yalnızca plaj ve havuzda.",
+      "gorgu": [
+        "Kamusal alanda öpüşme dahil fiziksel yakınlık gösterimi yasal yaptırıma tabidir.",
+        "Ramazan'da gündüz halka açık alanda yeme-içme-sigara kısıtlanmıştır.",
+        "Sol el yerine sağ el kullanmak yeme ve verme-alma davranışında nezakettir."
+      ],
+      "bahsis": "%10-15 yaygındır; hesaba 'service charge' eklenmiş olabilir.",
+      "pazarlik": "Souk'larda normaldir; alışveriş merkezlerinde yapılmaz.",
+      "dini_hassasiyet": "Camilere gayrimüslim girişi sınırlıdır (Jumeirah Camii ziyarete açıktır). Ezan sırasında müzik kısılır.",
+      "dil_ipuclari": {"Merhaba": "As-salamu alaykum", "Teşekkürler": "Shukran", "Lütfen": "Min fadlak"},
+      "guvenlik": "Suç oranı çok düşüktür; asıl risk yasal kuralların bilinmemesidir.",
+      "kacinilmasi_gerekenler": [
+        "Alkolü lisanslı mekân dışında tüketmek veya sarhoş halde kamusal alanda bulunmak suçtur.",
+        "İnsanların, özellikle yerel kadınların, izinsiz fotoğrafını çekmeyin.",
+        "Reçeteli bazı ilaçlar ülkeye girişte yasaklıdır; ilaç raporu bulundurun."
+      ]
+    },
+    "marakes": {
+      "selamlasma": "El sıkışma yaygın; kadın-erkek arasında karşı tarafın inisiyatifi beklenir.",
+      "kiyafet": "Medina'da omuz ve diz kapalı giyim rahat dolaşımı belirgin şekilde kolaylaştırır.",
+      "gorgu": [
+        "Nane çayı ikramı ticaretin doğal parçasıdır, kabul etmek satın alma zorunluluğu doğurmaz.",
+        "Sol el yerine sağ el kullanılır.",
+        "İnsanların izinsiz fotoğrafı çekilmez; meydandaki gösteri sanatçıları ücret talep eder."
+      ],
+      "bahsis": "Yaygındır: restoranda %10, küçük hizmetlerde bozuk para.",
+      "pazarlik": "Souk'ta zorunlu norm; ilk fiyatın üçte biri makul başlangıç sayılır, gülümseyerek yapılır.",
+      "dini_hassasiyet": "Camilere gayrimüslim girişi genel olarak kapalıdır. Ramazan'da gündüz yeme-içmede duyarlılık beklenir.",
+      "dil_ipuclari": {"Merhaba": "Salam / Bonjour", "Teşekkürler": "Shukran / Merci", "Hayır teşekkürler": "La, shukran"},
+      "guvenlik": "Şiddet suçu düşük; yoğun satış baskısı ve yönlendirme dolandırıcılığı yaygındır.",
+      "kacinilmasi_gerekenler": [
+        "'Bu yol kapalı, ben göstereyim' diyerek rehberlik edip ücret isteyen kişilere uymayın.",
+        "Medina'da kaybolmak normaldir; telefonda çevrimdışı harita indirin."
+      ]
+    },
+    "kapadokya": {
+      "selamlasma": "Yerel misafirperverlik güçlüdür; çay ikramı yaygındır.",
+      "kiyafet": "Serbest; vadi yürüyüşleri için kapalı ve tabanı sağlam ayakkabı gerekir.",
+      "gorgu": [
+        "Balon turlarında kalkış saatine dakik olunmalıdır, geç kalan yolcu beklenmez.",
+        "Kaya kiliselerindeki fresklere dokunulmaz; flaş kullanımı yasaktır.",
+        "Yerel halkın yaşadığı mahallelerde drone kullanımı izne tabidir."
+      ],
+      "bahsis": "%10 yaygındır; balon ekiplerine bahşiş gelenekseldir ama zorunlu değildir.",
+      "pazarlik": "Halı, seramik ve hediyelik eşyada yapılır.",
+      "dini_hassasiyet": "Bölgedeki kaya kiliseleri müze statüsündedir; ibadet mekânı değildir.",
+      "dil_ipuclari": {},
+      "guvenlik": "Güvenli; asıl risk vadi yürüyüşlerinde işaretsiz patika ve yaz sıcağında susuz kalmaktır.",
+      "kacinilmasi_gerekenler": [
+        "Sertifikasız balon operatörleriyle uçmayın; SHGM yetkisi sorgulanabilir.",
+        "Öğle saatlerinde gölgesiz vadi yürüyüşüne çıkmayın."
+      ]
+    }
+  }
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pusula AI — Seyahat Asistanı</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
+<link rel="stylesheet" href="/web/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">🧭</span>
+    <div>
+      <h1>Pusula AI</h1>
+      <p>Kaynağa dayalı seyahat asistanı · Agno lider-ajan mimarisi</p>
+    </div>
+  </div>
+  <div class="mode" id="mode-badges"></div>
+</header>
+
+<main class="layout">
+
+  <!-- ───────── SOL: akış ve senaryolar ───────── -->
+  <aside class="panel left">
+    <section class="card">
+      <h2>Akış izi</h2>
+      <p class="hint">Her isteğin geçtiği duraklar canlı olarak burada belirir.</p>
+      <ol class="pipeline" id="pipeline">
+        <li data-step="guardrail"><span class="dot"></span>Giriş guardrail</li>
+        <li data-step="profile"><span class="dot"></span>Rıza &amp; profil</li>
+        <li data-step="cache"><span class="dot"></span>Semantic cache</li>
+        <li data-step="classify"><span class="dot"></span>Karmaşıklık sınıflandırıcı</li>
+        <li data-step="agent"><span class="dot"></span>Uzman ajanlar</li>
+        <li data-step="llm"><span class="dot"></span>Lider sentezi</li>
+        <li data-step="done"><span class="dot"></span>Çıkış guardrail</li>
+      </ol>
+      <div id="pipeline-detail" class="pipeline-detail"></div>
+    </section>
+
+    <section class="card">
+      <h2>Senaryolar</h2>
+      <p class="hint">Brief 10 istiyor; 18 senaryo tanımlı ve testli.</p>
+      <div id="scenarios" class="scenarios"></div>
+    </section>
+  </aside>
+
+  <!-- ───────── ORTA: sohbet ───────── -->
+  <section class="panel chat">
+    <div id="messages" class="messages">
+      <div class="msg bot">
+        <div class="bubble">
+          <p><strong>Merhaba, ben Pusula AI.</strong> Seyahat planlamanızda uçtan uca yardımcı olurum:
+          destinasyon önerisi, günlük gezi planı, konaklama ve ulaşım, yöresel lezzetler,
+          kültürel bilgiler, hava durumu, saat farkı, vize bilgilendirmesi ve sıkça sorulan sorular.</p>
+          <p>İki ilkem var: <strong>olgu uydurmam</strong> — her sayı ya küratörlü bilgi tabanından
+          ya araçlardan gelir — ve <strong>verinizi rızanız olmadan saklamam.</strong></p>
+          <p class="muted">Soldaki senaryolardan birine tıklayarak başlayabilirsiniz.</p>
+        </div>
+      </div>
+    </div>
+
+    <form id="composer" class="composer">
+      <input id="input" type="text" autocomplete="off" maxlength="4000"
+             placeholder="Örn: Roma'da 3 günlük gezi planı çıkarır mısın?">
+      <button type="submit" id="send">Gönder</button>
+    </form>
+  </section>
+
+  <!-- ───────── SAĞ: tercih + KVKK ───────── -->
+  <aside class="panel right">
+    <nav class="tabs">
+      <button class="tab active" data-tab="prefs">Tercihlerim</button>
+      <button class="tab" data-tab="kvkk">Verilerim</button>
+      <button class="tab" data-tab="arch">Mimari</button>
+    </nav>
+
+    <div class="tabpane active" id="tab-prefs">
+      <section class="card">
+        <h2>Tercih paneli</h2>
+        <p class="hint">Değiştirdiğinizde öneriler <em>anında</em> yeniden hesaplanır.</p>
+
+        <label>Bütçe bandı
+          <select id="pref-budget">
+            <option value="">—</option>
+            <option value="ekonomik">Ekonomik</option>
+            <option value="orta">Orta</option>
+            <option value="konforlu">Konforlu</option>
+            <option value="luks">Lüks</option>
+          </select>
+        </label>
+
+        <label>Tempo
+          <select id="pref-pace">
+            <option value="">—</option>
+            <option value="sakin">Sakin</option>
+            <option value="dengeli">Dengeli</option>
+            <option value="yogun">Yoğun</option>
+          </select>
+        </label>
+
+        <label>Grup
+          <select id="pref-group">
+            <option value="">—</option>
+            <option value="yalniz">Yalnız</option>
+            <option value="cift">Çift</option>
+            <option value="aile_cocuklu">Çocuklu aile</option>
+            <option value="arkadas_grubu">Arkadaş grubu</option>
+            <option value="is">İş</option>
+          </select>
+        </label>
+
+        <label>Bütçe üst sınırı (TRY)
+          <input id="pref-budget-total" type="number" min="0" step="1000" placeholder="ör. 35000">
+        </label>
+
+        <fieldset>
+          <legend>Seyahat stili</legend>
+          <div class="chips" id="pref-styles"></div>
+        </fieldset>
+
+        <fieldset class="sensitive">
+          <legend>Diyet <span class="badge m6">KVKK m.6</span></legend>
+          <div class="chips" id="pref-diet"></div>
+          <p class="hint">Diyet ve erişilebilirlik bilgisi <strong>özel nitelikli veri</strong>
+             sayılabilir; ayrı açık rıza olmadan saklanmaz.</p>
+        </fieldset>
+
+        <fieldset class="sensitive">
+          <legend>Erişilebilirlik <span class="badge m6">KVKK m.6</span></legend>
+          <div class="chips" id="pref-access"></div>
+        </fieldset>
+
+        <button id="save-prefs" class="primary">Tercihleri kaydet</button>
+        <p id="pref-status" class="status"></p>
+      </section>
+
+      <section class="card">
+        <h2>Hazır profiller</h2>
+        <p class="hint">Cold-start: sinyal yokken arketiple başlanır.</p>
+        <div class="chips" id="personas"></div>
+      </section>
+
+      <section class="card">
+        <h2>Öneriler <span class="hint">skorlanmış</span></h2>
+        <div id="recommendations"></div>
+      </section>
+    </div>
+
+    <div class="tabpane" id="tab-kvkk">
+      <section class="card">
+        <h2>Rıza kademeleri</h2>
+        <p class="hint">Ayrı ayrı verilir, istediğiniz an geri alınır.</p>
+        <label class="switch"><input type="checkbox" id="consent-personalization">
+          <span>Kişiselleştirme — tercihlerim saklansın</span></label>
+        <label class="switch"><input type="checkbox" id="consent-sensitive">
+          <span>Özel nitelikli veriler (m.6) — diyet / erişilebilirlik saklansın</span></label>
+        <label class="switch"><input type="checkbox" id="consent-marketing">
+          <span>Kampanya iletileri</span></label>
+        <p id="consent-status" class="status"></p>
+      </section>
+
+      <section class="card">
+        <h2>Verilerim</h2>
+        <div class="row">
+          <button id="btn-export">Verilerimi göster</button>
+          <button id="btn-delete" class="danger">Verilerimi sil</button>
+        </div>
+        <pre id="kvkk-output" class="output"></pre>
+      </section>
+
+      <section class="card">
+        <h2>Denetim izi</h2>
+        <p class="hint">Kayıtlar ham kimlik değil hash taşır, kişisel içerik barındırmaz.</p>
+        <div id="audit" class="audit"></div>
+      </section>
+    </div>
+
+    <div class="tabpane" id="tab-arch">
+      <section class="card">
+        <h2>Uzman ajanlar</h2>
+        <div id="roster"></div>
+      </section>
+      <section class="card">
+        <h2>Araç katmanı</h2>
+        <div id="toolcat"></div>
+      </section>
+      <section class="card">
+        <h2>Çalışma modu</h2>
+        <pre id="runtime" class="output"></pre>
+      </section>
+    </div>
+  </aside>
+</main>
+
+<script src="/web/app.js"></script>
+</body>
+</html>

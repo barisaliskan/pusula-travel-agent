@@ -106,11 +106,21 @@ Aynı zamanda seyahat, hata maliyeti yüksek bir alandır: yanlış vize bilgisi
 
 Coordinate mode güçlüdür ama lider + üye zinciri her istekte birden fazla LLM çağrısı demektir → case'in "⚡ düşük gecikme" gereksinimiyle çelişir. Çözüm: **isteğin karmaşıklığına göre yol seçimi.**
 
-| Yol | Ne zaman | LLM çağrısı | Hedef gecikme |
-|---|---|---|---|
-| Cache HIT | Tekrar eden soru | **0** | < 300 ms |
-| Hızlı yol (`route`) | Tek alanlı ("Roma'da hava nasıl?") | 1 + 1 | < 1.5 sn |
-| Yavaş yol (`coordinate`) | Karma/çok adımlı ("4 günlük Roma planı, vejetaryenim") | 3–6 | ilk token < 2 sn (streaming) |
+| Yol | Ne zaman | LLM çağrısı | Hedef gecikme | Ölçülen (30 Tem) |
+|---|---|---|---|---|
+| Cache HIT | Tekrar eden soru | **0** | < 300 ms | **3 ms** ✅ |
+| Hızlı yol | Tek alanlı ("Roma'da hava nasıl?") | **1** | < 1.5 sn | 1,4–4,2 sn ⚠️ |
+| Yavaş yol (`coordinate`) | Karma/çok adımlı ("4 günlük Roma planı, vejetaryenim") | 3–6 | ilk token < 2 sn (streaming) | 8,1 sn (tam yanıt) |
+
+> ⚠️ **Uygulamada değişti (30 Tem):** Hızlı yol için `Team(mode="route")` öngörülmüştü
+> (1 lider + 1 üye = 2 çağrı). Ölçümde liderin yönlendirme çağrısının gecikmeyi ikiye
+> katladığı görüldü. Sınıflandırma **kural tabanlı** yapıldı (~1 ms, 0 LLM) ve hızlı yol
+> **tek çağrıya** indi. `route` ekibi hâlâ kuruluyor ve `/api/architecture`'da görünüyor,
+> ama akışta kullanılmıyor. Ayrıntı: §14.
+>
+> Hızlı yol hedefi ücretsiz GitHub Models katmanında tutturulamadı (tek çağrı 1,4–4,2 sn);
+> gerçek OpenAI uç noktasında bu süre belirgin düşer. Mimari **çağrı sayısını** zaten
+> minimuma indiriyor. Sunumda bu dürüstçe belirtiliyor.
 
 İki `Team` nesnesi **aynı member listesini paylaşır** → kod tekrarı yok.
 
@@ -341,4 +351,26 @@ Doküman metadata'sı: `kategori > alt_konu > etiketler` + `dil` · `ülke/bölg
 | Gerçek seyahat API'leri yok | Deterministik mock adapter'lar; prod'da gövde değişir, tool imzası aynı kalır. Sunumda açıkça belirtilir. | planlandı |
 | 5 gün kısıtı, mimari büyük | 9 ajan aynı şablondan üretilir (hızlı çoğaltma); slayt/metin öncelikli | planlandı |
 | GitHub Models kotası düşük (RPM) | Semantic + embedding cache kotayı korur; mock mod her zaman yedek | planlandı |
-| KVKK maddeleri hassas | Madde numaraları yazım sırasında teyit edilecek | açık |
+| KVKK maddeleri hassas | Madde numaraları yazım sırasında teyit edilecek | ✅ ihtiyatlı formüle edildi; slayt 16'da "hukuki görüş değildir" notu |
+
+---
+
+## 14. Uygulama sırasında değişen kararlar (30 Temmuz)
+
+Plan bir tahmindir; kod bir ölçümdür. Aşağıdaki dört karar **uygulama sırasında değişti**
+ve gerekçeleri sunuma da girdi. Kodu okurken plandan sapma gördüğünüzde buraya bakın.
+
+| # | Plandaki karar | Uygulanan | Neden |
+|---|---|---|---|
+| 1 | Hızlı yol `Team(mode="route")` | **Kural tabanlı sınıflandırıcı + tek uzman** | Route modunda lider de bir LLM çağrısı harcıyor → hızlı yol 2 çağrı ediyordu. Kurallarla 1 çağrıya indi, maliyeti ~1 ms. |
+| 2 | Karmaşıklık sınıflandırıcı "en ucuz model" | **LLM yok, kural tabanlı** | Kurallar hem daha hızlı hem daha kararlı; her istekte bir çağrı tasarrufu. |
+| 3 | Uzmanlar yanıtı doğrudan LLM'le üretir | **Olgu paketi deseni:** uzman önce araçlarını çalıştırıp JSON olgu paketi üretir, LLM yalnızca onu dile çevirir | "Model olgu uydurmaz" kuralı böylece mimariden gelir. Yan fayda: mock ve gerçek mod **aynı olguları** kullanır, iki mod da regresyon yakalar. |
+| 4 | Semantic cache anahtarı `sc:{lang}:{hash}` | **Kova: `dil \| profil parmak izi \| niyet \| destinasyon`** | Hashing embedder farklı niyetleri karıştırıyordu (destinasyon sorusuna plan yanıtı, benzerlik 0,954). Eşiği yükseltmek gerçek tekrarları kaçırırdı; kovalama yalnızca yanlış eşleşmeyi keser. |
+
+**Plana eklenen, plansız çıkan iki bileşen:**
+
+- **`app/scenarios.py`** — 18 senaryo tek doğruluk kaynağı olarak koda taşındı. Arayüzdeki
+  hızlı deneme düğmeleri, uçtan uca test ve sunum slaytı aynı listeden besleniyor;
+  senaryoyu bir yerde güncelleyip diğerinde unutmak imkânsız.
+- **Araç çıktı şeması sürümü (`#v2`)** — bir aracın dönüş alanları değişince önbellekteki
+  eski şekilli kayıtlar `KeyError` üretiyordu. Anahtara sürüm soneki eklendi.

@@ -1,8 +1,32 @@
+# ─── Sanal ortam & Python artıkları ───────────────────────────────
 .venv/
+venv/
 __pycache__/
 *.py[cod]
-.env
-*.db
-tmp/
+*.egg-info/
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ─── Sırlar ───────────────────────────────────────────────────────
+# .env ASLA commit edilmez; şablon için .env.example izlenir.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ─── Yerel veri & durum ───────────────────────────────────────────
+# denetim izi (audit.log) — kişisel veri barındırmasa da repoya girmez
+.data/
+*.db
+*.sqlite3
+dump.rdb
+tmp/
+
+# ─── Araç / editör ────────────────────────────────────────────────
+.claude/
+.idea/
+.vscode/
 .DS_Store

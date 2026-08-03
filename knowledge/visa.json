@@ -1,0 +1,144 @@
+{
+  "_meta": {
+    "aciklama": "Vize / pasaport / giriş koşulları matrisi. **YÜKSEK RİSK ALANI** (CLAUDE.md kural 4): `documents_officer` ajanı yalnızca bu dosyadan konuşur, T1 dışına çıkamaz, her yanıta atıf + geçerlilik tarihi + feragat eklenir.",
+    "guven_kademesi": "T1",
+    "kapsam": "Yalnızca T.C. vatandaşları (from_country = TR) içindir. Farklı vatandaşlık sorulursa ajan cevap üretmez, resmî kanala yönlendirir.",
+    "zorunlu_feragat": "Bu bilgi genel bilgilendirme amaçlıdır, hukuki sonuç doğurmaz ve bağlayıcı değildir. Vize mevzuatı önceden haber verilmeksizin değişebilir. Seyahatten önce T.C. Dışişleri Bakanlığı ile ilgili ülkenin Türkiye'deki temsilciliğinden teyit alınız.",
+    "invalidation_notu": "Cache anahtarı `visa:{from}:{to}` 24 saat TTL'e sahiptir ancak mevzuat değişikliğinde **olay tabanlı** olarak anında temizlenir (PLAN.md §5).",
+    "resmi_kanallar": [
+      {"title": "T.C. Dışişleri Bakanlığı — Yurt Dışında Yaşayan Vatandaşlarımız / Seyahat Bilgileri", "tier": "T1", "url": "https://www.mfa.gov.tr"},
+      {"title": "İlgili ülkenin Türkiye'deki büyükelçilik/konsolosluğu", "tier": "T1"},
+      {"title": "IATA Travel Centre (Timatic)", "tier": "T1", "url": "https://www.iatatravelcentre.com"}
+    ],
+    "son_dogrulama": "2026-07-27",
+    "gecerlilik_sonu": "2026-10-27"
+  },
+  "pasaport_turleri": {
+    "umuma_mahsus": "Bordo pasaport — en yaygın tür. Aşağıdaki kayıtlarda aksi belirtilmedikçe kurallar bu türe göredir.",
+    "hususi": "Yeşil pasaport — belirli kamu görevlileri ve emeklileri ile birinci derece yakınlarına verilir. Bazı ülkelerde vize muafiyeti sağlar.",
+    "hizmet": "Gri pasaport — resmî görevle gidenler.",
+    "diplomatik": "Siyah pasaport."
+  },
+  "genel_kurallar": {
+    "schengen_pasaport_gecerliligi": "Schengen bölgesine girişte pasaportun son 10 yıl içinde düzenlenmiş olması ve planlanan çıkış tarihinden itibaren en az 3 ay geçerli olması aranır.",
+    "yaygin_6_ay_kurali": "Schengen dışındaki birçok ülke, girişte pasaportun en az 6 ay geçerli olmasını ister.",
+    "90_180_kurali": "Vize muafiyeti veya Schengen kısa dönem vizesinde 'herhangi bir 180 günlük dönemde toplam 90 gün' hesabı uygulanır; ülke değiştirmek süreyi sıfırlamaz.",
+    "yeterli_bos_sayfa": "Çoğu ülke en az 1-2 boş vize sayfası ister.",
+    "cocuk_yolcu": "18 yaş altı yolcunun tek ebeveynle veya refakatsiz seyahatinde noter onaylı muvafakatname istenebilir.",
+    "donus_bileti": "Vize muafiyetli girişlerde bile dönüş/devam bileti, konaklama teyidi ve yeterli maddi imkân belgesi sınırda talep edilebilir."
+  },
+  "matrix": {
+    "TR->IT": {
+      "country": "İtalya", "destination_keys": ["roma"], "schengen": true,
+      "umuma_mahsus": {"vize_gerekli": true, "tur": "Schengen kısa dönem (C tipi) vizesi", "sure": "180 günde toplam 90 güne kadar"},
+      "hususi_pasaport": {"vize_gerekli": false, "sure": "180 günde 90 güne kadar", "not": "Yeşil pasaport hamilleri Schengen bölgesine vizesiz girebilir."},
+      "pasaport_gecerliligi": "Çıkış tarihinden itibaren en az 3 ay + son 10 yıl içinde düzenlenmiş",
+      "basvuru_notu": "Randevu ve başvuru, ilgili konsolosluğun yetkilendirdiği başvuru merkezi üzerinden yapılır. Yoğun sezonda randevu süresi uzayabilir; en az 6-8 hafta önceden planlanmalıdır.",
+      "tipik_belgeler": ["Pasaport", "Biyometrik fotoğraf", "Seyahat sağlık sigortası (asgari 30.000 EUR teminat)", "Gidiş-dönüş bilet rezervasyonu", "Konaklama teyidi", "Banka hesap dökümü", "İşyeri/öğrenci belgesi"],
+      "ek_kosullar": ["AB Giriş/Çıkış Sistemi (EES) kapsamında sınırda biyometrik veri alınabilir."]
+    },
+    "TR->ES": {
+      "country": "İspanya", "destination_keys": ["barselona"], "schengen": true,
+      "umuma_mahsus": {"vize_gerekli": true, "tur": "Schengen kısa dönem (C tipi) vizesi", "sure": "180 günde toplam 90 güne kadar"},
+      "hususi_pasaport": {"vize_gerekli": false, "sure": "180 günde 90 güne kadar"},
+      "pasaport_gecerliligi": "Çıkış tarihinden itibaren en az 3 ay + son 10 yıl içinde düzenlenmiş",
+      "basvuru_notu": "Başvuru, ana varış ülkesinin veya en uzun kalınacak ülkenin konsolosluğuna yapılır.",
+      "tipik_belgeler": ["Pasaport", "Biyometrik fotoğraf", "Seyahat sağlık sigortası (asgari 30.000 EUR)", "Bilet ve konaklama teyidi", "Maddi imkân belgesi"],
+      "ek_kosullar": []
+    },
+    "TR->FR": {
+      "country": "Fransa", "destination_keys": ["paris"], "schengen": true,
+      "umuma_mahsus": {"vize_gerekli": true, "tur": "Schengen kısa dönem (C tipi) vizesi", "sure": "180 günde toplam 90 güne kadar"},
+      "hususi_pasaport": {"vize_gerekli": false, "sure": "180 günde 90 güne kadar"},
+      "pasaport_gecerliligi": "Çıkış tarihinden itibaren en az 3 ay + son 10 yıl içinde düzenlenmiş",
+      "basvuru_notu": "Randevular başvuru merkezi üzerinden alınır; belge listesi başvuru amacına (turistik/ticari/aile ziyareti) göre değişir.",
+      "tipik_belgeler": ["Pasaport", "Biyometrik fotoğraf", "Seyahat sağlık sigortası (asgari 30.000 EUR)", "Bilet ve konaklama teyidi", "Maddi imkân belgesi"],
+      "ek_kosullar": []
+    },
+    "TR->CZ": {
+      "country": "Çekya", "destination_keys": ["prag"], "schengen": true,
+      "umuma_mahsus": {"vize_gerekli": true, "tur": "Schengen kısa dönem (C tipi) vizesi", "sure": "180 günde toplam 90 güne kadar"},
+      "hususi_pasaport": {"vize_gerekli": false, "sure": "180 günde 90 güne kadar"},
+      "pasaport_gecerliligi": "Çıkış tarihinden itibaren en az 3 ay + son 10 yıl içinde düzenlenmiş",
+      "basvuru_notu": "Geçerli bir Schengen vizesi ile Çekya'ya giriş yapılabilir; ayrı ülke vizesi gerekmez.",
+      "tipik_belgeler": ["Pasaport", "Biyometrik fotoğraf", "Seyahat sağlık sigortası (asgari 30.000 EUR)", "Bilet ve konaklama teyidi"],
+      "ek_kosullar": []
+    },
+    "TR->JP": {
+      "country": "Japonya", "destination_keys": ["tokyo"], "schengen": false,
+      "umuma_mahsus": {"vize_gerekli": true, "tur": "Kısa süreli ziyaret (turistik) vizesi", "sure": "Verilen vizede belirtilen süre"},
+      "hususi_pasaport": {"vize_gerekli": true, "not": "Muafiyet diplomatik ve hizmet pasaportları için geçerlidir; hususi (yeşil) pasaport için teyit alınmalıdır."},
+      "pasaport_gecerliligi": "Kalış süresini kapsayacak şekilde geçerli olmalı; 6 ay tavsiye edilir",
+      "basvuru_notu": "Başvurular Japonya'nın Türkiye'deki temsilcilikleri veya yetkilendirilmiş acenteler aracılığıyla yapılır. Detaylı seyahat programı (gün gün) istenmesi olağandır.",
+      "tipik_belgeler": ["Pasaport", "Başvuru formu", "Fotoğraf", "Gün gün seyahat programı", "Bilet ve otel rezervasyonu", "Maddi imkân belgesi", "İşyeri belgesi"],
+      "ek_kosullar": ["Bazı reçeteli ilaçların ülkeye girişi kısıtlıdır; ilaç raporu ve gerekiyorsa ön izin (Yakkan Shoumei) araştırılmalıdır."]
+    },
+    "TR->TH": {
+      "country": "Tayland", "destination_keys": ["bangkok"], "schengen": false,
+      "umuma_mahsus": {"vize_gerekli": false, "tur": "Turistik amaçlı vize muafiyeti", "sure": "Muafiyet süresi sınırlıdır; güncel süre seyahat öncesi teyit edilmelidir"},
+      "hususi_pasaport": {"vize_gerekli": false},
+      "pasaport_gecerliligi": "Girişte en az 6 ay geçerli olmalı",
+      "basvuru_notu": "Muafiyet süresi ve kapsamı Tayland makamlarınca dönemsel olarak değiştirilmektedir. Uçuş öncesi ülkenin resmî kaynağından mutlaka teyit alınmalıdır.",
+      "tipik_belgeler": ["Pasaport", "Dönüş/devam bileti", "Konaklama teyidi", "Yeterli maddi imkân (sınırda talep edilebilir)"],
+      "ek_kosullar": ["Muafiyetle giriş turistik amaçlıdır; çalışma veya uzun süreli kalış için ayrı vize gerekir.", "Elektronik giriş kartı uygulaması yürürlükte olabilir."]
+    },
+    "TR->GE": {
+      "country": "Gürcistan", "destination_keys": ["tiflis"], "schengen": false,
+      "umuma_mahsus": {"vize_gerekli": false, "tur": "Vize muafiyeti", "sure": "1 yıla kadar kalış"},
+      "hususi_pasaport": {"vize_gerekli": false},
+      "pasaport_gecerliligi": "Kalış süresini kapsamalı",
+      "kimlik_ile_giris": true,
+      "basvuru_notu": "T.C. kimlik kartı ile de giriş yapılabilir (kimlik kartının geçerli ve çipli olması gerekir).",
+      "tipik_belgeler": ["Pasaport veya T.C. kimlik kartı"],
+      "ek_kosullar": ["Abhazya ve Güney Osetya bölgelerine Gürcistan'ın kontrolü dışındaki kapılardan giriş, Gürcistan mevzuatına göre yasa dışıdır."]
+    },
+    "TR->BA": {
+      "country": "Bosna-Hersek", "destination_keys": ["saraybosna"], "schengen": false,
+      "umuma_mahsus": {"vize_gerekli": false, "tur": "Vize muafiyeti", "sure": "180 günde toplam 90 güne kadar"},
+      "hususi_pasaport": {"vize_gerekli": false},
+      "pasaport_gecerliligi": "Girişte en az 3 ay geçerli olması beklenir",
+      "kimlik_ile_giris": false,
+      "basvuru_notu": "Turistik amaçlı kısa kalışlarda vize aranmaz.",
+      "tipik_belgeler": ["Pasaport", "Konaklama teyidi", "Dönüş bileti"],
+      "ek_kosullar": ["Kırsalda işaretlenmiş mayınlı alanlar mevcuttur; işaretli parkurların dışına çıkılmamalıdır."]
+    },
+    "TR->AZ": {
+      "country": "Azerbaycan", "destination_keys": ["baku"], "schengen": false,
+      "umuma_mahsus": {"vize_gerekli": false, "tur": "Vize muafiyeti", "sure": "180 günde toplam 90 güne kadar"},
+      "hususi_pasaport": {"vize_gerekli": false},
+      "pasaport_gecerliligi": "Kalış süresini kapsamalı",
+      "kimlik_ile_giris": true,
+      "basvuru_notu": "T.C. kimlik kartı ile giriş mümkündür.",
+      "tipik_belgeler": ["Pasaport veya T.C. kimlik kartı"],
+      "ek_kosullar": ["Dağlık Karabağ ve çevresine izinsiz giriş girişimi ciddi hukuki sonuç doğurur.", "Ermenistan giriş damgası bulunması sorun yaratabilir."]
+    },
+    "TR->AE": {
+      "country": "Birleşik Arap Emirlikleri", "destination_keys": ["dubai"], "schengen": false,
+      "umuma_mahsus": {"vize_gerekli": false, "tur": "Vize muafiyeti", "sure": "180 günde toplam 90 güne kadar"},
+      "hususi_pasaport": {"vize_gerekli": false},
+      "pasaport_gecerliligi": "Girişte en az 6 ay geçerli olmalı",
+      "basvuru_notu": "Muafiyet turistik ziyaret içindir.",
+      "tipik_belgeler": ["Pasaport", "Dönüş bileti", "Konaklama teyidi"],
+      "ek_kosullar": ["Bazı reçeteli ilaçlar (özellikle psikotrop içerikliler) yasaklı listededir; doktor raporu ve ön izin gerekebilir.", "Kamusal alanda davranış kuralları yasal yaptırıma tabidir."]
+    },
+    "TR->MA": {
+      "country": "Fas", "destination_keys": ["marakes"], "schengen": false,
+      "umuma_mahsus": {"vize_gerekli": false, "tur": "Vize muafiyeti", "sure": "90 güne kadar"},
+      "hususi_pasaport": {"vize_gerekli": false},
+      "pasaport_gecerliligi": "Girişte en az 6 ay geçerli olmalı",
+      "basvuru_notu": "Turistik amaçlı kısa kalışlarda vize aranmaz.",
+      "tipik_belgeler": ["Pasaport", "Dönüş bileti", "Konaklama teyidi"],
+      "ek_kosullar": ["Dirham kapalı para birimidir; ülke dışına çıkarılması kısıtlıdır."]
+    },
+    "TR->TR": {
+      "country": "Türkiye", "destination_keys": ["kapadokya"], "schengen": false,
+      "umuma_mahsus": {"vize_gerekli": false, "tur": "Yurt içi seyahat", "sure": "-"},
+      "hususi_pasaport": {"vize_gerekli": false},
+      "pasaport_gecerliligi": "Gerekmez",
+      "kimlik_ile_giris": true,
+      "basvuru_notu": "Yurt içi uçuşlarda T.C. kimlik kartı yeterlidir.",
+      "tipik_belgeler": ["T.C. kimlik kartı"],
+      "ek_kosullar": []
+    }
+  }
+}

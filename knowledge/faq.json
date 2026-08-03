@@ -1,0 +1,359 @@
+{
+  "_meta": {
+    "aciklama": "SSS bilgi mimarisi — Çıktı 3. 13 ana kategori, `kategori > alt_konu > etiketler` taksonomisi. `faq_specialist` ajanının bilgi tabanı.",
+    "taksonomi_kurali": "Her doküman TEK bir ana kategoriye aittir; çapraz ilişki `ilgili` alanıyla kurulur. Böylece retrieval'da kategori filtresi kesin çalışır.",
+    "metadata_sozlugu": {
+      "id": "Kalıcı doküman kimliği — içerik değişse de değişmez, sürümleme buna bağlanır",
+      "kategori": "13 ana kategoriden biri",
+      "alt_konu": "Kategori içi ikinci kırılım",
+      "etiketler": "Serbest anahtar kelimeler; retrieval'da hibrit aramayı besler",
+      "dil": "Doküman dili (tr)",
+      "kapsam": "Ülke/bölge geçerliliği; 'global' veya ülke kodu",
+      "kaynak": "İçeriğin dayanağı",
+      "guven_kademesi": "T0-T4",
+      "yuksek_risk": "true ise zorunlu feragat + T1 kaynak şartı devreye girer",
+      "gecerlilik_tarihi": "Bu tarihten sonra içerik yeniden doğrulanmadan sunulmaz",
+      "son_guncelleme": "Son editoryal düzenleme",
+      "sahip": "İçerikten sorumlu ekip"
+    },
+    "icerik_yonetisimi": {
+      "kim_gunceller": "Kategori sahibi ekip; yüksek riskli dokümanlarda ikinci onay Hukuk/Uyum ekibinden alınır.",
+      "inceleme_sikligi": "Yüksek riskli: 3 ay · Operasyonel politika: 6 ay · Genel bilgi: 12 ay",
+      "surumleme": "Her düzenleme yeni sürüm yaratır; eski sürüm arşivde tutulur, denetim izine bağlanır.",
+      "gecersizleme": "Politika değişikliğinde ilgili doküman ve `sc:*` semantic cache kayıtları olay tabanlı temizlenir."
+    },
+    "kategoriler": [
+      "Rezervasyon & Ödeme", "Uçuş & Ulaşım", "Konaklama", "Vize & Belgeler",
+      "Sağlık & Sigorta", "Bagaj", "Değişiklik, İptal & İade", "Destinasyon & Plan",
+      "Yerel Yaşam", "Erişilebilirlik & Özel Yolcu", "Güvenlik & Acil Durum",
+      "Hesap & Gizlilik (KVKK)", "Sadakat & Kampanya"
+    ],
+    "son_guncelleme": "2026-07-27"
+  },
+  "faqs": [
+    {
+      "id": "FAQ-RZP-001", "kategori": "Rezervasyon & Ödeme", "alt_konu": "Ödeme yöntemleri",
+      "soru": "Hangi ödeme yöntemlerini kullanabilirim?",
+      "cevap": "Kredi ve banka kartı, banka havalesi/EFT ve anlaşmalı bankaların taksit seçenekleri kullanılabilir. Ödeme sayfası 3D Secure ile korunur ve kart bilgileri Pusula sistemlerinde saklanmaz; ödeme kuruluşunda tokenize edilir.",
+      "etiketler": ["ödeme", "kredi kartı", "taksit", "3d secure"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula Ödeme Politikası", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Ödeme Operasyonları",
+      "ilgili": ["FAQ-RZP-002", "FAQ-GZL-002"]
+    },
+    {
+      "id": "FAQ-RZP-002", "kategori": "Rezervasyon & Ödeme", "alt_konu": "Rezervasyon onayı",
+      "soru": "Rezervasyonum onaylandı mı, nasıl anlarım?",
+      "cevap": "Ödeme tamamlandığında e-posta ile PNR/rezervasyon numarası içeren onay gönderilir. Onay 30 dakika içinde ulaşmadıysa spam klasörünü kontrol edin; ulaşmamışsa aynı işlemi tekrarlamadan destek ekibine başvurun. Çift ödeme riskine karşı sistemde idempotency (çift-tetik) koruması vardır.",
+      "etiketler": ["onay", "pnr", "e-posta"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula Rezervasyon Politikası", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Rezervasyon Operasyonları",
+      "ilgili": ["FAQ-IPT-001"]
+    },
+    {
+      "id": "FAQ-RZP-003", "kategori": "Rezervasyon & Ödeme", "alt_konu": "Fiyat değişimi",
+      "soru": "Aramada gördüğüm fiyat neden ödeme adımında değişti?",
+      "cevap": "Uçuş ve otel fiyatları canlı envanterden gelir ve saniyeler içinde değişebilir. Pusula, arama sonuçlarını kısa süreli önbellekte tutar (uçuş için 15, otel için 30 dakika); bu sürede envanter tükenirse veya fiyat güncellenirse ödeme adımında güncel tutar gösterilir. Ödeme öncesi gösterilen tutar bağlayıcıdır.",
+      "etiketler": ["fiyat", "değişim", "cache", "envanter"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula Fiyatlandırma Politikası", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Fiyatlandırma",
+      "ilgili": ["FAQ-UCS-002"]
+    },
+    {
+      "id": "FAQ-UCS-001", "kategori": "Uçuş & Ulaşım", "alt_konu": "Check-in",
+      "soru": "Online check-in ne zaman açılır?",
+      "cevap": "Çoğu havayolunda kalkıştan 24-48 saat önce açılır ve kalkıştan 1-2 saat önce kapanır. Süreler havayoluna göre değişir; rezervasyon detay sayfanızda ilgili havayolunun kesin saati gösterilir.",
+      "etiketler": ["check-in", "uçuş", "biniş kartı"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Havayolu genel kuralları derlemesi", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Uçuş Operasyonları",
+      "ilgili": ["FAQ-BGJ-001"]
+    },
+    {
+      "id": "FAQ-UCS-002", "kategori": "Uçuş & Ulaşım", "alt_konu": "Aktarma",
+      "soru": "Aktarmalı uçuşta ne kadar bağlantı süresi bırakmalıyım?",
+      "cevap": "İç hat aktarmalarında en az 1 saat, dış hat aktarmalarında en az 2 saat, farklı havalimanları arası aktarmada en az 4 saat önerilir. Ayrı biletlerle yapılan aktarmalarda ilk uçuş gecikirse ikinci bilet güvence altında değildir; tek PNR altında birleşik bilet tercih edilmelidir.",
+      "etiketler": ["aktarma", "bağlantı", "transfer", "pnr"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula Operasyon Rehberi", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Uçuş Operasyonları",
+      "ilgili": ["FAQ-IPT-002"]
+    },
+    {
+      "id": "FAQ-UCS-003", "kategori": "Uçuş & Ulaşım", "alt_konu": "Havalimanı transferi",
+      "soru": "Havalimanından şehre nasıl giderim?",
+      "cevap": "Destinasyona göre değişir; Pusula asistanı seçtiğiniz şehir için raylı sistem, havalimanı otobüsü, özel transfer ve taksi seçeneklerini süre ve tahmini maliyetle karşılaştırır. Gece varışlarında toplu taşıma saatleri kısıtlı olabileceğinden önceden transfer ayarlanması önerilir.",
+      "etiketler": ["transfer", "havalimanı", "ulaşım"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula İçerik Editörlüğü", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "İçerik Editörlüğü",
+      "ilgili": []
+    },
+    {
+      "id": "FAQ-KNK-001", "kategori": "Konaklama", "alt_konu": "Giriş-çıkış saatleri",
+      "soru": "Otele erken giriş veya geç çıkış yapabilir miyim?",
+      "cevap": "Standart giriş genellikle 14:00, çıkış 12:00'dir. Erken giriş ve geç çıkış talebe ve müsaitliğe bağlıdır, çoğu otelde ek ücretlidir ve garanti edilmez. Rezervasyon sırasında talep notu bırakılabilir.",
+      "etiketler": ["check-in", "check-out", "otel"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula Konaklama Politikası", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Konaklama Operasyonları",
+      "ilgili": []
+    },
+    {
+      "id": "FAQ-KNK-002", "kategori": "Konaklama", "alt_konu": "Şehir vergisi",
+      "soru": "Otel fiyatına her şey dahil mi?",
+      "cevap": "Birçok ülkede şehir/konaklama vergisi rezervasyon tutarına dahil değildir ve otelde kişi-gece başına tahsil edilir. Rezervasyon özetinde 'yerinde ödenecek ücretler' bölümünde bu tutar ayrıca gösterilir.",
+      "etiketler": ["şehir vergisi", "ek ücret", "fiyat"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula Konaklama Politikası", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Konaklama Operasyonları",
+      "ilgili": ["FAQ-RZP-003"]
+    },
+    {
+      "id": "FAQ-VZE-001", "kategori": "Vize & Belgeler", "alt_konu": "Vize gerekliliği",
+      "soru": "Gideceğim ülke için vize gerekiyor mu?",
+      "cevap": "Vize gerekliliği vatandaşlığınıza, pasaport türünüze (umuma mahsus/hususi/hizmet) ve seyahat amacınıza göre değişir. Pusula asistanı T.C. vatandaşları için genel bilgilendirme sunar ve mutlaka resmî kaynağa yönlendirir. Bu bilgi genel bilgilendirme amaçlıdır, bağlayıcı değildir; seyahatten önce T.C. Dışişleri Bakanlığı ve ilgili ülkenin temsilciliğinden teyit alınız.",
+      "etiketler": ["vize", "pasaport", "giriş koşulu"], "dil": "tr", "kapsam": "TR",
+      "kaynak": "T.C. Dışişleri Bakanlığı", "guven_kademesi": "T1", "yuksek_risk": true,
+      "gecerlilik_tarihi": "2026-10-27", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-VZE-002", "FAQ-VZE-003"]
+    },
+    {
+      "id": "FAQ-VZE-002", "kategori": "Vize & Belgeler", "alt_konu": "Pasaport geçerliliği",
+      "soru": "Pasaportumun ne kadar geçerli olması gerekir?",
+      "cevap": "Schengen bölgesinde pasaportun son 10 yıl içinde düzenlenmiş ve planlanan çıkıştan itibaren en az 3 ay geçerli olması aranır. Schengen dışındaki birçok ülke en az 6 ay geçerlilik ister. Bu bilgi genel bilgilendirme amaçlıdır ve bağlayıcı değildir; ilgili ülkenin resmî kaynağından teyit alınız.",
+      "etiketler": ["pasaport", "geçerlilik", "schengen", "6 ay kuralı"], "dil": "tr", "kapsam": "TR",
+      "kaynak": "T.C. Dışişleri Bakanlığı / IATA Timatic", "guven_kademesi": "T1", "yuksek_risk": true,
+      "gecerlilik_tarihi": "2026-10-27", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-VZE-001"]
+    },
+    {
+      "id": "FAQ-VZE-003", "kategori": "Vize & Belgeler", "alt_konu": "90/180 kuralı",
+      "soru": "Schengen'de 90 gün kuralı nasıl hesaplanır?",
+      "cevap": "Herhangi bir 180 günlük dönem içinde Schengen bölgesinde toplam kalış 90 günü aşamaz. Hesap ülke bazında değil bölge bazında yapılır; ülke değiştirmek sayacı sıfırlamaz. Bu bilgi genel bilgilendirme amaçlıdır; kesin hesap için resmî hesaplama araçlarını ve konsolosluğu esas alınız.",
+      "etiketler": ["90/180", "schengen", "kalış süresi"], "dil": "tr", "kapsam": "TR",
+      "kaynak": "T.C. Dışişleri Bakanlığı", "guven_kademesi": "T1", "yuksek_risk": true,
+      "gecerlilik_tarihi": "2026-10-27", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-VZE-001"]
+    },
+    {
+      "id": "FAQ-SGL-001", "kategori": "Sağlık & Sigorta", "alt_konu": "Seyahat sağlık sigortası",
+      "soru": "Seyahat sağlık sigortası zorunlu mu?",
+      "cevap": "Schengen vizesi başvurularında asgari 30.000 EUR teminatlı seyahat sağlık sigortası zorunludur. Vize gerektirmeyen ülkelerde yasal zorunluluk olmasa da güçlü şekilde önerilir. Poliçe kapsamının seyahat tarihlerinizin tamamını içerdiğinden emin olun.",
+      "etiketler": ["sigorta", "sağlık", "schengen", "teminat"], "dil": "tr", "kapsam": "TR",
+      "kaynak": "T.C. Dışişleri Bakanlığı / konsolosluk başvuru koşulları", "guven_kademesi": "T1", "yuksek_risk": true,
+      "gecerlilik_tarihi": "2026-10-27", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-VZE-001", "FAQ-SGL-002"]
+    },
+    {
+      "id": "FAQ-SGL-002", "kategori": "Sağlık & Sigorta", "alt_konu": "Aşı ve ilaç",
+      "soru": "Seyahat için aşı gerekiyor mu, ilaçlarımı yanımda götürebilir miyim?",
+      "cevap": "Aşı gereklilikleri destinasyona ve güncel sağlık durumuna göre değişir; bu konuda Pusula tıbbi tavsiye vermez. Seyahat sağlığı polikliniği veya hekiminize danışın ve T.C. Sağlık Bakanlığı ile DSÖ duyurularını kontrol edin. Reçeteli ilaçların bazı ülkelere girişi kısıtlıdır (özellikle Japonya ve Körfez ülkeleri); orijinal kutu, reçete ve İngilizce doktor raporu bulundurmanız önerilir.",
+      "etiketler": ["aşı", "ilaç", "sağlık", "reçete"], "dil": "tr", "kapsam": "global",
+      "kaynak": "T.C. Sağlık Bakanlığı / DSÖ", "guven_kademesi": "T1", "yuksek_risk": true,
+      "gecerlilik_tarihi": "2026-10-27", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-SGL-001"]
+    },
+    {
+      "id": "FAQ-BGJ-001", "kategori": "Bagaj", "alt_konu": "Kabin bagajı",
+      "soru": "Kabin bagajı hakkım nedir?",
+      "cevap": "Kabin bagajı hakkı havayoluna ve bilet sınıfına göre değişir; ekonomi biletlerde tipik olarak 8 kg ve 55x40x23 cm sınırı uygulanır. Ultra düşük maliyetli havayollarında yalnızca koltuk altına sığan küçük çanta ücretsiz olabilir. Kesin hak, rezervasyon detay sayfanızda havayolu bazında gösterilir.",
+      "etiketler": ["kabin", "bagaj", "el bagajı", "ağırlık"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Havayolu kuralları derlemesi", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Uçuş Operasyonları",
+      "ilgili": ["FAQ-BGJ-002", "FAQ-BGJ-003"]
+    },
+    {
+      "id": "FAQ-BGJ-002", "kategori": "Bagaj", "alt_konu": "Yasaklı ürünler",
+      "soru": "Kabine sıvı ve powerbank alabilir miyim?",
+      "cevap": "Sıvılar kabin bagajında en fazla 100 ml'lik kaplarda ve toplam 1 litrelik şeffaf poşette taşınabilir. Powerbank ve yedek lityum piller YALNIZCA kabin bagajında taşınır, kargo bagajına verilemez; 100 Wh üzeri kapasitelerde havayolu izni gerekir. Kesici-delici aletler kabine alınmaz.",
+      "etiketler": ["sıvı", "powerbank", "lityum", "yasaklı"], "dil": "tr", "kapsam": "global",
+      "kaynak": "IATA Tehlikeli Maddeler Kuralları / havacılık güvenlik mevzuatı", "guven_kademesi": "T1", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Uçuş Operasyonları",
+      "ilgili": ["FAQ-BGJ-001"]
+    },
+    {
+      "id": "FAQ-BGJ-003", "kategori": "Bagaj", "alt_konu": "Kayıp bagaj",
+      "soru": "Bagajım kaybolursa ne yapmalıyım?",
+      "cevap": "Havalimanından ayrılmadan önce kayıp bagaj bankosundan PIR (Property Irregularity Report) tutanağı alın — sonradan başvuru zorlaşır. Tutanak numarasıyla havayolunun takip sistemi üzerinden durumu izleyebilirsiniz. Gecikmiş bagajda zorunlu ihtiyaç harcamalarınızın faturasını saklayın; seyahat sigortanız kapsıyorsa tazminat başvurusunda kullanılır.",
+      "etiketler": ["kayıp bagaj", "pir", "tazminat"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula Destek Rehberi", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Müşteri Destek",
+      "ilgili": ["FAQ-SGL-001"]
+    },
+    {
+      "id": "FAQ-IPT-001", "kategori": "Değişiklik, İptal & İade", "alt_konu": "İptal koşulları",
+      "soru": "Rezervasyonumu iptal edersem param iade edilir mi?",
+      "cevap": "İade koşulu satın aldığınız ürünün kurallarına bağlıdır. 'Esnek' tarifelerde belirli bir süreye kadar tam iade, 'promosyon' tarifelerde çoğunlukla iade yapılmaz, yalnızca vergi iadesi mümkün olur. Rezervasyon özetinizdeki 'iptal ve iade koşulları' bölümü bağlayıcıdır.",
+      "etiketler": ["iptal", "iade", "tarife", "esnek"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula İptal & İade Politikası", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Müşteri Destek",
+      "ilgili": ["FAQ-IPT-002", "FAQ-IPT-003"]
+    },
+    {
+      "id": "FAQ-IPT-002", "kategori": "Değişiklik, İptal & İade", "alt_konu": "Havayolu kaynaklı iptal",
+      "soru": "Uçuşum havayolu tarafından iptal edilirse hakkım nedir?",
+      "cevap": "Havayolu kaynaklı iptallerde yolcuya alternatif taşıma veya bilet bedelinin iadesi sunulur; ayrıca bekleme süresine göre ikram ve konaklama desteği gündeme gelebilir. AB kalkışlı uçuşlarda ve Türkiye'de yolcu hakları yönetmeliği kapsamında ek tazminat hakkı doğabilir. Somut hak, uçuşun kalkış ülkesi ve gecikme süresine bağlıdır; bu konuda kesin hukuki sonuç bildirmeyiz, başvurunuzu ilgili havayolu ve düzenleyici kuruma yapmanız gerekir.",
+      "etiketler": ["iptal", "tazminat", "yolcu hakları", "gecikme"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Yolcu hakları mevzuatı derlemesi", "guven_kademesi": "T1", "yuksek_risk": true,
+      "gecerlilik_tarihi": "2026-10-27", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-IPT-001"]
+    },
+    {
+      "id": "FAQ-IPT-003", "kategori": "Değişiklik, İptal & İade", "alt_konu": "İade süresi",
+      "soru": "İadem ne kadar sürede hesabıma geçer?",
+      "cevap": "Onaylanan iadeler Pusula tarafında 1-3 iş günü içinde işleme alınır; tutarın kartınıza yansıması bankanıza bağlı olarak 5-15 iş günü sürebilir. Havayolu veya otel kaynaklı iadelerde tedarikçi süreci bu süreyi uzatabilir.",
+      "etiketler": ["iade süresi", "banka", "geri ödeme"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula İptal & İade Politikası", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Ödeme Operasyonları",
+      "ilgili": ["FAQ-IPT-001"]
+    },
+    {
+      "id": "FAQ-DST-001", "kategori": "Destinasyon & Plan", "alt_konu": "Plan oluşturma",
+      "soru": "Asistan benim için gezi planı oluşturabilir mi?",
+      "cevap": "Evet. Destinasyon, tarih aralığı, bütçe ve tercihlerinizi (tempo, ilgi alanları, diyet, erişilebilirlik) belirtmeniz yeterlidir. Asistan gün gün plan üretir, planı mesafe/bütçe/tempo açısından doğrular ve her önerinin kaynağını gösterir. 'İkinci günü sakinleştir' gibi taleplerle planı revize edebilirsiniz.",
+      "etiketler": ["gezi planı", "itinerary", "revizyon"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula Ürün Dokümantasyonu", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Ürün",
+      "ilgili": ["FAQ-DST-002", "FAQ-SDK-001"]
+    },
+    {
+      "id": "FAQ-DST-002", "kategori": "Destinasyon & Plan", "alt_konu": "En uygun zaman",
+      "soru": "Bir destinasyona gitmek için en uygun dönem nasıl belirleniyor?",
+      "cevap": "Asistan üç sinyali birleştirir: iklim uygunluğu (sıcaklık ve yağış), kalabalık yoğunluğu ve fiyat seviyesi. Bunlar küratörlü sezon verisinden gelir; kısa vadeli hava tahmini ise ayrıca canlı kaynaktan çekilir ve tahmin olduğu belirtilir.",
+      "etiketler": ["sezon", "en iyi zaman", "iklim", "kalabalık"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula İçerik Editörlüğü", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "İçerik Editörlüğü",
+      "ilgili": ["FAQ-DST-001"]
+    },
+    {
+      "id": "FAQ-DST-003", "kategori": "Destinasyon & Plan", "alt_konu": "Bütçe",
+      "soru": "Verilen maliyet tahminleri ne kadar güvenilir?",
+      "cevap": "Günlük maliyet bantları küratörlü tahminlerdir ve konaklama, yeme-içme, yerel ulaşım ve giriş ücretlerini kapsar; uçuş bileti dahil değildir. Canlı uçuş ve otel fiyatları ayrı olarak tedarikçi sistemlerinden çekilir ve 'tahmin' değil 'güncel fiyat' olarak etiketlenir. Kur dalgalanması TRY karşılıklarını etkileyebilir.",
+      "etiketler": ["bütçe", "maliyet", "tahmin", "kur"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula İçerik Editörlüğü", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "İçerik Editörlüğü",
+      "ilgili": ["FAQ-RZP-003"]
+    },
+    {
+      "id": "FAQ-YSM-001", "kategori": "Yerel Yaşam", "alt_konu": "Para ve ödeme",
+      "soru": "Yanımda nakit mi taşımalıyım, kart mı yeterli?",
+      "cevap": "Destinasyona göre değişir: Japonya ve Fas gibi ülkelerde küçük işletmeler ağırlıklı nakit çalışır, Batı Avrupa ve Körfez'de kart neredeyse her yerde geçer. Asistan seçtiğiniz şehir için nakit kullanım yoğunluğunu, döviz bozdurma ipuçlarını ve ATM uyarılarını verir. Havalimanı döviz bürolarında kur genellikle dezavantajlıdır.",
+      "etiketler": ["nakit", "kart", "döviz", "atm"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula İçerik Editörlüğü", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "İçerik Editörlüğü",
+      "ilgili": ["FAQ-YSM-002"]
+    },
+    {
+      "id": "FAQ-YSM-002", "kategori": "Yerel Yaşam", "alt_konu": "Priz ve elektrik",
+      "soru": "Adaptör götürmem gerekir mi?",
+      "cevap": "Avrupa, Kafkasya ve Balkanlar'da Türkiye ile aynı yuvarlak uçlu prizler (C/F) kullanılır, adaptör gerekmez. Japonya (A/B tipi, 100V) ve Birleşik Arap Emirlikleri (G tipi) için adaptör zorunludur. Japonya'da ayrıca voltaj farkı vardır; yalnızca 100-240V etiketli cihazlar güvenle kullanılabilir.",
+      "etiketler": ["priz", "adaptör", "voltaj", "elektrik"], "dil": "tr", "kapsam": "global",
+      "kaynak": "IEC ülke priz standartları derlemesi", "guven_kademesi": "T3", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "İçerik Editörlüğü",
+      "ilgili": ["FAQ-YSM-001"]
+    },
+    {
+      "id": "FAQ-YSM-003", "kategori": "Yerel Yaşam", "alt_konu": "Bahşiş",
+      "soru": "Hangi ülkede ne kadar bahşiş bırakmalıyım?",
+      "cevap": "Bahşiş kültürü ülkeye göre köklü şekilde farklıdır: Japonya'da bahşiş verilmez ve rahatsızlık yaratabilir; İtalya ve İspanya'da yuvarlama yeterlidir; Fas ve Körfez ülkelerinde %10 civarı beklenir. Asistan destinasyon seçildiğinde yerel normu ayrıca belirtir.",
+      "etiketler": ["bahşiş", "görgü", "kültür"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula İçerik Editörlüğü", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "İçerik Editörlüğü",
+      "ilgili": []
+    },
+    {
+      "id": "FAQ-ERS-001", "kategori": "Erişilebilirlik & Özel Yolcu", "alt_konu": "Engelli yolcu desteği",
+      "soru": "Tekerlekli sandalye kullanıyorum, seyahatimi nasıl planlarım?",
+      "cevap": "Havalimanı özel yardım talebi (WCHR/WCHS/WCHC kodları) uçuştan en az 48 saat önce bildirilmelidir; rezervasyon sırasında talep edilebilir. Asistan plan üretirken erişilebilirlik ihtiyacınızı SERT FİLTRE olarak uygular: erişilebilir olmayan duraklar plana hiç eklenmez, alternatif önerilir. Erişilebilirlik ihtiyacı özel nitelikli kişisel veri sayılabileceğinden yalnızca açık rızanızla saklanır.",
+      "etiketler": ["erişilebilirlik", "tekerlekli sandalye", "özel yardım", "wchr"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Havayolu özel yolcu prosedürleri / Pusula Ürün Dokümantasyonu", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Ürün",
+      "ilgili": ["FAQ-GZL-003", "FAQ-ERS-002"]
+    },
+    {
+      "id": "FAQ-ERS-002", "kategori": "Erişilebilirlik & Özel Yolcu", "alt_konu": "Çocuk ve bebek",
+      "soru": "Bebekle seyahat ederken nelere dikkat etmeliyim?",
+      "cevap": "2 yaş altı bebekler genellikle kucakta ve indirimli tarifeyle taşınır; bebek arabası çoğu havayolunda ücretsiz olarak uçak kapısına kadar kullanılabilir. Bebek beziği ve mama için sıvı kısıtlaması istisnası uygulanır. 18 yaş altı yolcunun tek ebeveynle seyahatinde bazı ülkeler noter onaylı muvafakatname isteyebilir.",
+      "etiketler": ["bebek", "çocuk", "aile", "muvafakatname"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Havayolu kuralları derlemesi", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Uçuş Operasyonları",
+      "ilgili": ["FAQ-VZE-001"]
+    },
+    {
+      "id": "FAQ-GVN-001", "kategori": "Güvenlik & Acil Durum", "alt_konu": "Acil numaralar",
+      "soru": "Yurt dışında acil durumda kimi ararım?",
+      "cevap": "Avrupa Birliği ülkelerinde ortak acil numara 112'dir. Japonya'da polis 110, ambulans/itfaiye 119; BAE'de polis 999; Tayland'da turist polisi 1155'tir. Ayrıca pasaport kaybı, tutuklanma veya ciddi kaza gibi durumlarda bulunduğunuz ülkedeki T.C. Büyükelçiliği/Başkonsolosluğu ile iletişime geçin.",
+      "etiketler": ["acil", "112", "polis", "konsolosluk"], "dil": "tr", "kapsam": "global",
+      "kaynak": "T.C. Dışişleri Bakanlığı / ülke resmî acil hizmet bilgileri", "guven_kademesi": "T1", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-GVN-002"]
+    },
+    {
+      "id": "FAQ-GVN-002", "kategori": "Güvenlik & Acil Durum", "alt_konu": "Pasaport kaybı",
+      "soru": "Pasaportumu kaybedersem ne yapmalıyım?",
+      "cevap": "Önce yerel polise başvurup kayıp tutanağı alın, ardından en yakın T.C. temsilciliğine başvurarak seyahat belgesi (pasaport yerine geçen belge) talep edin. Seyahat öncesinde pasaportunuzun fotoğrafını ve bir fotokopisini ayrı yerde bulundurmanız süreci belirgin şekilde hızlandırır.",
+      "etiketler": ["pasaport kaybı", "konsolosluk", "seyahat belgesi"], "dil": "tr", "kapsam": "TR",
+      "kaynak": "T.C. Dışişleri Bakanlığı", "guven_kademesi": "T1", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-GVN-001"]
+    },
+    {
+      "id": "FAQ-GVN-003", "kategori": "Güvenlik & Acil Durum", "alt_konu": "Seyahat uyarıları",
+      "soru": "Gideceğim ülkede güvenlik riski var mı?",
+      "cevap": "Pusula, riskli bölgelere yönelik öneri üretmez ve resmî seyahat uyarılarını esas alır. Güncel durum için T.C. Dışişleri Bakanlığı'nın ülke bazlı seyahat uyarılarını kontrol edin. Asistan, hakkında aktif uyarı bulunan bölgeler için plan oluşturmayı reddeder ve sizi resmî kaynağa yönlendirir.",
+      "etiketler": ["seyahat uyarısı", "güvenlik", "risk"], "dil": "tr", "kapsam": "TR",
+      "kaynak": "T.C. Dışişleri Bakanlığı seyahat uyarıları", "guven_kademesi": "T1", "yuksek_risk": true,
+      "gecerlilik_tarihi": "2026-10-27", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-GVN-001"]
+    },
+    {
+      "id": "FAQ-GZL-001", "kategori": "Hesap & Gizlilik (KVKK)", "alt_konu": "Veri saklama",
+      "soru": "Pusula benim hangi verilerimi saklıyor?",
+      "cevap": "Üç grup veri işlenir: (1) oturum verisi — konuşma geçmişi, 30 dakika sonra silinir; (2) seyahat tercihleri profili — YALNIZCA kişiselleştirme rızası verdiyseniz saklanır; (3) rıza ve denetim kayıtları — yasal hesap verebilirlik için tutulur. Pasaport numarası, kimlik numarası ve ödeme kartı bilgisi asistan tarafında hiçbir koşulda saklanmaz. 'Verilerim' panelinden tam envanteri görebilirsiniz.",
+      "etiketler": ["kvkk", "veri", "saklama", "profil", "envanter"], "dil": "tr", "kapsam": "TR",
+      "kaynak": "Pusula Aydınlatma Metni", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-GZL-002", "FAQ-GZL-003"]
+    },
+    {
+      "id": "FAQ-GZL-002", "kategori": "Hesap & Gizlilik (KVKK)", "alt_konu": "Silme hakkı",
+      "soru": "Verilerimi nasıl sildiririm?",
+      "cevap": "'Verilerim' panelinden tek tıkla silme talebinde bulunabilirsiniz. Talep anında işlenir: seyahat tercihleri profiliniz, oturum geçmişiniz ve önbellekteki kayıtlarınız silinir. Silme işleminin kendisi denetim kaydına yazılır (kim, ne zaman, ne silindi) — bu kayıt kişisel içerik barındırmaz, yalnızca işlemin kanıtıdır. Verilerinizi silmeden önce dışa aktarma (JSON) seçeneğini de kullanabilirsiniz.",
+      "etiketler": ["kvkk", "silme", "unutulma hakkı", "dışa aktarma"], "dil": "tr", "kapsam": "TR",
+      "kaynak": "Pusula Aydınlatma Metni", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-GZL-001"]
+    },
+    {
+      "id": "FAQ-GZL-003", "kategori": "Hesap & Gizlilik (KVKK)", "alt_konu": "Yurt dışı aktarım",
+      "soru": "Mesajlarım yurt dışındaki bir yapay zekâ servisine gidiyor mu?",
+      "cevap": "Yanıt üretimi için dil modeli sağlayıcısı kullanılır ve bu bir yurt dışı aktarımı anlamına gelebilir. Bu nedenle mesajınız modele ulaşmadan önce PII maskeleme katmanından geçirilir: ad-soyad, telefon, e-posta, kimlik ve kart numarası gibi tanımlayıcılar tespit edilip maskelenir, sınır ötesine kişisel veri aktarılmaz. Ayrıca diyet ve erişilebilirlik gibi özel nitelikli olabilecek veriler açık rızanız olmadan işlenmez.",
+      "etiketler": ["kvkk", "yurt dışı aktarım", "pii", "maskeleme", "açık rıza"], "dil": "tr", "kapsam": "TR",
+      "kaynak": "Pusula Aydınlatma Metni", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-GZL-001", "FAQ-ERS-001"]
+    },
+    {
+      "id": "FAQ-SDK-001", "kategori": "Sadakat & Kampanya", "alt_konu": "Öneri kişiselleştirme",
+      "soru": "Asistan bana neden bu destinasyonu önerdi?",
+      "cevap": "Her önerinin yanında 'Neden bu öneri?' bağlantısı bulunur. Burada skor kırılımı gösterilir: tercih uyumu, sezon uygunluğu, bütçe uyumu, popülerlik, yenilik ve son reddettikleriniz. Katılmadığınız bir çıkarımı tercih panelinden düzeltebilirsiniz; öneriler anında yeniden hesaplanır.",
+      "etiketler": ["öneri", "kişiselleştirme", "şeffaflık", "skor"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula Ürün Dokümantasyonu", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Ürün",
+      "ilgili": ["FAQ-SDK-002", "FAQ-GZL-001"]
+    },
+    {
+      "id": "FAQ-SDK-002", "kategori": "Sadakat & Kampanya", "alt_konu": "Tercih yönetimi",
+      "soru": "Tercihlerimi nasıl güncellerim?",
+      "cevap": "İki yol var: doğrudan tercih panelinden düzenleyebilir ya da konuşma sırasında belirtebilirsiniz ('artık vejetaryen değilim', 'kalabalık yerleri seviyorum'). Asistan konuşmadan çıkardığı her tercihi profil panelinde açıkça gösterir, böylece neyin nasıl öğrenildiği görünür olur ve yanlışsa düzeltebilirsiniz.",
+      "etiketler": ["tercih", "profil", "düzeltme"], "dil": "tr", "kapsam": "global",
+      "kaynak": "Pusula Ürün Dokümantasyonu", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Ürün",
+      "ilgili": ["FAQ-SDK-001", "FAQ-GZL-002"]
+    },
+    {
+      "id": "FAQ-SDK-003", "kategori": "Sadakat & Kampanya", "alt_konu": "Kampanya bildirimleri",
+      "soru": "Kampanya bildirimlerini nasıl kapatırım?",
+      "cevap": "Pazarlama iletileri ayrı bir rıza kademesidir ve varsayılan olarak KAPALIDIR. Açtıysanız 'Verilerim' panelindeki rıza bölümünden tek tıkla geri alabilirsiniz; geri alma işlemi geleceğe etkilidir ve hizmetin diğer bölümlerini etkilemez.",
+      "etiketler": ["pazarlama", "rıza", "bildirim", "iletişim izni"], "dil": "tr", "kapsam": "TR",
+      "kaynak": "Pusula Aydınlatma Metni", "guven_kademesi": "T0", "yuksek_risk": false,
+      "gecerlilik_tarihi": "2027-01-31", "son_guncelleme": "2026-07-27", "sahip": "Uyum & Hukuk",
+      "ilgili": ["FAQ-GZL-001"]
+    }
+  ]
+}
